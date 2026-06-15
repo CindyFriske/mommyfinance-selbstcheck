@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finanz-Selbstcheck | MommyFinance</title>
+<meta name="description" content="Finde heraus, wo du finanziell wirklich stehst. Der kostenfreie Selbstcheck für Mütter von Cindy Friske, Finanztrainerin.">
+<meta property="og:title" content="Dein Finanz-Selbstcheck | MommyFinance">
+<meta property="og:description" content="Finde heraus, wo du finanziell wirklich stehst. 13 ehrliche Fragen — und deine persönliche Auswertung.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Alice&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --weinrot: #8b1130;
+  --dunkelrot: #441a32;
+  --elfenbein: #fbf2ed;
+  --goldgelb: #ffebb8;
+  --gold1: #f8d960;
+  --gold2: #efc11b;
+  --gold3: #e6a400;
+  --glow: rgba(248, 217, 96, 0.5);
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: linear-gradient(180deg, #fbf2ed 0%, #f7ebe3 50%, #fbf2ed 100%);
+  color: var(--dunkelrot);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.header-logo {
+  display: block;
+  margin: 0 auto 24px;
+  height: 28px;
+  width: auto;
+}
+
+.header h1 {
+  font-family: 'Alice', serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--weinrot);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.gold-divider {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold1), var(--gold2), var(--gold3), transparent);
+  margin: 16px auto;
+  border-radius: 1px;
+}
+
+.gold-divider-short {
+  width: 80px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold1), var(--gold3), transparent);
+  margin: 0 auto;
+}
+
+.header p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  font-weight: 500;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Progress */
+.progress-wrap {
+  margin-bottom: 32px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(139, 17, 48, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(68, 26, 50, 0.04);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--weinrot), var(--gold3));
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+  box-shadow: 0 0 8px rgba(230, 164, 0, 0.3);
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--dunkelrot);
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+/* Page */
+.page {
+  display: none;
+  animation: fadeIn 0.45s ease;
+}
+
+.page.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Question Card */
+.question-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 32px 32px;
+  margin-bottom: 16px;
+  border: 0.5px solid rgba(139, 17, 48, 0.06);
+  box-shadow: 0 1px 3px rgba(68, 26, 50, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--weinrot), var(--gold3), var(--gold1));
+}
+
+.question-card:hover {
+  border-color: rgba(139, 17, 48, 0.12);
+  box-shadow: 0 2px 8px rgba(68, 26, 50, 0.06);
+}
+
+.q-number {
+  font-family: 'Alice', serif;
+  font-size: 13px;
+  color: var(--gold3);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.q-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--dunkelrot);
+  font-weight: 500;
+  margin-bottom: 36px;
+}
+
+.slider-container {
+  position: relative;
+  padding: 8px 0 0;
+}
+
+.slider-value {
+  text-align: center;
+  font-family: 'Alice', serif;
+  font-size: 40px;
+  color: var(--weinrot);
+  margin-bottom: 16px;
+  transition: all 0.2s;
+  text-shadow: 0 0 20px rgba(248, 217, 96, 0.2);
+}
+
+.slider-value span {
+  font-size: 16px;
+  color: var(--dunkelrot);
+  opacity: 0.3;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+}
+
+.slider-track {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(139, 17, 48, 0.08);
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #a8173c, var(--weinrot));
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(139, 17, 48, 0.3), 0 0 16px var(--glow);
+  transition: box-shadow 0.3s, transform 0.15s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 12px rgba(139, 17, 48, 0.4), 0 0 24px var(--glow), 0 0 40px rgba(248, 217, 96, 0.25);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  box-shadow: 0 2px 12px rgba(139, 17, 48, 0.4), 0 0 32px var(--glow), 0 0 56px rgba(248, 217, 96, 0.3);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #a8173c, var(--weinrot));
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(139, 17, 48, 0.3), 0 0 16px var(--glow);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 0 2px;
+}
+
+.slider-label-lo, .slider-label-hi {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dunkelrot);
+}
+
+.slider-label-lo {
+  text-align: left;
+}
+
+.slider-label-hi {
+  text-align: right;
+  color: var(--weinrot);
+}
+
+.slider-dots {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.slider-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(139, 17, 48, 0.12);
+}
+
+/* Navigation */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  gap: 12px;
+}
+
+.btn-back {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dunkelrot);
+  opacity: 0.5;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px 24px;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  opacity: 0.8;
+  background: rgba(139, 17, 48, 0.04);
+}
+
+.btn-next {
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--weinrot), var(--dunkelrot));
+  border: none;
+  padding: 14px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.3px;
+  margin-left: auto;
+  box-shadow: 0 2px 12px rgba(139, 17, 48, 0.15);
+}
+
+.btn-next:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(139, 17, 48, 0.25);
+}
+
+.btn-next:active { transform: scale(0.98); }
+
+/* =================== RESULT PAGE =================== */
+.result-page {
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+
+.result-page.active { display: block; }
+
+.result-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 44px 36px;
+  text-align: center;
+  border: 0.5px solid rgba(139, 17, 48, 0.06);
+  box-shadow: 0 4px 20px rgba(68, 26, 50, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--weinrot), var(--gold1), var(--gold3), var(--weinrot));
+}
+
+.result-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold3);
+  margin-bottom: 24px;
+}
+
+.score-ring {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 28px;
+}
+
+.score-ring svg {
+  width: 160px;
+  height: 160px;
+  transform: rotate(-90deg);
+}
+
+.score-ring .ring-bg {
+  fill: none;
+  stroke: rgba(139, 17, 48, 0.06);
+  stroke-width: 6;
+}
+
+.score-ring .ring-fg {
+  fill: none;
+  stroke: url(#goldGradient);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 408;
+  stroke-dashoffset: 408;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 10px rgba(248, 217, 96, 0.5));
+}
+
+.score-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.score-number {
+  font-family: 'Alice', serif;
+  font-size: 42px;
+  color: var(--weinrot);
+  line-height: 1;
+}
+
+.score-max {
+  font-size: 13px;
+  color: var(--dunkelrot);
+  opacity: 0.35;
+  margin-top: 2px;
+}
+
+.result-title {
+  font-family: 'Alice', serif;
+  font-size: 22px;
+  color: var(--weinrot);
+  margin-bottom: 20px;
+  line-height: 1.35;
+}
+
+.result-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--dunkelrot);
+  opacity: 0.85;
+  max-width: 480px;
+  margin: 0 auto 12px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.result-text strong {
+  font-weight: 600;
+  color: var(--weinrot);
+}
+
+/* Highlighted CTA intro box */
+.result-cta-intro {
+  max-width: 480px;
+  margin: 24px auto 32px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, rgba(248, 217, 96, 0.1), rgba(230, 164, 0, 0.08));
+  border: 1.5px solid rgba(230, 164, 0, 0.3);
+  border-radius: 14px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--dunkelrot);
+  font-weight: 500;
+  text-align: center;
+  position: relative;
+}
+
+.result-cta-intro::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+}
+
+.result-divider {
+  width: 120px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold1), var(--gold3), transparent);
+  margin: 0 auto 32px;
+}
+
+/* CTA Button */
+.cta-button {
+  display: inline-block;
+  font-family: 'Barlow', sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, var(--weinrot), var(--dunkelrot));
+  border: none;
+  padding: 20px 40px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 0 4px 16px rgba(139, 17, 48, 0.2), 0 0 20px rgba(248, 217, 96, 0.1);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(139, 17, 48, 0.3), 0 0 28px rgba(248, 217, 96, 0.2);
+}
+
+.cta-button .cta-line1 {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.cta-button .cta-line2 {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.cta-details {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--dunkelrot);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.cta-details .cta-gold {
+  color: var(--gold3);
+  font-weight: 600;
+}
+
+.cta-details span {
+  display: block;
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+/* Breakdown */
+.breakdown {
+  margin-top: 36px;
+  text-align: left;
+}
+
+.breakdown-title {
+  font-family: 'Alice', serif;
+  font-size: 16px;
+  color: var(--weinrot);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(139, 17, 48, 0.05);
+}
+
+.breakdown-item:last-child { border-bottom: none; }
+
+.breakdown-label {
+  flex: 1;
+  font-size: 13px;
+  color: var(--dunkelrot);
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.breakdown-bar-bg {
+  width: 100px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(139, 17, 48, 0.06);
+  overflow: hidden;
+}
+
+.breakdown-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--weinrot), var(--gold3));
+  transition: width 1s ease;
+  box-shadow: 0 0 6px rgba(230, 164, 0, 0.3);
+}
+
+.breakdown-val {
+  font-family: 'Alice', serif;
+  font-size: 14px;
+  color: var(--weinrot);
+  min-width: 20px;
+  text-align: right;
+}
+
+/* Footer gold accent */
+.result-footer-gold {
+  margin-top: 32px;
+}
+
+@media (max-width: 480px) {
+  body { padding: 20px 12px; }
+  .header h1 { font-size: 24px; }
+  .question-card { padding: 24px 20px 22px; }
+  .result-card { padding: 28px 20px; }
+  .q-text { font-size: 16px; }
+  .cta-button { padding: 18px 28px; }
+  .cta-button .cta-line2 { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <img src="MommyFinance_Logo_gold.png" alt="MommyFinance" class="header-logo">
+    <h1>Dein Finanz-Selbstcheck</h1>
+    <div class="gold-divider"></div>
+    <p>Finde heraus, wo du finanziell wirklich stehst. Bewege die Regler ehrlich — es gibt keine falschen Antworten, nur deinen ehrlichen Startpunkt.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label"><span id="progressText">Frage 1 von 13</span><span id="progressPct">0 %</span></div>
+  </div>
+
+  <div id="pages"></div>
+
+  <div class="result-page" id="resultPage">
+    <div class="result-card">
+      <div class="result-badge">Deine Auswertung</div>
+
+      <div class="score-ring">
+        <svg viewBox="0 0 160 160">
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f8d960"/>
+              <stop offset="50%" stop-color="#efc11b"/>
+              <stop offset="100%" stop-color="#e6a400"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg" cx="80" cy="80" r="65"/>
+          <circle class="ring-fg" id="ringFg" cx="80" cy="80" r="65"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-number" id="scoreNum">0</div>
+          <div class="score-max">von 130</div>
+        </div>
+      </div>
+
+      <div class="result-title" id="resultTitle"></div>
+      <div id="resultText"></div>
+
+      <div class="result-divider"></div>
+
+      <a class="cta-button" href="#" id="ctaBtn">
+        <span class="cta-line1">Bewirb dich jetzt f&uuml;r dein</span>
+        <span class="cta-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
+      </a>
+      <div class="cta-details">
+        <span class="cta-gold">60 Minuten &middot; 1:1 mit Cindy &middot; kostenfrei</span>
+        <span>Begrenzte Pl&auml;tze — Bewerbung erforderlich</span>
+      </div>
+
+      <div class="breakdown" id="breakdown">
+        <div class="gold-divider" style="margin: 32px auto 24px;"></div>
+        <div class="breakdown-title">Deine Bereiche im &Uuml;berblick</div>
+      </div>
+
+      <div class="result-footer-gold">
+        <div class="gold-divider"></div>
+        <img src="MommyFinance_Logo_gold.png" alt="MommyFinance" style="height: 20px; margin-top: 20px; opacity: 0.6;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  { q: "Ich habe einen klaren Überblick über meine monatlichen Einnahmen und Ausgaben.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Überblick Finanzen" },
+  { q: "Ich habe ein einfaches System, das mein Geld nach Zweck trennt (z. B. Alltag, Sparen, Vorsorge).", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Kontensystem" },
+  { q: "Mein Partner und ich haben ein gemeinsames Kontensystem für Haushalt, Miete und Fixkosten.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Gemeinschaftskonto" },
+  { q: "Ich habe einen Notgroschen von mindestens drei Monatsausgaben auf einem separaten Konto, das auf meinen Namen läuft.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Notgroschen" },
+  { q: "Ich weiß, wie hoch meine Rentenlücke ist — also was mir im Alter fehlen wird.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Rentenlücke" },
+  { q: "Ich lege regelmäßig einen festen Betrag für meine eigene Altersvorsorge zurück.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Altersvorsorge" },
+  { q: "Ich besitze ein eigenes Wertpapierdepot und weiß, wie ich es nutze.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Eigenes Depot" },
+  { q: "Ich habe Erfahrungen mit ETFs und investiere regelmäßig per Sparplan.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "ETF-Sparplan" },
+  { q: "Ich spare gezielt für die Zukunft meines Kindes in ein ETF-Kinderdepot.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Kinderdepot" },
+  { q: "Ich kenne den Zinseszinseffekt und habe einen Plan, wie ich Kindergeld und Geldgeschenke renditestark einsetze.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Zinseszins-Strategie" },
+  { q: "Ich weiß, dass die Börse schwankt und weiß, was ich tue, wenn sie fällt.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Börsenwissen" },
+  { q: "Ich habe Freistellungsaufträge für mich und meine Kinder eingerichtet und habe einen Überblick über Verteilung und Ausnutzung.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Freistellungsaufträge" },
+  { q: "Ich fühle mich sicher, eigenständig finanzielle Entscheidungen zu treffen — ohne abhängig von anderen zu sein.", lo: "Trifft gar nicht zu", hi: "Trifft voll zu", short: "Finanzielle Selbstsicherheit" }
+];
+
+const totalPages = questions.length;
+let currentPage = 0;
+
+const pagesContainer = document.getElementById('pages');
+
+questions.forEach((item, i) => {
+  const page = document.createElement('div');
+  page.className = 'page' + (i === 0 ? ' active' : '');
+  page.id = 'page' + i;
+
+  const isLast = i === totalPages - 1;
+
+  page.innerHTML =
+    '<div class="question-card">' +
+      '<div class="q-number">Frage ' + (i + 1) + ' von ' + totalPages + '</div>' +
+      '<div class="q-text">' + item.q + '</div>' +
+      '<div class="slider-container">' +
+        '<div class="slider-value" id="val' + i + '">5 <span>/ 10</span></div>' +
+        '<div class="slider-track">' +
+          '<div class="slider-dots">' + '<div class="slider-dot"></div>'.repeat(10) + '</div>' +
+          '<input type="range" id="s' + i + '" min="1" max="10" value="5" step="1" oninput="updateSlider(' + i + ', this.value)">' +
+        '</div>' +
+        '<div class="slider-labels">' +
+          '<span class="slider-label-lo">' + item.lo + '</span>' +
+          '<span class="slider-label-hi">' + item.hi + '</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="nav-row">' +
+      (i > 0 ? '<button class="btn-back" onclick="goPage(' + (i - 1) + ')">← Zurück</button>' : '<div></div>') +
+      '<button class="btn-next" onclick="' + (isLast ? 'showResult()' : 'goPage(' + (i + 1) + ')') + '">' + (isLast ? 'Auswertung anzeigen' : 'Weiter →') + '</button>' +
+    '</div>';
+
+  pagesContainer.appendChild(page);
+});
+
+questions.forEach(function(_, i) { updateSliderBg(i, 5); });
+updateProgress();
+
+function updateSlider(i, v) {
+  document.getElementById('val' + i).innerHTML = v + ' <span>/ 10</span>';
+  updateSliderBg(i, v);
+}
+
+function updateSliderBg(i, v) {
+  var el = document.getElementById('s' + i);
+  if (!el) return;
+  var pct = ((v - 1) / 9) * 100;
+  el.style.background = 'linear-gradient(90deg, #8b1130 0%, #8b1130 ' + pct + '%, rgba(139,17,48,0.08) ' + pct + '%, rgba(139,17,48,0.08) 100%)';
+}
+
+function updateProgress() {
+  var pct = Math.round(((currentPage) / totalPages) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = 'Frage ' + (currentPage + 1) + ' von ' + totalPages;
+  document.getElementById('progressPct').textContent = pct + ' %';
+}
+
+function goPage(p) {
+  document.getElementById('page' + currentPage).classList.remove('active');
+  var newPage = document.getElementById('page' + p);
+  newPage.style.animation = 'none';
+  newPage.offsetHeight;
+  newPage.style.animation = '';
+  newPage.classList.add('active');
+  currentPage = p;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showResult() {
+  document.getElementById('page' + currentPage).classList.remove('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = 'Auswertung';
+  document.getElementById('progressPct').textContent = '100 %';
+
+  var total = 0;
+  var scores = [];
+  questions.forEach(function(_, i) {
+    var v = parseInt(document.getElementById('s' + i).value);
+    total += v;
+    scores.push(v);
+  });
+
+  var circ = 2 * Math.PI * 65;
+  var offset = circ - (circ * total / 130);
+  document.getElementById('ringFg').style.strokeDasharray = circ;
+
+  var resultPage = document.getElementById('resultPage');
+  resultPage.classList.add('active');
+
+  setTimeout(function() {
+    document.getElementById('ringFg').style.strokeDashoffset = offset;
+  }, 100);
+
+  var current = 0;
+  var step = total / 40;
+  var counter = setInterval(function() {
+    current += step;
+    if (current >= total) { current = total; clearInterval(counter); }
+    document.getElementById('scoreNum').textContent = Math.round(current);
+  }, 30);
+
+  var title, text;
+
+  if (total <= 39) {
+    title = "Du stehst am Anfang — und genau jetzt ist der richtige Moment";
+    text = '<div class="result-text">Dein Ergebnis zeigt: Bei dir liegen noch viele Baustellen offen. Kein Kontensystem, kein Notgroschen, kein Depot, keine klare Altersvorsorge. Und wahrscheinlich kennst du das Gefühl nur zu gut: <strong>Schon wieder ein Monat vorbei, und du hast es immer noch nicht angefangen.</strong></div>'
+      + '<div class="result-text">Das Geld liegt auf dem Girokonto oder Tagesgeld und tut nichts. Du weißt, dass du handeln solltest — aber der erste Schritt fühlt sich riesig an. Zu viele Begriffe, zu viele Möglichkeiten, zu viele Unsicherheiten.</div>'
+      + '<div class="result-text">Aber du hast gerade diesen Check gemacht. Das zeigt: <strong>Du bist bereit.</strong> Du brauchst keine weiteren YouTube-Videos oder Finanzratgeber. Du brauchst jemanden, der dich an die Hand nimmt und mit dir gemeinsam dein Finanzsystem aufbaut — servierfertig, genau so wie du es brauchst.</div>'
+      + '<div class="result-cta-intro">Genau dafür gibt es mein kostenfreies Finanzcheck-Beratungsgespräch. Wir schauen uns gemeinsam an, wo du stehst, welche Lücken es gibt und welcher erste Schritt für dich der richtige ist. Kein Verkaufsdruck, kein Fachchinesisch — nur Klarheit und ein konkreter Plan für dich.</div>';
+  } else if (total <= 65) {
+    title = "Du hast angefangen — aber der rote Faden fehlt noch";
+    text = '<div class="result-text">Du bist nicht bei Null. Vielleicht hast du schon ein eigenes Konto, legst etwas zur Seite oder hast dich mit dem Thema ETFs beschäftigt. <strong>Aber es fehlt das System dahinter.</strong> Einzelne Puzzleteile liegen auf dem Tisch — nur zusammengesetzt hast du sie noch nicht.</div>'
+      + '<div class="result-text">Vielleicht schiebst du das Thema Depot seit Monaten vor dir her. Vielleicht weißt du nicht genau, wie groß deine Rentenlücke wirklich ist. Vielleicht hast du die Broker-App schon runtergeladen, geöffnet — und wieder geschlossen. Zu viele Begriffe, zu viele Entscheidungen auf einmal.</div>'
+      + '<div class="result-text">Das Frustrierende: <strong>Du weißt eigentlich, dass du es könntest.</strong> Aber alleine fehlt dir die Struktur und jemand, der dir sagt: Genau so machst du es jetzt. Schritt für Schritt, in deinem Tempo.</div>'
+      + '<div class="result-cta-intro">Genau dafür gibt es mein kostenfreies Finanzcheck-Beratungsgespräch. Wir schauen gemeinsam auf deine Situation, identifizieren die Lücken und ich zeige dir, wie du in wenigen Wochen ein funktionierendes System aufbaust — ohne dass du dafür BWL studieren musst.</div>';
+  } else if (total <= 91) {
+    title = "Gute Basis — jetzt geht es um die entscheidenden Details";
+    text = '<div class="result-text">Du bist weiter als die meisten Mütter, die ich treffe. Die Grundlagen stehen: Du hast ein Bewusstsein für deine Finanzen, legst vermutlich schon etwas zurück und hast dich mit dem Thema Investieren beschäftigt.</div>'
+      + '<div class="result-text">Aber bei genauerem Hinsehen fehlen dir vielleicht noch <strong>die Stellschrauben, die den echten Unterschied machen</strong>: Weißt du genau, wie hoch deine Rentenlücke ist? Nutzt du den Zinseszinseffekt bei Kindergeld und Geldgeschenken wirklich optimal? Hast du deine Freistellungsaufträge im Blick? Weißt du, was du tust, wenn die Börse fällt?</div>'
+      + '<div class="result-text">Das sind genau die Details, die trennen zwischen <strong>„ganz okay aufgestellt"</strong> und <strong>„finanziell souverän investiert"</strong>. Und oft sind es nur kleine Anpassungen, die über Jahre hinweg Tausende Euro Unterschied machen.</div>'
+      + '<div class="result-cta-intro">In meinem kostenfreien Finanzcheck-Beratungsgespräch analysieren wir gemeinsam, welche Stellschrauben bei dir noch offen sind — und wie du sie gezielt schließt. 60 Minuten, die sich über die nächsten 30 Jahre auszahlen können.</div>';
+  } else {
+    title = "Souverän aufgestellt — Respekt, du machst das richtig gut!";
+    text = '<div class="result-text">Wow. Du gehörst zu den wenigen Müttern, die ihre Finanzen wirklich im Griff haben. Du investierst, du planst voraus, du triffst eigenständige Entscheidungen. Du hast ein System, du kennst deine Zahlen und du lässt dein Geld für dich arbeiten.</div>'
+      + '<div class="result-text"><strong>Das verdient ehrlichen Respekt.</strong> Die meisten Frauen in deiner Situation wünschen sich genau das — und du hast es bereits umgesetzt.</div>'
+      + '<div class="result-text">Trotzdem: Auch ein starkes Fundament kann Feinschliff gebrauchen. Vielleicht gibt es Optimierungspotenzial bei der Steuer, bei der Depotstruktur oder bei der Absicherung im Fall einer Trennung. Manchmal zeigt ein Blick von außen Dinge, die man selbst übersieht — nicht weil man es nicht kann, sondern weil man zu nah dran ist.</div>'
+      + '<div class="result-cta-intro">Auch für dich kann mein kostenfreies Finanzcheck-Beratungsgespräch wertvoll sein: Ein Austausch auf Augenhöhe, bei dem wir gemeinsam schauen, ob es noch blinde Flecken gibt — und ob du wirklich so abgesichert bist, wie du denkst.</div>';
+  }
+
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultText').innerHTML = text;
+
+  var breakdown = document.getElementById('breakdown');
+  questions.forEach(function(item, i) {
+    var row = document.createElement('div');
+    row.className = 'breakdown-item';
+    row.innerHTML = '<span class="breakdown-label">' + item.short + '</span><div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="bar' + i + '" style="width:0%"></div></div><span class="breakdown-val">' + scores[i] + '</span>';
+    breakdown.appendChild(row);
+  });
+
+  setTimeout(function() {
+    scores.forEach(function(v, i) {
+      document.getElementById('bar' + i).style.width = (v * 10) + '%';
+    });
+  }, 300);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
