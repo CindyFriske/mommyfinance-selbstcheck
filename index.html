@@ -555,14 +555,23 @@ body {
   padding: 20px 0;
 }
 
-.bottom-bar .kernbotschaft {
+.q-hint {
+  font-size: 13px;
+  color: var(--weinrot);
+  opacity: 0.6;
+  font-weight: 300;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.kernbotschaft-above {
   font-family: 'Alice', serif;
   font-size: 13px;
-  color: var(--goldgelb);
-  opacity: 0.8;
+  color: var(--weinrot);
+  opacity: 0.7;
   font-style: italic;
-  margin-bottom: 16px;
-  padding: 0 20px;
+  text-align: center;
+  padding: 18px 20px 14px;
   line-height: 1.6;
 }
 
@@ -597,7 +606,7 @@ body {
   <div class="header">
     <h1>Dein Finanz-Selbstcheck</h1>
     <div class="gold-divider"></div>
-    <p>Bewege die Regler ehrlich – es gibt keine falschen Antworten, nur deinen ehrlichen Startpunkt.</p>
+    <p>Finde heraus, wo du finanziell stehst. Beantworte 13 Fragen ehrlich – es gibt keine falschen Antworten, nur deinen ehrlichen Startpunkt.</p>
   </div>
 
   <div class="progress-wrap">
@@ -659,10 +668,10 @@ body {
 </div>
 
 <!-- ===== FOOTER BAR ===== -->
+<div class="kernbotschaft-above">Mit Kindergeld und Köpfchen – für ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
 <div class="bottom-bar-gold"></div>
 <div class="bottom-bar">
   <div class="bottom-bar-content">
-    <div class="kernbotschaft">Mit Kindergeld und Köpfchen — für ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
     <img src="MommyFinance_Logo_gold.png" alt="MommyFinance">
   </div>
 </div>
@@ -686,7 +695,7 @@ var questions = [
 
 var totalPages = questions.length;
 var currentPage = 0;
-var scores = new Array(totalPages).fill(5);
+var scores = new Array(totalPages).fill(1);
 
 var pagesContainer = document.getElementById('pages');
 
@@ -698,13 +707,14 @@ questions.forEach(function(item, i) {
 
   var coinsHtml = '';
   for (var c = 1; c <= 9; c++) {
-    coinsHtml += '<div class="coin' + (c <= 5 ? ' active' : '') + '" data-q="' + i + '" data-val="' + c + '" onclick="setCoin(' + i + ',' + c + ')"></div>';
+    coinsHtml += '<div class="coin' + (c <= 1 ? ' active' : '') + '" data-q="' + i + '" data-val="' + c + '" onclick="setCoin(' + i + ',' + c + ')"></div>';
   }
 
   page.innerHTML =
     '<div class="question-card">' +
       '<div class="q-number">Frage ' + (i + 1) + ' von ' + totalPages + '</div>' +
       '<div class="q-text">' + item.q + '</div>' +
+      (i === 2 ? '<div class="q-hint">Falls du keinen Partner hast, wähle die Mitte.</div>' : '') +
       '<div class="coins-container">' +
         '<div class="coins-hint"><span class="arrow-left"></span><span>Tippe auf die Goldstücke</span><span class="arrow-right"></span></div>' +
         '<div class="coins-row" id="coins' + i + '">' + coinsHtml + '</div>' +
