@@ -88,8 +88,6 @@ a:hover {
   color: var(--gold3);
 }
 
-.bottom-section { flex-shrink: 0; }
-
 .kernbotschaft-above {
   font-family: 'Alice', serif;
   font-size: 13px;
@@ -97,7 +95,7 @@ a:hover {
   opacity: 0.7;
   font-style: italic;
   text-align: center;
-  padding: 12px 20px 10px;
+  padding: 18px 20px 14px;
   line-height: 1.6;
 }
 
@@ -109,26 +107,30 @@ a:hover {
 .bottom-bar {
   background: var(--weinrot);
   text-align: center;
-  padding: 14px 0;
+  padding: 16px 0;
+}
+
+.bottom-bar-content {
+  padding: 20px 0;
 }
 
 .bottom-bar img { height: 22px; }
 
-.footer-links {
-  background: var(--dunkelrot);
-  text-align: center;
-  padding: 14px;
+.footer-nav {
+  margin-top: 12px;
 }
 
-.footer-links a {
+.footer-nav a {
   color: var(--goldgelb);
   text-decoration: none;
-  font-size: 0.9rem;
-  margin: 0 16px;
+  font-size: 0.85rem;
+  margin: 0 12px;
+  opacity: 0.8;
 }
 
-.footer-links a:hover {
+.footer-nav a:hover {
   text-decoration: underline;
+  opacity: 1;
 }
 
 @media (max-width: 600px) {
@@ -138,14 +140,13 @@ a:hover {
   .top-bar img { height: 60px; }
   .top-bar { padding: 16px 0 0; }
   .kernbotschaft-above { font-size: 12px; padding: 10px 16px 8px; }
-  .bottom-bar { padding: 12px 0; }
 }
 </style>
 </head>
 <body>
 
 <div class="top-bar">
-  <img src="/bewerbung/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin">
+  <img src="/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin">
 </div>
 <div class="top-bar-gold"></div>
 
@@ -174,18 +175,18 @@ a:hover {
 
 </div>
 
-<div class="bottom-section">
-  <div class="kernbotschaft-above">Mit Kindergeld und K&ouml;pfchen &ndash; f&uuml;r ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
-  <div class="bottom-bar-gold"></div>
-  <div class="bottom-bar">
-    <img src="/bewerbung/MommyFinance_Logo_gold.png" alt="MommyFinance">
+<div class="kernbotschaft-above">Mit Kindergeld und K&ouml;pfchen &ndash; f&uuml;r ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
+<div class="bottom-bar-gold"></div>
+<div class="bottom-bar">
+  <div class="bottom-bar-content">
+    <img src="/MommyFinance_Logo_gold.png" alt="MommyFinance">
+    <div class="footer-nav">
+      <a href="/selbstcheck">Selbstcheck</a>
+      <a href="/bewerbung">Bewerbung</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <a href="/impressum">Impressum</a>
+    </div>
   </div>
-</div>
-<div class="footer-links">
-  <a href="/selbstcheck">Selbstcheck</a>
-  <a href="/bewerbung">Bewerbung</a>
-  <a href="/datenschutz">Datenschutz</a>
-  <a href="/impressum">Impressum</a>
 </div>
 
 </body>
