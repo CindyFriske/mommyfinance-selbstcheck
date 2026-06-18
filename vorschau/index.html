@@ -1,0 +1,921 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MommyFinance | Cindy Friske, Finanztrainerin</title>
+<meta name="description" content="Persoenliche Finanzbegleitung fuer Muetter. ETF-Sparplan, Kinderdepot, Altersvorsorge â€“ servierfertig und 1:1 mit Cindy Friske.">
+<meta property="og:title" content="MommyFinance | Finanztrainerin fuer Muetter">
+<meta property="og:description" content="Mit Kindergeld und Koepfchen â€“ fuer ein finanziell entspanntes Zukunfts-ICH von Kind und Mama.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Alice&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --weinrot: #8b1130;
+  --dunkelrot: #441a32;
+  --elfenbein: #fbf2ed;
+  --goldgelb: #ffebb8;
+  --gold1: #f8d960;
+  --gold2: #efc11b;
+  --gold3: #e6a400;
+}
+
+html { height: 100%; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--elfenbein);
+  color: var(--dunkelrot);
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER BAR ===== */
+.top-bar {
+  background: var(--weinrot);
+  padding: 20px 0 0;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.top-bar img { height: 80px; margin-bottom: 16px; }
+
+.top-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+  flex-shrink: 0;
+}
+
+/* ===== NAVIGATION (zentriert) ===== */
+.page-nav {
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.page-nav a {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--weinrot);
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.2s;
+}
+
+.page-nav a:hover { color: var(--gold3); }
+
+.page-nav .nav-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gold3);
+  flex-shrink: 0;
+}
+
+/* ===== CONTENT WRAPPER ===== */
+.content {
+  flex: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  padding: 48px 0 40px;
+}
+
+.hero-text { flex: 1; }
+
+.hero-tagline {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold3);
+  margin-bottom: 12px;
+}
+
+.hero-text h1 {
+  font-family: 'Alice', serif;
+  font-size: 2rem;
+  color: var(--weinrot);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--dunkelrot);
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+.hero-photo { flex-shrink: 0; }
+
+.hero-photo-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--weinrot);
+  box-shadow: 0 0 0 3px var(--gold3), 0 8px 24px rgba(68, 26, 50, 0.12);
+}
+
+/* Instagram-Link */
+.hero-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--weinrot);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1.5px solid rgba(139, 17, 48, 0.15);
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.hero-instagram:hover { border-color: var(--gold3); color: var(--gold3); }
+.hero-instagram svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ===== BUTTONS ===== */
+
+/* Selbstcheck-Button: helles Gold, weinrote Umrandung */
+.btn-selbstcheck {
+  display: inline-block;
+  font-family: 'Barlow', sans-serif;
+  color: var(--weinrot);
+  background: linear-gradient(135deg, #fff8e1, var(--goldgelb));
+  border: 2px solid var(--weinrot);
+  padding: 14px 36px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 0 4px 16px rgba(248, 217, 96, 0.2);
+}
+
+.btn-selbstcheck:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(248, 217, 96, 0.4);
+  background: linear-gradient(135deg, var(--goldgelb), var(--gold1));
+}
+
+.btn-selbstcheck .btn-line1 {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-selbstcheck .btn-line2 {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* Beratungsgespraech-Button: volles Gold */
+.btn-gold {
+  display: inline-block;
+  font-family: 'Barlow', sans-serif;
+  color: var(--weinrot);
+  background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+  border: none;
+  padding: 16px 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 0 4px 20px rgba(248, 217, 96, 0.3);
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(248, 217, 96, 0.5);
+}
+
+.btn-gold .btn-line1 {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-gold .btn-line2 {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ===== GOLD DIVIDERS ===== */
+.gold-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold1), var(--gold2), var(--gold3), transparent);
+  margin: 0 auto;
+}
+
+.title-underline {
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+  margin: 14px 0 32px;
+}
+
+/* ===== SECTION TITLES ===== */
+.section-title {
+  font-family: 'Alice', serif;
+  font-size: 1.5rem;
+  color: var(--weinrot);
+  line-height: 1.35;
+}
+
+.section-title-wrap {
+  display: inline-block;
+}
+
+.section-title-wrap .title-underline {
+  width: 100%;
+}
+
+/* ===== PAIN-POINT SECTION ===== */
+.pain-section { padding: 48px 0; }
+
+.pain-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pain-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 24px;
+  border-left: 3px solid var(--gold3);
+  border-right: 3px solid var(--gold3);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  font-weight: 400;
+  box-shadow: 0 1px 3px rgba(68, 26, 50, 0.04);
+}
+
+.pain-card strong { font-weight: 600; color: var(--weinrot); }
+
+.pain-bridge {
+  margin-top: 32px;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  font-weight: 500;
+}
+
+.pain-bridge strong { color: var(--weinrot); }
+
+/* ===== QUOTE (dezent, hervorgehoben) ===== */
+.quote-section {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.quote-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 32px;
+  border-left: 4px solid var(--gold3);
+  border-right: 4px solid var(--gold3);
+  box-shadow: 0 2px 12px rgba(68, 26, 50, 0.05);
+  position: relative;
+}
+
+.quote-card::before,
+.quote-card::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold1), var(--gold2), var(--gold3), transparent);
+}
+
+.quote-card::before { top: 0; }
+.quote-card::after { bottom: 0; }
+
+.quote-text {
+  font-family: 'Alice', serif;
+  font-size: 1.3rem;
+  color: var(--weinrot);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-section { padding: 48px 0; }
+
+.about-grid {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.about-photo-wrap { flex-shrink: 0; }
+
+.about-photo {
+  width: 220px;
+  height: 280px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 3px solid var(--weinrot);
+  box-shadow: 0 0 0 2px var(--gold3), 0 8px 24px rgba(68, 26, 50, 0.1);
+  background: rgba(139, 17, 48, 0.06);
+}
+
+.about-text { flex: 1; }
+
+.about-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--dunkelrot);
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+
+.about-text p strong { font-weight: 600; color: var(--weinrot); }
+
+.about-name {
+  font-family: 'Alice', serif;
+  font-size: 1.15rem;
+  color: var(--weinrot);
+  margin-bottom: 2px;
+}
+
+.about-role {
+  font-size: 0.85rem;
+  color: var(--dunkelrot);
+  opacity: 0.6;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.credentials {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.credentials li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  padding: 6px 0 6px 28px;
+  position: relative;
+  font-weight: 400;
+}
+
+.credentials li::before {
+  content: '\203A';
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold3);
+  line-height: 1;
+}
+
+/* ===== VIDEO SECTION ===== */
+.video-section {
+  padding: 48px 0;
+  text-align: center;
+}
+
+.video-placeholder {
+  max-width: 640px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, rgba(139, 17, 48, 0.06), rgba(68, 26, 50, 0.08));
+  border-radius: 16px;
+  border: 2px dashed rgba(139, 17, 48, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.video-play-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--weinrot), var(--dunkelrot));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(139, 17, 48, 0.2);
+}
+
+.video-play-icon::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 18px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+
+.video-caption {
+  font-family: 'Alice', serif;
+  font-size: 0.95rem;
+  color: var(--weinrot);
+  opacity: 0.6;
+}
+
+/* ===== ERGEBNIS-SECTION ===== */
+.result-section { padding: 48px 0; }
+
+.result-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.result-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(139, 17, 48, 0.06);
+}
+
+.result-item:last-child { border-bottom: none; }
+
+.result-chevron {
+  flex-shrink: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold3);
+  line-height: 1.4;
+}
+
+.result-item p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  font-weight: 400;
+}
+
+.result-item p strong { font-weight: 600; color: var(--weinrot); }
+
+.result-footer {
+  margin-top: 24px;
+  font-family: 'Alice', serif;
+  font-size: 1.05rem;
+  color: var(--weinrot);
+  font-style: italic;
+}
+
+/* ===== FINANZCHECK CTA SECTION ===== */
+.finanzcheck-section { padding: 48px 0 56px; }
+
+.finanzcheck-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 44px 36px;
+  text-align: center;
+  border: 0.5px solid rgba(139, 17, 48, 0.06);
+  box-shadow: 0 4px 20px rgba(68, 26, 50, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.finanzcheck-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--weinrot), var(--gold1), var(--gold3), var(--weinrot));
+}
+
+.finanzcheck-label {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold3);
+  margin-bottom: 12px;
+}
+
+.finanzcheck-title {
+  font-family: 'Alice', serif;
+  font-size: 1.6rem;
+  color: var(--weinrot);
+  line-height: 1.35;
+  margin-bottom: 24px;
+}
+
+.finanzcheck-benefits {
+  list-style: none;
+  padding: 0;
+  max-width: 420px;
+  margin: 0 auto 28px;
+  text-align: left;
+}
+
+.finanzcheck-benefits li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  padding: 8px 0 8px 32px;
+  position: relative;
+  font-weight: 400;
+}
+
+.finanzcheck-benefits li::before {
+  content: '\203A';
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold3);
+  line-height: 1;
+}
+
+.finanzcheck-duration {
+  font-size: 0.95rem;
+  color: var(--gold3);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.finanzcheck-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.finanzcheck-sub {
+  font-size: 0.8rem;
+  color: var(--dunkelrot);
+  opacity: 0.5;
+}
+
+.finanzcheck-limit {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--weinrot);
+  letter-spacing: 0.5px;
+}
+
+/* Selbstcheck-Hinweis */
+.selbstcheck-hint {
+  text-align: center;
+  padding: 0 0 48px;
+}
+
+.selbstcheck-hint p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--dunkelrot);
+  margin-bottom: 0;
+}
+
+.selbstcheck-hint a {
+  color: var(--weinrot);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--weinrot);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.selbstcheck-hint a:hover {
+  color: var(--gold3);
+  border-color: var(--gold3);
+}
+
+/* ===== FOOTER ===== */
+.kernbotschaft-above {
+  font-family: 'Alice', serif;
+  font-size: 13px;
+  color: var(--weinrot);
+  opacity: 0.7;
+  font-style: italic;
+  text-align: center;
+  padding: 18px 20px 14px;
+  line-height: 1.6;
+}
+
+.bottom-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+}
+
+.bottom-bar {
+  background: var(--weinrot);
+  text-align: center;
+  padding: 16px 0;
+}
+
+.bottom-bar-content { padding: 20px 0; }
+.bottom-bar img { height: 22px; }
+
+.footer-nav { margin-top: 20px; }
+
+.footer-nav a {
+  color: var(--goldgelb);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin: 0 12px;
+  opacity: 0.8;
+}
+
+.footer-nav a:hover { text-decoration: underline; opacity: 1; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 24px;
+    padding: 32px 0 28px;
+  }
+
+  .hero-text h1 { font-size: 1.6rem; }
+  .hero-photo-img { width: 140px; height: 140px; }
+  .hero-instagram { margin: 16px auto 0; }
+
+  .about-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-photo { width: 180px; height: 230px; }
+  .credentials li { text-align: left; }
+
+  .section-title { font-size: 1.3rem; }
+  .pain-section, .about-section, .video-section, .result-section, .finanzcheck-section { padding: 36px 0; }
+
+  .finanzcheck-card { padding: 28px 20px; }
+  .finanzcheck-title { font-size: 1.35rem; }
+
+  .top-bar img { height: 60px; }
+  .top-bar { padding: 16px 0 0; }
+  .kernbotschaft-above { font-size: 12px; padding: 10px 16px 8px; }
+
+  .quote-section { padding: 24px 16px; }
+  .quote-card { padding: 28px 20px; }
+  .quote-text { font-size: 1.1rem; }
+}
+
+@media (max-width: 400px) {
+  .hero-text h1 { font-size: 1.4rem; }
+  .page-nav a { font-size: 0.78rem; }
+  .content { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER BAR ===== -->
+<div class="top-bar">
+  <img src="/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin">
+</div>
+<div class="top-bar-gold"></div>
+
+<!-- ===== NAVIGATION (zentriert) ===== -->
+<nav class="page-nav">
+  <a href="/selbstcheck">Selbstcheck</a>
+  <span class="nav-dot"></span>
+  <a href="/bewerbung">Bewerbung</a>
+  <span class="nav-dot"></span>
+  <a href="/datenschutz">Datenschutz</a>
+  <span class="nav-dot"></span>
+  <a href="/impressum">Impressum</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="content">
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-tagline">Souver&auml;n investiert &ndash; f&uuml;r dich und dein Kind</div>
+      <h1>Dein Geld arbeitet f&uuml;r dich.<br>Dein Depot l&auml;uft. Automatisch.</h1>
+      <p>Pers&ouml;nliche Finanzbegleitung f&uuml;r M&uuml;tter, die selbstbestimmt investieren wollen. Servierfertig und in deinem Tempo.</p>
+      <a href="/selbstcheck" class="btn-selbstcheck">
+        <span class="btn-line1">Mach jetzt deinen kostenfreien</span>
+        <span class="btn-line2">Online-Finanz-Selbstcheck</span>
+      </a>
+      <br>
+      <a href="https://www.instagram.com/mommyfinance.de/" target="_blank" rel="noopener" class="hero-instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        @mommyfinance.de
+      </a>
+    </div>
+    <div class="hero-photo">
+      <img src="/cindy-profilfoto.png" alt="Cindy Friske" class="hero-photo-img">
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAIN POINTS ===== -->
+<div class="content">
+  <section class="pain-section">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Kennst du das?</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="pain-cards">
+      <div class="pain-card">
+        Schon wieder ein Monat um, und du hast es <strong>immer noch nicht angefangen</strong>. Du wei&szlig;t, dass das Geld auf dem Tagesgeld nichts tut. Trotzdem liegt es da.
+      </div>
+      <div class="pain-card">
+        Du hast Videos geschaut, B&uuml;cher angefangen, Tipps gespeichert. Aber dein Depot? <strong>Gibt&rsquo;s noch nicht.</strong>
+      </div>
+      <div class="pain-card">
+        Du hast die Broker-App runtergeladen. Dann wieder geschlossen. <strong>Zu viele Begriffe, zu viel auf einmal.</strong>
+      </div>
+      <div class="pain-card">
+        Du wei&szlig;t, dass die Rente nicht reichen wird. Trotzdem schiebst du das Thema <strong>immer wieder auf</strong>.
+      </div>
+      <div class="pain-card">
+        Du m&ouml;chtest das Kindergeld <strong>clever f&uuml;r dein Kind investieren</strong>, aber du wei&szlig;t nicht, wie und wo du anf&auml;ngst.
+      </div>
+      <div class="pain-card">
+        Du tr&auml;umst davon, deinem Kind zum 18. Geburtstag ein <strong>gut gef&uuml;lltes Depot zu &uuml;bergeben</strong> &ndash; und gleichzeitig praktisches Finanzwissen weiterzugeben.
+      </div>
+    </div>
+
+    <p class="pain-bridge">Du brauchst keine weiteren YouTube-Videos.<br><strong>Du brauchst jemanden, der es mit dir zusammen macht.</strong></p>
+  </section>
+</div>
+
+<!-- ===== QUOTE (dezent, hervorgehoben) ===== -->
+<div class="quote-section">
+  <div class="quote-card">
+    <p class="quote-text">Stell dir vor, du triffst deine Finanzentscheidungen k&uuml;nftig selbst<br>&ndash; souver&auml;n, informiert und ohne Bankberater.</p>
+  </div>
+</div>
+
+<!-- ===== ABOUT / BIO ===== -->
+<div class="content">
+  <section class="about-section">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Warum gerade ich?</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <img src="/cindy-about.jpg" alt="Cindy Friske" class="about-photo">
+      </div>
+      <div class="about-text">
+        <div class="about-name">Cindy Friske</div>
+        <div class="about-role">Finanztrainerin</div>
+
+        <ul class="credentials">
+          <li>&Uuml;ber 25 Jahre eigene Investment-Erfahrung.</li>
+          <li>Ehemalige Bankerin &ndash; ich kenne das System von innen.</li>
+          <li>Dreifach-Mama. Ich predige nicht, ich lebe es.</li>
+          <li>Pers&ouml;nliche Begleitung statt anonymer Gro&szlig;gruppe.</li>
+        </ul>
+
+        <p>
+          <strong>Individuell. Pers&ouml;nlich. Umsetzungsstark</strong> &ndash; mit laufendem Depot f&uuml;r dich und eines je Kind.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== VIDEO ===== -->
+<div class="content">
+  <section class="video-section">
+    <div class="section-title-wrap" style="display: block; text-align: center;">
+      <h2 class="section-title" style="display: inline;">Lern mich kennen</h2>
+      <div class="title-underline" style="margin: 14px auto 32px;"></div>
+    </div>
+
+    <div class="video-placeholder">
+      <div class="video-play-icon"></div>
+      <span class="video-caption">Willkommensvideo folgt</span>
+    </div>
+  </section>
+</div>
+
+<!-- ===== ERGEBNISSE ===== -->
+<div class="content">
+  <section class="result-section">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Nach unserem Mentoring hast du ...</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <ul class="result-list">
+      <li class="result-item">
+        <span class="result-chevron">&rsaquo;</span>
+        <p>ein <strong>Spar- und Konten-Modell</strong>, das zu deinem Familienalltag passt.</p>
+      </li>
+      <li class="result-item">
+        <span class="result-chevron">&rsaquo;</span>
+        <p>dein eigenes <strong>Mama-Depot</strong>, in deinem Namen, eingerichtet.</p>
+      </li>
+      <li class="result-item">
+        <span class="result-chevron">&rsaquo;</span>
+        <p>ein laufendes <strong>ETF-Kinderdepot je Kind</strong>, bef&uuml;llt mit Kindergeld.</p>
+      </li>
+      <li class="result-item">
+        <span class="result-chevron">&rsaquo;</span>
+        <p>ein <strong>Notgroschen-Konto</strong> mit klarem Plan, wie du es Schritt f&uuml;r Schritt f&uuml;llst.</p>
+      </li>
+      <li class="result-item">
+        <span class="result-chevron">&rsaquo;</span>
+        <p>eine klare <strong>Strategie f&uuml;r st&uuml;rmische B&ouml;rsenzeiten</strong>.</p>
+      </li>
+    </ul>
+
+    <p class="result-footer">Praktisches Finanzwissen &ndash; f&uuml;r deinen Alltag.</p>
+  </section>
+</div>
+
+<!-- ===== FINANZCHECK CTA ===== -->
+<div class="content">
+  <section class="finanzcheck-section">
+    <div class="finanzcheck-card">
+      <div class="finanzcheck-label">Dein n&auml;chster Schritt</div>
+      <h2 class="finanzcheck-title">Dein kostenfreies<br>Finanzcheck-Beratungsgespr&auml;ch</h2>
+
+      <ul class="finanzcheck-benefits">
+        <li>wo du gerade wirklich stehst</li>
+        <li>was dein n&auml;chster konkreter Schritt ist</li>
+        <li>wie dein pers&ouml;nliches Sparmodell aussehen kann</li>
+      </ul>
+
+      <div class="finanzcheck-duration">60 Minuten &middot; 1:1 mit Cindy &middot; per Videocall</div>
+
+      <div class="finanzcheck-buttons">
+        <a href="/bewerbung" class="btn-gold">
+          <span class="btn-line1">Bewirb dich jetzt f&uuml;r dein kostenfreies</span>
+          <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
+        </a>
+        <span class="finanzcheck-sub">Kurzer Bewerbungsbogen &ndash; dauert 3 Minuten</span>
+      </div>
+
+      <p class="finanzcheck-limit">Limitierte Anzahl an Pl&auml;tzen verf&uuml;gbar.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===== SELBSTCHECK HINWEIS ===== -->
+<div class="content">
+  <div class="selbstcheck-hint">
+    <div class="gold-divider" style="width: 280px; margin-bottom: 24px;"></div>
+    <p>Noch nicht sicher?<br>Mach zuerst den <a href="/selbstcheck">kostenfreien Online-Finanz-Selbstcheck</a><br>13 Fragen, 3 Minuten, deine pers&ouml;nliche Auswertung.</p>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="kernbotschaft-above">Mit Kindergeld und K&ouml;pfchen &ndash; f&uuml;r ein finanziell entspanntes Zukunfts-ICH von Kind und Mama.</div>
+<div class="bottom-bar-gold"></div>
+<div class="bottom-bar">
+  <div class="bottom-bar-content">
+    <img src="/MommyFinance_Logo_gold.png" alt="MommyFinance">
+    <div class="footer-nav">
+      <a href="/selbstcheck">Selbstcheck</a>
+      <a href="/bewerbung">Bewerbung</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <a href="/impressum">Impressum</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
