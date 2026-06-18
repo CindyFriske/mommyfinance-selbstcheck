@@ -88,21 +88,46 @@ a:hover {
   color: var(--gold3);
 }
 
-.footer-bar {
-  background: var(--weinrot);
+.bottom-section { flex-shrink: 0; }
+
+.kernbotschaft-above {
+  font-family: 'Alice', serif;
+  font-size: 13px;
+  color: var(--weinrot);
+  opacity: 0.7;
+  font-style: italic;
   text-align: center;
-  padding: 18px;
-  flex-shrink: 0;
+  padding: 12px 20px 10px;
+  line-height: 1.6;
 }
 
-.footer-bar a {
+.bottom-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+}
+
+.bottom-bar {
+  background: var(--weinrot);
+  text-align: center;
+  padding: 14px 0;
+}
+
+.bottom-bar img { height: 22px; }
+
+.footer-links {
+  background: var(--dunkelrot);
+  text-align: center;
+  padding: 14px;
+}
+
+.footer-links a {
   color: var(--goldgelb);
   text-decoration: none;
   font-size: 0.9rem;
   margin: 0 16px;
 }
 
-.footer-bar a:hover {
+.footer-links a:hover {
   text-decoration: underline;
 }
 
@@ -110,13 +135,17 @@ a:hover {
   .main-wrap { padding: 24px 16px 40px; }
   h1 { font-size: 1.5rem; }
   h2 { font-size: 1.2rem; }
+  .top-bar img { height: 60px; }
+  .top-bar { padding: 16px 0 0; }
+  .kernbotschaft-above { font-size: 12px; padding: 10px 16px 8px; }
+  .bottom-bar { padding: 12px 0; }
 }
 </style>
 </head>
 <body>
 
 <div class="top-bar">
-  <a href="/"><img src="https://raw.githubusercontent.com/CindyFriske/mommyfinance-selbstcheck/master/selbstcheck/logo.png" alt="MommyFinance Logo"></a>
+  <img src="/bewerbung/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin">
 </div>
 <div class="top-bar-gold"></div>
 
@@ -125,7 +154,7 @@ a:hover {
 <h1>Impressum</h1>
 
 <h2>Angaben gem&auml;&szlig; &sect; 5 DDG</h2>
-<p>Cindy Friske<br>Finanztrainerin &amp; Mentoring<br>Voigtstr. 36<br>10247 Berlin</p>
+<p>Cindy Friske Mentoring<br>Cindy Friske, Finanztrainerin<br>Voigtstr. 36<br>10247 Berlin</p>
 
 <h2>Kontakt</h2>
 <p>E-Mail: <a href="mailto:kontakt@mommyfinance.de">kontakt@mommyfinance.de</a></p>
@@ -145,7 +174,14 @@ a:hover {
 
 </div>
 
-<div class="footer-bar">
+<div class="bottom-section">
+  <div class="kernbotschaft-above">Mit Kindergeld und K&ouml;pfchen &ndash; f&uuml;r ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
+  <div class="bottom-bar-gold"></div>
+  <div class="bottom-bar">
+    <img src="/bewerbung/MommyFinance_Logo_gold.png" alt="MommyFinance">
+  </div>
+</div>
+<div class="footer-links">
   <a href="/selbstcheck">Selbstcheck</a>
   <a href="/bewerbung">Bewerbung</a>
   <a href="/datenschutz">Datenschutz</a>
