@@ -466,6 +466,151 @@ body {
 .cta-details .cta-gold { color: var(--gold3); font-weight: 600; }
 .cta-details span { display: block; font-size: 12px; opacity: 0.5; margin-top: 6px; font-weight: 400; }
 
+/* ===== EMAIL FORM ===== */
+.email-form-section {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.email-form-title {
+  font-family: 'Alice', serif;
+  font-size: 19px;
+  color: var(--weinrot);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.email-form-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  opacity: 0.85;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.email-form-section input[type="text"],
+.email-form-section input[type="email"] {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid rgba(139, 17, 48, 0.15);
+  border-radius: 10px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  color: var(--dunkelrot);
+  background: #fff;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.email-form-section input[type="text"]:focus,
+.email-form-section input[type="email"]:focus {
+  outline: none;
+  border-color: var(--gold3);
+  box-shadow: 0 0 0 3px rgba(230, 164, 0, 0.15);
+}
+
+.email-form-section input[type="text"]::placeholder,
+.email-form-section input[type="email"]::placeholder {
+  color: rgba(68, 26, 50, 0.35);
+}
+
+.email-form-btn {
+  display: block;
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--weinrot);
+  background: linear-gradient(135deg, var(--gold1), var(--gold2));
+  border: 2px solid var(--weinrot);
+  padding: 16px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-top: 8px;
+  box-shadow: 0 2px 12px rgba(230, 164, 0, 0.2);
+}
+
+.email-form-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(230, 164, 0, 0.35);
+}
+
+.email-form-btn:active { transform: scale(0.98); }
+
+.email-form-newsletter {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.email-form-newsletter-hint {
+  font-size: 13px;
+  color: var(--dunkelrot);
+  margin: 0 0 8px 0;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.email-form-newsletter label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--dunkelrot);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.email-form-newsletter input[type="checkbox"] {
+  accent-color: var(--weinrot);
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.email-form-privacy {
+  font-size: 12px;
+  color: var(--dunkelrot);
+  opacity: 0.5;
+  margin-top: 14px;
+  font-weight: 300;
+}
+
+.email-form-privacy a { color: var(--weinrot); }
+
+.email-confirm {
+  margin-top: 32px;
+  padding: 28px 24px;
+  background: linear-gradient(135deg, rgba(248, 217, 96, 0.12), rgba(230, 164, 0, 0.08));
+  border: 1.5px solid rgba(230, 164, 0, 0.35);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.email-confirm-title {
+  font-family: 'Alice', serif;
+  font-size: 20px;
+  color: var(--weinrot);
+  margin-bottom: 12px;
+}
+
+.email-confirm p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  margin-bottom: 8px;
+}
+
+.email-confirm-hint {
+  font-size: 13px;
+  opacity: 0.6;
+  font-style: italic;
+}
+
 /* Profile photo */
 .profile-section {
   margin-top: 28px;
@@ -607,6 +752,8 @@ body {
   .cta-button { padding: 18px 28px; }
   .cta-button .cta-line2 { font-size: 18px; }
   .top-bar img { height: 60px; }
+  .email-form-title { font-size: 17px; }
+  .email-form-section { margin-top: 24px; }
 }
 </style>
 </head>
@@ -656,16 +803,48 @@ body {
       </div>
 
       <div class="result-title" id="resultTitle"></div>
-      <div id="resultText"></div>
+      <div id="resultTeaser"></div>
       <div class="result-divider"></div>
 
-      <a class="cta-button" href="/bewerbung" id="ctaBtn">
-        <span class="cta-line1">Bewirb dich jetzt für dein</span>
-        <span class="cta-line2">Finanzcheck-Beratungsgespräch</span>
-      </a>
-      <div class="cta-details">
-        <span class="cta-gold">60 Minuten · 1:1 mit Cindy · kostenfrei</span>
-        <span>Begrenzte Plätze — Bewerbung erforderlich</span>
+      <div class="email-form-section" id="emailFormSection">
+        <div class="email-form-title">Möchtest du dein ausführliches Ergebnis?</div>
+        <p class="email-form-text">Ich schicke dir deine persönliche Auswertung mit konkreten Tipps kostenfrei per E-Mail zu – inklusive deiner Stärken, deines Potenzials und einem klaren nächsten Schritt.</p>
+        <form id="brevoForm" method="POST" action="https://8fb30248.sibforms.com/serve/MUIFAGSLl2ZMFXKw5VGpwFlTvg-_Y7JhjNRb2WCjcIcpUn8IgqOA4wCTGeR8aalGPaCiMNM8yEK_O0ohKUFsqNkMglOdht45CJEH715ALdECacEwaPd49d9tU3hzVrI7DDkfrWxIIxLP2eWjH6EmadsBFt_ijmN1MyhvJ0xUjNDCAe63X75BcZVm--istIaepYw4VXvzLg2l6mt_jQ==" target="brevo-result">
+          <input type="text" name="VORNAME" placeholder="Dein Vorname (optional)" autocomplete="given-name" />
+          <input type="email" name="EMAIL" placeholder="Deine E-Mail-Adresse" required autocomplete="email" />
+          <input type="hidden" name="SELBSTCHECK_SCORE" id="formScore" />
+          <input type="hidden" name="SELBSTCHECK_KATEGORIE" id="formKategorie" />
+          <input type="hidden" name="SELBSTCHECK_STAERKEN" id="formStaerken" />
+          <input type="hidden" name="SELBSTCHECK_SCHWAECHEN" id="formSchwaechen" />
+          <input type="hidden" name="SCORE_Q1" id="formQ1" />
+          <input type="hidden" name="SCORE_Q2" id="formQ2" />
+          <input type="hidden" name="SCORE_Q3" id="formQ3" />
+          <input type="hidden" name="SCORE_Q4" id="formQ4" />
+          <input type="hidden" name="SCORE_Q5" id="formQ5" />
+          <input type="hidden" name="SCORE_Q6" id="formQ6" />
+          <input type="hidden" name="SCORE_Q7" id="formQ7" />
+          <input type="hidden" name="SCORE_Q8" id="formQ8" />
+          <input type="hidden" name="SCORE_Q9" id="formQ9" />
+          <input type="hidden" name="SCORE_Q10" id="formQ10" />
+          <input type="hidden" name="SCORE_Q11" id="formQ11" />
+          <input type="hidden" name="SCORE_Q12" id="formQ12" />
+          <input type="hidden" name="SCORE_Q13" id="formQ13" />
+          <input type="text" name="email_address_check" value="" style="display:none!important;" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="locale" value="de" />
+          <input type="hidden" name="html_type" value="simple" />
+          <div class="email-form-newsletter">
+            <p class="email-form-newsletter-hint">Dein Ergebnis ist erst der Anfang – damit ich dir auch danach wertvolle Finanztipps schicken darf:</p>
+            <label><input type="checkbox" name="NEWSLETTER_EINWILLIGUNG" value="Ja" /> Ja, ich freue mich über kostenfreie Finanztipps von Cindy per E-Mail.</label>
+          </div>
+          <button type="submit" class="email-form-btn">Ergebnis per E-Mail erhalten</button>
+        </form>
+        <p class="email-form-privacy">Deine Daten sind sicher. Du erhältst nur dein persönliches Ergebnis per E-Mail. <a href="/datenschutz">Datenschutz</a></p>
+      </div>
+
+      <div class="email-confirm" id="emailConfirm" style="display:none;">
+        <div class="email-confirm-title">Fast geschafft!</div>
+        <p>Ich habe dir eine Bestätigungs-E-Mail geschickt.<br/>Bitte klick auf den Link in der E-Mail – dann sende ich dir dein ausführliches Ergebnis zu.</p>
+        <p class="email-confirm-hint">Schau auch im Spam-Ordner nach, falls die E-Mail nicht sofort ankommt.</p>
       </div>
 
       <div class="profile-section">
@@ -673,13 +852,9 @@ body {
         <div class="profile-name">Cindy Friske</div>
         <div class="profile-title">Finanztrainerin</div>
       </div>
-
-      <div class="breakdown" id="breakdown">
-        <div class="gold-divider" style="margin: 32px auto 24px;"></div>
-        <div class="breakdown-title">Deine Bereiche im Überblick</div>
-      </div>
     </div>
   </div>
+  <iframe name="brevo-result" style="display:none;"></iframe>
 
   <div class="footer-spacer"></div>
 </div>
@@ -814,7 +989,6 @@ function showResult() {
     document.getElementById('scoreNum').textContent = Math.round(current);
   }, 30);
 
-  // Dynamic strengths/weaknesses
   var strong = [];
   var weak = [];
   var labels = {
@@ -838,68 +1012,43 @@ function showResult() {
     if (scores[i] <= 3) weak.push(labels[q.key]);
   });
 
-  var strengthText = '';
-  if (strong.length > 0) {
-    strengthText = '<div class="result-text"><strong>Das hast du schon gut im Griff:</strong> ' + strong.join(', ') + '. Das ist wirklich toll!</div>';
-  }
-
-  var weakText = '';
-  if (weak.length > 0) {
-    weakText = '<div class="result-text"><strong>Hier liegt dein größtes Potenzial:</strong> ' + weak.join(', ') + '. Genau das sind die Bereiche, die wir gemeinsam anpacken können.</div>';
-  }
-
-  var title, baseText, ctaText;
+  var title, teaser;
 
   if (total <= 35) {
-    title = "Du stehst am Anfang — und genau jetzt ist der richtige Moment";
-    baseText = '<div class="result-text">Dein Ergebnis zeigt: Es gibt noch viele offene Baustellen. Und wahrscheinlich kennst du das Gefühl nur zu gut: <strong>Schon wieder ein Monat vorbei, und du hast es immer noch nicht angefangen.</strong></div>'
-      + '<div class="result-text">Du weißt, dass du handeln solltest — aber der erste Schritt fühlt sich riesig an. Zu viele Begriffe, zu viele Möglichkeiten, zu viele Unsicherheiten.</div>'
-      + strengthText
-      + weakText
-      + '<div class="result-text">Aber du hast gerade diesen Check gemacht. Das zeigt: <strong>Du bist bereit.</strong> Du brauchst keine weiteren YouTube-Videos oder Finanzratgeber. Du brauchst jemanden, der dich an die Hand nimmt und mit dir gemeinsam dein Finanzsystem aufbaut — servierfertig, genau so wie du es brauchst.</div>';
-    ctaText = 'In meinem kostenfreien Finanzcheck-Beratungsgespräch schauen wir uns gemeinsam an, wo du stehst, welche Lücken es gibt und welcher erste Schritt für dich der richtige ist. Kein Verkaufsdruck, kein Fachchinesisch — nur Klarheit und ein konkreter Plan für dich.';
+    title = "Du stehst am Anfang – und genau jetzt ist der richtige Moment";
+    teaser = '<div class="result-text">Dein Ergebnis zeigt: Es gibt noch einige offene Baustellen. Aber du hast gerade diesen Check gemacht – das zeigt, dass du bereit bist, etwas zu verändern.</div>';
   } else if (total <= 58) {
-    title = "Du hast angefangen — aber der rote Faden fehlt noch";
-    baseText = '<div class="result-text">Du bist nicht bei Null. Einzelne Puzzleteile liegen auf dem Tisch — nur zusammengesetzt hast du sie noch nicht. <strong>Es fehlt das System dahinter.</strong></div>'
-      + strengthText
-      + weakText
-      + '<div class="result-text">Das Frustrierende: <strong>Du weißt eigentlich, dass du es könntest.</strong> Aber alleine fehlt dir die Struktur und jemand, der dir sagt: Genau so machst du es jetzt. Schritt für Schritt, in deinem Tempo.</div>';
-    ctaText = 'Genau dafür gibt es mein kostenfreies Finanzcheck-Beratungsgespräch. Wir schauen gemeinsam auf deine Situation, identifizieren die Lücken und ich zeige dir, wie du in wenigen Wochen ein funktionierendes System aufbaust — ohne dass du dafür BWL studieren musst.';
+    title = "Du hast angefangen – aber der rote Faden fehlt noch";
+    teaser = '<div class="result-text">Du bist nicht bei Null – einzelne Puzzleteile liegen schon auf dem Tisch. Was jetzt fehlt, ist das System dahinter.</div>';
   } else if (total <= 82) {
-    title = "Gute Basis — jetzt geht es um die entscheidenden Details";
-    baseText = '<div class="result-text">Du bist weiter als die meisten Mütter, die ich treffe. Die Grundlagen stehen — und das verdient Anerkennung.</div>'
-      + strengthText
-      + weakText
-      + '<div class="result-text">Das sind genau die Details, die trennen zwischen <strong>„ganz okay aufgestellt"</strong> und <strong>„finanziell souverän investiert"</strong>. Und oft sind es nur kleine Anpassungen, die über Jahre hinweg Tausende Euro Unterschied machen.</div>';
-    ctaText = 'In meinem kostenfreien Finanzcheck-Beratungsgespräch analysieren wir gemeinsam, welche Stellschrauben bei dir noch offen sind — und wie du sie gezielt schließt. 60 Minuten, die sich über die nächsten 30 Jahre auszahlen können.';
+    title = "Gute Basis – jetzt geht es um die entscheidenden Details";
+    teaser = '<div class="result-text">Du bist weiter als die meisten Mütter, die ich treffe. Die Grundlagen stehen – und das verdient Anerkennung.</div>';
   } else {
-    title = "Souverän aufgestellt — Respekt, du machst das richtig gut!";
-    baseText = '<div class="result-text">Wow. Du gehörst zu den wenigen Müttern, die ihre Finanzen wirklich im Griff haben. Du investierst, du planst voraus, du triffst eigenständige Entscheidungen. <strong>Das verdient ehrlichen Respekt.</strong></div>'
-      + strengthText
-      + weakText
-      + '<div class="result-text">Auch ein starkes Fundament kann Feinschliff gebrauchen. Manchmal zeigt ein Blick von außen Dinge, die man selbst übersieht — nicht weil man es nicht kann, sondern weil man zu nah dran ist.</div>';
-    ctaText = 'Auch für dich kann mein kostenfreies Finanzcheck-Beratungsgespräch wertvoll sein: Ein Austausch auf Augenhöhe, bei dem wir gemeinsam schauen, ob es noch blinde Flecken gibt — und ob du wirklich so abgesichert bist, wie du denkst.';
+    title = "Souverän aufgestellt – Respekt, du machst das richtig gut!";
+    teaser = '<div class="result-text">Du gehörst zu den wenigen Müttern, die ihre Finanzen wirklich im Griff haben. Das verdient ehrlichen Respekt.</div>';
   }
 
   document.getElementById('resultTitle').textContent = title;
-  document.getElementById('resultText').innerHTML = baseText + '<div class="result-cta-intro">' + ctaText + '</div>';
+  document.getElementById('resultTeaser').innerHTML = teaser;
 
-  var breakdown = document.getElementById('breakdown');
-  questions.forEach(function(item, i) {
-    var row = document.createElement('div');
-    row.className = 'breakdown-item';
-    row.innerHTML = '<span class="breakdown-label">' + item.short + '</span><div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="bar' + i + '" style="width:0%"></div></div><span class="breakdown-val">' + scores[i] + '</span>';
-    breakdown.appendChild(row);
-  });
+  document.getElementById('formScore').value = total;
+  document.getElementById('formKategorie').value = title;
+  document.getElementById('formStaerken').value = strong.length > 0 ? strong.join(', ') : 'Noch keine klaren Stärken erkennbar – genau deshalb lohnt sich der nächste Schritt.';
+  document.getElementById('formSchwaechen').value = weak.length > 0 ? weak.join(', ') : 'Kein einzelner Bereich besonders schwach – ein gutes Zeichen!';
 
-  setTimeout(function() {
-    scores.forEach(function(v, i) {
-      document.getElementById('bar' + i).style.width = Math.round((v / 9) * 100) + '%';
-    });
-  }, 300);
+  for (var qi = 0; qi < scores.length; qi++) {
+    document.getElementById('formQ' + (qi + 1)).value = Math.round(scores[qi] / 9 * 100);
+  }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+document.getElementById('brevoForm').addEventListener('submit', function() {
+  setTimeout(function() {
+    document.getElementById('emailFormSection').style.display = 'none';
+    document.getElementById('emailConfirm').style.display = 'block';
+  }, 100);
+});
 </script>
 </body>
 </html>
