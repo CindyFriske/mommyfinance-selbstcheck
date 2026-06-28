@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abmeldung bestätigt | MommyFinance</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Alice&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --weinrot: #8b1130;
+  --dunkelrot: #441a32;
+  --elfenbein: #fbf2ed;
+  --goldgelb: #ffebb8;
+  --gold1: #f8d960;
+  --gold2: #efc11b;
+  --gold3: #e6a400;
+}
+
+html { height: 100%; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--elfenbein);
+  color: var(--dunkelrot);
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  background: var(--weinrot);
+  padding: 20px 0 0;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.top-bar img { height: 80px; margin-bottom: 16px; }
+
+.top-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+  flex-shrink: 0;
+}
+
+.main-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(68, 26, 50, 0.08);
+}
+
+.check-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--goldgelb);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.check-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--weinrot);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+h1 {
+  font-family: 'Alice', serif;
+  color: var(--weinrot);
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--dunkelrot);
+  margin-bottom: 14px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--weinrot);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--gold2);
+  padding-bottom: 2px;
+}
+
+.back-link:hover {
+  color: var(--gold3);
+  border-color: var(--gold3);
+}
+
+.kernbotschaft-above {
+  font-family: 'Alice', serif;
+  font-size: 13px;
+  color: var(--weinrot);
+  opacity: 0.7;
+  font-style: italic;
+  text-align: center;
+  padding: 18px 20px 14px;
+  line-height: 1.6;
+}
+
+.bottom-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+}
+
+.bottom-bar {
+  background: var(--weinrot);
+  text-align: center;
+  padding: 16px 0;
+}
+
+.bottom-bar-content {
+  padding: 20px 0;
+}
+
+.bottom-bar img { height: 22px; }
+
+.footer-nav {
+  margin-top: 20px;
+}
+
+.footer-nav a {
+  color: var(--goldgelb);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin: 0 12px;
+  opacity: 0.8;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .card { padding: 36px 24px; }
+  h1 { font-size: 1.4rem; }
+  .top-bar img { height: 60px; }
+  .top-bar { padding: 16px 0 0; }
+  .kernbotschaft-above { font-size: 12px; padding: 10px 16px 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <img src="/cf-logo-elfenbein.png" alt="Cindy Friske">
+</div>
+<div class="top-bar-gold"></div>
+
+<div class="main-wrap">
+  <div class="card">
+    <div class="check-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <h1>Du hast dich erfolgreich abgemeldet.</h1>
+    <p>Du erhältst von mir keine weiteren E-Mails mehr. Deine Abmeldung ist sofort wirksam.</p>
+    <p>Solltest du deine Meinung ändern, kannst du dich jederzeit erneut eintragen.</p>
+    <a href="/selbstcheck" class="back-link">Zurück zum Selbstcheck</a>
+  </div>
+</div>
+
+<div class="kernbotschaft-above">Mit Kindergeld und Köpfchen – für ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
+<div class="bottom-bar-gold"></div>
+<div class="bottom-bar">
+  <div class="bottom-bar-content">
+    <img src="/MommyFinance_Logo_gold.png" alt="MommyFinance">
+    <div class="footer-nav">
+      <a href="/selbstcheck">Selbstcheck</a>
+      <a href="/bewerbung">Bewerbung</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <a href="/impressum">Impressum</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

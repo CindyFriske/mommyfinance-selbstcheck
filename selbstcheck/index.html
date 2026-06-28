@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finanz-Selbstcheck | MommyFinance</title>
-<meta name="description" content="Finde heraus, wo du finanziell wirklich stehst. Der kostenfreie Selbstcheck für Mütter von Cindy Friske, Finanztrainerin.">
-<meta property="og:title" content="Dein Finanz-Selbstcheck | MommyFinance">
-<meta property="og:description" content="Finde heraus, wo du finanziell wirklich stehst. 13 ehrliche Fragen — und deine persönliche Auswertung.">
+<title>Online-Selbstcheck | MommyFinance</title>
+<meta name="description" content="Finde heraus, wo du gerade wirklich stehst. Der kostenfreie Selbstcheck für Mütter von Cindy Friske.">
+<meta property="og:title" content="Dein Online-Selbstcheck | MommyFinance">
+<meta property="og:description" content="Finde heraus, wo du gerade wirklich stehst. 13 ehrliche Fragen — und deine persönliche Auswertung.">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Alice&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -572,6 +572,12 @@ body {
   cursor: pointer;
 }
 
+.newsletter-error {
+  color: var(--weinrot);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
 .email-form-privacy {
   font-size: 12px;
   color: var(--dunkelrot);
@@ -761,16 +767,16 @@ body {
 
 <!-- ===== HEADER BAR ===== -->
 <div class="top-bar">
-  <img src="cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin">
+  <img src="cf-logo-elfenbein.png" alt="Cindy Friske">
 </div>
 <div class="top-bar-gold"></div>
 
 <!-- ===== MAIN ===== -->
 <div class="main">
   <div class="header">
-    <h1>Dein Finanz-Selbstcheck</h1>
+    <h1>Dein Online-Selbstcheck</h1>
     <div class="gold-divider"></div>
-    <p>Finde heraus, wo du finanziell stehst. Beantworte 13 Fragen ehrlich – es gibt keine falschen Antworten, nur deinen ehrlichen Startpunkt.</p>
+    <p>Finde heraus, wo du gerade stehst. Beantworte 13 Fragen ehrlich – es gibt keine falschen Antworten, nur deinen ehrlichen Startpunkt.</p>
   </div>
 
   <div class="progress-wrap">
@@ -833,12 +839,12 @@ body {
           <input type="hidden" name="locale" value="de" />
           <input type="hidden" name="html_type" value="simple" />
           <div class="email-form-newsletter">
-            <p class="email-form-newsletter-hint">Dein Ergebnis ist erst der Anfang – damit ich dir auch danach wertvolle Finanztipps schicken darf:</p>
-            <label><input type="checkbox" name="NEWSLETTER_EINWILLIGUNG" value="Ja" /> Ja, ich freue mich über kostenfreie Finanztipps von Cindy per E-Mail.</label>
+            <label><input type="checkbox" name="NEWSLETTER_EINWILLIGUNG" value="Ja" /> Ja, ich bin einverstanden, dass Cindy Friske meine Daten verwendet, um mir mein persönliches Ergebnis zuzusenden und mich von Zeit zu Zeit per E-Mail über passende Angebote und hilfreiche Inhalte zu informieren. Abmeldung jederzeit mit einem Klick.</label>
+            <p id="newsletterError" class="newsletter-error" style="display:none;">Bitte stimme zu, damit ich dir dein Ergebnis schicken darf.</p>
           </div>
           <button type="submit" class="email-form-btn">Ergebnis per E-Mail erhalten</button>
         </form>
-        <p class="email-form-privacy">Deine Daten sind sicher. Du erhältst nur dein persönliches Ergebnis per E-Mail. <a href="/datenschutz">Datenschutz</a></p>
+        <p class="email-form-privacy">Deine Daten sind sicher. <a href="/datenschutz">Datenschutz</a></p>
       </div>
 
       <div class="email-confirm" id="emailConfirm" style="display:none;">
@@ -1043,11 +1049,24 @@ function showResult() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.getElementById('brevoForm').addEventListener('submit', function() {
+document.getElementById('brevoForm').addEventListener('submit', function(e) {
+  var checkbox = document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]');
+  var errorEl = document.getElementById('newsletterError');
+  if (!checkbox.checked) {
+    e.preventDefault();
+    errorEl.style.display = 'block';
+    errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  errorEl.style.display = 'none';
   setTimeout(function() {
     document.getElementById('emailFormSection').style.display = 'none';
     document.getElementById('emailConfirm').style.display = 'block';
   }, 100);
+});
+
+document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]').addEventListener('change', function() {
+  if (this.checked) document.getElementById('newsletterError').style.display = 'none';
 });
 </script>
 </body>
