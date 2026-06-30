@@ -1060,7 +1060,7 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
   var email = document.querySelector('[name="EMAIL"]').value.trim();
   var vorname = document.querySelector('[name="VORNAME"]').value.trim();
   try {
-    var res = await fetch('https://api.brevo.com/v3/contacts/createDoiContact', {
+    var res = await fetch('https://api.brevo.com/v3/contacts/doubleOptinConfirmation', {
       method: 'POST',
       headers: {
         'accept': 'application/json',
