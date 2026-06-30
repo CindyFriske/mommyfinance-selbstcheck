@@ -815,7 +815,7 @@ body {
       <div class="email-form-section" id="emailFormSection">
         <div class="email-form-title">Möchtest du dein ausführliches Ergebnis?</div>
         <p class="email-form-text">Ich schicke dir deine persönliche Auswertung mit konkreten Tipps kostenfrei per E-Mail zu – inklusive deiner Stärken, deines Potenzials und einem klaren nächsten Schritt.</p>
-        <form id="brevoForm" method="POST" action="https://8fb30248.sibforms.com/v2/serve/MUIFAGSLl2ZMFXKw5VGpwFlTvg-_Y7JhjNRb2WCjcIcpUn8IgqOA4wCTGeR8aalGPaCiMNM8yEK_O0ohKUFsqNkMglOdht45CJEH715ALdECacEwaPd49d9tU3hzVrI7DDkfrWxIIxLP2eWjH6EmadsBFt_ijmN1MyhvJ0xUjNDCAe63X75BcZVm--istIaepYw4VXvzLg2l6mt_jQ==" target="brevo-result">
+        <form id="brevoForm">
           <input type="text" name="VORNAME" placeholder="Dein Vorname (optional)" autocomplete="given-name" />
           <input type="email" name="EMAIL" placeholder="Deine E-Mail-Adresse" required autocomplete="email" />
           <input type="hidden" name="SELBSTCHECK_SCORE" id="formScore" />
@@ -835,9 +835,6 @@ body {
           <input type="hidden" name="SCORE_Q11" id="formQ11" />
           <input type="hidden" name="SCORE_Q12" id="formQ12" />
           <input type="hidden" name="SCORE_Q13" id="formQ13" />
-          <input type="text" name="email_address_check" value="" style="display:none!important;" tabindex="-1" autocomplete="off" />
-          <input type="hidden" name="locale" value="de" />
-          <input type="hidden" name="html_type" value="simple" />
           <div class="email-form-newsletter">
             <label><input type="checkbox" name="NEWSLETTER_EINWILLIGUNG" value="Ja" /> Ja, ich bin einverstanden, dass Cindy Friske meine Daten verwendet, um mir mein persönliches Ergebnis zuzusenden und mich von Zeit zu Zeit per E-Mail über passende Angebote und hilfreiche Inhalte zu informieren. Abmeldung jederzeit mit einem Klick.</label>
             <p id="newsletterError" class="newsletter-error" style="display:none;">Bitte stimme zu, damit ich dir dein Ergebnis schicken darf.</p>
@@ -860,8 +857,6 @@ body {
       </div>
     </div>
   </div>
-  <iframe name="brevo-result" style="display:none;"></iframe>
-
   <div class="footer-spacer"></div>
 </div>
 
@@ -1049,20 +1044,74 @@ function showResult() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.getElementById('brevoForm').addEventListener('submit', function(e) {
+document.getElementById('brevoForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
   var checkbox = document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]');
   var errorEl = document.getElementById('newsletterError');
   if (!checkbox.checked) {
-    e.preventDefault();
     errorEl.style.display = 'block';
     errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
   errorEl.style.display = 'none';
-  setTimeout(function() {
-    document.getElementById('emailFormSection').style.display = 'none';
-    document.getElementById('emailConfirm').style.display = 'block';
-  }, 100);
+  var btn = document.querySelector('.email-form-btn');
+  btn.textContent = 'Wird gesendet…';
+  btn.disabled = true;
+  var email = document.querySelector('[name="EMAIL"]').value.trim();
+  var vorname = document.querySelector('[name="VORNAME"]').value.trim();
+  try {
+    var res = await fetch('https://api.brevo.com/v3/contacts/createDoiContact', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'api-key': '%%BREVO_API_KEY%%'
+      },
+      body: JSON.stringify({
+        email: email,
+        attributes: {
+          VORNAME: vorname,
+          SELBSTCHECK_SCORE: parseInt(document.getElementById('formScore').value) || 0,
+          SELBSTCHECK_KATEGORIE: document.getElementById('formKategorie').value,
+          SELBSTCHECK_STAERKEN: document.getElementById('formStaerken').value,
+          SELBSTCHECK_SCHWAECHEN: document.getElementById('formSchwaechen').value,
+          SCORE_Q1: parseInt(document.getElementById('formQ1').value) || 0,
+          SCORE_Q2: parseInt(document.getElementById('formQ2').value) || 0,
+          SCORE_Q3: parseInt(document.getElementById('formQ3').value) || 0,
+          SCORE_Q4: parseInt(document.getElementById('formQ4').value) || 0,
+          SCORE_Q5: parseInt(document.getElementById('formQ5').value) || 0,
+          SCORE_Q6: parseInt(document.getElementById('formQ6').value) || 0,
+          SCORE_Q7: parseInt(document.getElementById('formQ7').value) || 0,
+          SCORE_Q8: parseInt(document.getElementById('formQ8').value) || 0,
+          SCORE_Q9: parseInt(document.getElementById('formQ9').value) || 0,
+          SCORE_Q10: parseInt(document.getElementById('formQ10').value) || 0,
+          SCORE_Q11: parseInt(document.getElementById('formQ11').value) || 0,
+          SCORE_Q12: parseInt(document.getElementById('formQ12').value) || 0,
+          SCORE_Q13: parseInt(document.getElementById('formQ13').value) || 0,
+          NEWSLETTER_EINWILLIGUNG: 'Ja'
+        },
+        includeListIds: [3],
+        templateId: 1,
+        redirectionUrl: 'https://mommyfinance.de/selbstcheck'
+      })
+    });
+    if (res.status === 204 || res.ok) {
+      document.getElementById('emailFormSection').style.display = 'none';
+      document.getElementById('emailConfirm').style.display = 'block';
+    } else {
+      var data = await res.json().catch(function() { return {}; });
+      if (data.code === 'duplicate_parameter') {
+        document.getElementById('emailFormSection').style.display = 'none';
+        document.getElementById('emailConfirm').style.display = 'block';
+      } else {
+        btn.textContent = 'Ergebnis per E-Mail erhalten';
+        btn.disabled = false;
+      }
+    }
+  } catch (err) {
+    btn.textContent = 'Ergebnis per E-Mail erhalten';
+    btn.disabled = false;
+  }
 });
 
 document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]').addEventListener('change', function() {
