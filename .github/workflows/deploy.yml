@@ -27,6 +27,7 @@ jobs:
       - name: API Key einsetzen
         run: |
           sed -i "s|%%BREVO_API_KEY%%|${{ secrets.BREVO_API_KEY }}|g" selbstcheck/index.html
+          sed -i "s|%%BREVO_API_KEY%%|${{ secrets.BREVO_API_KEY }}|g" abmeldung/index.html
 
       - name: Dateien hochladen
         uses: actions/upload-pages-artifact@v3
