@@ -203,5 +203,21 @@ p {
   </div>
 </div>
 
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var email = params.get('e');
+  if (!email) return;
+  var key = '%%BREVO_API_KEY%%';
+  var h = { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': key };
+  fetch('https://api.brevo.com/v3/contacts/lists/3/contacts/remove', {
+    method: 'POST', headers: h, body: JSON.stringify({ emails: [email] })
+  }).catch(function () {});
+  fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
+    method: 'PATCH', headers: h, body: JSON.stringify({ emailBlacklisted: true })
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>
