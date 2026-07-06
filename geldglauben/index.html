@@ -914,8 +914,8 @@ input[type="range"].gl-slider::-moz-range-thumb {
 /* Kategorie 1=Geldgeschichte, 2=Kontrolle, 3=Sparen, 4=Investieren, 5=Familie */
 var questions = [
   { q: "In meiner Familie wurde über Geld kaum oder gar nicht gesprochen.", cat: 1 },
-  { q: "Ich schaue am Monatsende, was noch übrig ist – und spare, wenn etwas da ist.", cat: 3 },
-  { q: "Mein Partner kümmert sich um die Finanzen – das haben wir so aufgeteilt.", cat: 5, hint: "Wenn du keinen Partner hast, wähle eher die linke Seite." },
+  { q: "Ich schaue am Monatsende, was noch übrig ist, und spare, wenn etwas da ist.", cat: 3 },
+  { q: "Mein Partner kümmert sich um die Finanzen, das haben wir so aufgeteilt.", cat: 5, hint: "Wenn du keinen Partner hast, wähle eher die linke Seite." },
   { q: "Ich weiß ehrlich gesagt nicht genau, wieviel Geld jeden Monat rein- und rausgeht.", cat: 2 },
   { q: "Zum Investieren fehlt mir noch das nötige Kleingeld.", cat: 4 },
   { q: "Als Kind hatte ich das Gefühl, dass Geld immer knapp ist.", cat: 1 },
@@ -927,7 +927,7 @@ var questions = [
   { q: "Richtig sparen kann ich erst, wenn ich mehr verdiene.", cat: 3 },
   { q: "Ich mache mir manchmal Sorgen, was wäre, wenn ich finanziell plötzlich auf mich allein gestellt wäre.", cat: 5 },
   { q: "Ich vertraue lieber anderen – meinem Partner, der Bank, dem Berater – wenn es um Geldentscheidungen geht.", cat: 2 },
-  { q: "Investieren fühlt sich für mich an wie eine fremde Welt – voller Fachbegriffe, die ich nicht kenne.", cat: 4 }
+  { q: "Investieren fühlt sich für mich wie eine fremde Welt an, voller Fachbegriffe, die ich nicht kenne.", cat: 4 }
 ];
 
 var catNames = {
@@ -939,11 +939,11 @@ var catNames = {
 };
 
 var catTeaser = {
-  1: "Deine Kindheitsprägungen rund um Geld sind besonders deutlich – das ist bei den meisten von uns so. Wer seine Geldgeschichte kennt, kann sie verändern.",
-  2: "Das Thema Finanzen fühlt sich noch fremd an und du verlässt dich lieber auf andere. Das ist nicht deine Schwäche, das ist Konditionierung – und die lässt sich umschreiben.",
-  3: "Sparen passiert bei dir, wenn etwas übrig bleibt – oder gar nicht. Dabei liegt der Unterschied nicht im Einkommen, sondern im System.",
-  4: "Investieren fühlt sich weit weg an – zu kompliziert, zu riskant, zu teuer. Dabei ist der erste Schritt einfacher als du denkst.",
-  5: "Die Familie zuerst – das ist schön. Aber dein eigenes finanzielles Wohl ist kein Luxus. Es ist Verantwortung, auch gegenüber deinen Kindern."
+  1: "Deine Kindheitsprägungen rund um Geld sind besonders deutlich, das ist bei den meisten von uns so. Wer seine Geldgeschichte kennt, kann sie verändern.",
+  2: "Das Thema Finanzen fühlt sich noch fremd an und du verlässt dich lieber auf andere. Das ist nicht deine Schwäche, das ist Konditionierung, die sich umschreiben lässt.",
+  3: "Sparen passiert bei dir, wenn etwas übrig bleibt, oder gar nicht. Dabei liegt der Unterschied nicht im Einkommen, sondern im System.",
+  4: "Investieren fühlt sich weit weg an, zu kompliziert, zu riskant, zu teuer. Dabei ist der erste Schritt einfacher als du denkst.",
+  5: "Die Familie zuerst, das ist schön. Aber dein eigenes finanzielles Wohl ist kein Luxus. Es ist Verantwortung, auch gegenüber deinen Kindern."
 };
 
 var scores = new Array(questions.length).fill(4);
@@ -966,11 +966,11 @@ questions.forEach(function(item, i) {
       '<div class="q-text">' + item.q + '</div>' +
       hintHtml +
       '<div class="slider-wrap">' +
-        '<div class="slider-labels">' +
+        (i === 0 ? '<div class="slider-labels">' +
           '<span class="slider-label-left">Das bin nicht ich</span>' +
           '<span class="slider-label-mid">teils teils</span>' +
           '<span class="slider-label-right">Das erkenne ich in mir</span>' +
-        '</div>' +
+        '</div>' : '') +
         '<input type="range" class="gl-slider" min="1" max="7" step="1" value="4" id="slider' + i + '" oninput="setScore(' + i + ', this.value); updateSliderTrack(this)">' +
         '<div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
       '</div>' +
@@ -1053,7 +1053,7 @@ function showResult() {
   /* Titel & Intro basierend auf stärkster Kategorie */
   document.getElementById('resultTitle').textContent = catNames[maxCat];
   document.getElementById('resultIntro').innerHTML =
-    'Du erkennst dich am stärksten in Aussagen rund um <strong>' + catNames[maxCat].toLowerCase() + '</strong>. ' +
+    'Du erkennst dich am stärksten in Aussagen rund um <strong>' + catNames[maxCat] + '</strong>. ' +
     catTeaser[maxCat] +
     '<br><br>So sieht dein vollständiges Profil aus:';
 
@@ -1148,7 +1148,7 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
           NEWSLETTER_EINWILLIGUNG: 'Ja'
         },
         includeListIds: [6],
-        templateId: 6,
+        templateId: 1,
         redirectionUrl: 'https://www.mommyfinance.de'
       })
     });
