@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dein Geldglauben-Profil | MommyFinance</title>
+</head>
+<body style="margin:0;padding:0;background:#fbf2ed;font-family:Helvetica,Arial,sans-serif;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#fbf2ed">
+<tr><td align="center">
+<table width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;">
+
+<!-- Header weinrot mit CF-Logo -->
+<tr>
+<td bgcolor="#8b1130" style="padding:24px 0;text-align:center;">
+<img src="https://mommyfinance.de/selbstcheck/cf-logo-elfenbein.png" alt="Cindy Friske" width="50" height="60" style="width:50px;height:60px;max-width:100%;display:inline-block;" />
+</td>
+</tr>
+
+<!-- Goldlinie oben -->
+<tr>
+<td style="height:4px;background:linear-gradient(90deg,#f8d960,#efc11b,#e6a400);font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+
+<!-- Inhalt -->
+<tr>
+<td bgcolor="#ffffff" style="padding:40px 32px 12px;">
+
+<!-- Badge -->
+<p style="font-size:11px;color:#e6a400;letter-spacing:2px;text-transform:uppercase;margin:0 0 12px;text-align:center;font-weight:600;font-family:Arial,sans-serif;">Persönliche Auswertung</p>
+
+<!-- Titel -->
+<p style="font-family:Georgia,serif;font-size:26px;color:#8b1130;margin:0 0 14px;line-height:1.35;text-align:center;font-weight:normal;">Dein Geldglauben-Profil</p>
+
+<!-- Goldlinie unter Titel: Breite ca. Textbreite, spitz auslaufend -->
+<table width="300" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto 32px;">
+<tr>
+<td width="45" height="2" style="background:linear-gradient(90deg,transparent,#efc11b);font-size:0;line-height:0;">&nbsp;</td>
+<td height="2" bgcolor="#efc11b" style="background-color:#efc11b;font-size:0;line-height:0;">&nbsp;</td>
+<td width="45" height="2" style="background:linear-gradient(90deg,#efc11b,transparent);font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+
+<!-- Anrede -->
+{% if contact.VORNAME %}
+<p style="font-size:16px;color:#441a32;line-height:1.7;margin:0 0 20px;font-family:Arial,sans-serif;">Hallo {{ contact.VORNAME }},</p>
+{% else %}
+<p style="font-size:16px;color:#441a32;line-height:1.7;margin:0 0 20px;font-family:Arial,sans-serif;">Hallo,</p>
+{% endif %}
+
+<p style="font-size:15px;color:#441a32;line-height:1.8;margin:0 0 32px;font-family:Arial,sans-serif;">
+schön, dass du dir die Zeit genommen hast. Hier ist deine persönliche Auswertung: fünf Bereiche, die zeigen, welche Überzeugungen rund ums Geld dich begleiten und wo sie dich bremsen, wirklich Vermögen aufzubauen.
+</p>
+
+<!-- ===== BALKENDIAGRAMM ===== -->
+<p style="font-family:Georgia,serif;font-size:17px;color:#8b1130;margin:0 0 18px;font-weight:normal;">Dein Profil auf einen Blick</p>
+
+<!-- Kat 1 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:11px;">
+<tr>
+<td style="font-size:13px;font-weight:bold;color:#441a32;font-family:Arial,sans-serif;padding-bottom:4px;">Deine Geldgeschichte</td>
+<td align="right" style="font-size:13px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;padding-bottom:4px;">{{ contact.GELDGLAUBEN_KAT1 }}&thinsp;%</td>
+</tr>
+<tr>
+<td colspan="2">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f0dde2">
+<tr>
+<td width="{{ contact.GELDGLAUBEN_KAT1 }}%" height="10" bgcolor="#8b1130" style="font-size:0;line-height:0;">&nbsp;</td>
+<td height="10" style="font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!-- Kat 2 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:11px;">
+<tr>
+<td style="font-size:13px;font-weight:bold;color:#441a32;font-family:Arial,sans-serif;padding-bottom:4px;">Finanzen &amp; Kontrolle</td>
+<td align="right" style="font-size:13px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;padding-bottom:4px;">{{ contact.GELDGLAUBEN_KAT2 }}&thinsp;%</td>
+</tr>
+<tr>
+<td colspan="2">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f0dde2">
+<tr>
+<td width="{{ contact.GELDGLAUBEN_KAT2 }}%" height="10" bgcolor="#8b1130" style="font-size:0;line-height:0;">&nbsp;</td>
+<td height="10" style="font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!-- Kat 3 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:11px;">
+<tr>
+<td style="font-size:13px;font-weight:bold;color:#441a32;font-family:Arial,sans-serif;padding-bottom:4px;">Sparen &amp; Ausgeben</td>
+<td align="right" style="font-size:13px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;padding-bottom:4px;">{{ contact.GELDGLAUBEN_KAT3 }}&thinsp;%</td>
+</tr>
+<tr>
+<td colspan="2">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f0dde2">
+<tr>
+<td width="{{ contact.GELDGLAUBEN_KAT3 }}%" height="10" bgcolor="#8b1130" style="font-size:0;line-height:0;">&nbsp;</td>
+<td height="10" style="font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!-- Kat 4 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:11px;">
+<tr>
+<td style="font-size:13px;font-weight:bold;color:#441a32;font-family:Arial,sans-serif;padding-bottom:4px;">Investieren &amp; Verm&#246;gen</td>
+<td align="right" style="font-size:13px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;padding-bottom:4px;">{{ contact.GELDGLAUBEN_KAT4 }}&thinsp;%</td>
+</tr>
+<tr>
+<td colspan="2">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f0dde2">
+<tr>
+<td width="{{ contact.GELDGLAUBEN_KAT4 }}%" height="10" bgcolor="#8b1130" style="font-size:0;line-height:0;">&nbsp;</td>
+<td height="10" style="font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!-- Kat 5 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:32px;">
+<tr>
+<td style="font-size:13px;font-weight:bold;color:#441a32;font-family:Arial,sans-serif;padding-bottom:4px;">Geld &amp; Familie</td>
+<td align="right" style="font-size:13px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;padding-bottom:4px;">{{ contact.GELDGLAUBEN_KAT5 }}&thinsp;%</td>
+</tr>
+<tr>
+<td colspan="2">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f0dde2">
+<tr>
+<td width="{{ contact.GELDGLAUBEN_KAT5 }}%" height="10" bgcolor="#8b1130" style="font-size:0;line-height:0;">&nbsp;</td>
+<td height="10" style="font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!-- Trennlinie kurz -->
+<table width="120" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto 32px;">
+<tr><td style="height:2px;background:linear-gradient(90deg,transparent,#efc11b,transparent);font-size:0;">&nbsp;</td></tr>
+</table>
+
+<!-- ===== KATEGORIE-TEXTE ===== -->
+<p style="font-family:Georgia,serif;font-size:17px;color:#8b1130;margin:0 0 20px;font-weight:normal;">Was das für dich bedeutet</p>
+
+<!-- KAT 1 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:18px;border-left:3px solid #efc11b;">
+<tr><td style="padding:12px 0 12px 16px;">
+<p style="font-size:11px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.8px;">Deine Geldgeschichte</p>
+{% if contact.GELDGLAUBEN_KAT1 >= 66 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Geld war in deiner Kindheit ein schwieriges oder stummes Thema. Diese Prägung wirkt bis heute, auch darauf, ob du sparst, ob du investierst und wie sicher du dich dabei fühlst. Wer seine Geldgeschichte kennt, kann sie neu schreiben. Du hast damit gerade angefangen.</p>
+{% elif contact.GELDGLAUBEN_KAT1 >= 31 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Einige Erlebnisse aus deiner Kindheit begleiten dich noch. Das ist völlig normal und gleichzeitig ein wertvoller Hinweis: Diese alten Bilder prägen deine Entscheidungen rund ums Geld bis heute. Du hast den ersten Schritt gemacht, sie zu erkennen.</p>
+{% else %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Du bist mit einem entspannten Verhältnis zu Geld aufgewachsen oder hast alte Prägungen bereits gut hinter dir gelassen. Das ist eine starke Basis. Sie hilft dir, klarer und ruhiger über Sparen, Investieren und Vermögensaufbau zu entscheiden.</p>
+{% endif %}
+</td></tr>
+</table>
+
+<!-- KAT 2 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:18px;border-left:3px solid #efc11b;">
+<tr><td style="padding:12px 0 12px 16px;">
+<p style="font-size:11px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.8px;">Finanzen &amp; Kontrolle</p>
+{% if contact.GELDGLAUBEN_KAT2 >= 66 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Finanzen fühlen sich kompliziert an und du verlässt dich lieber auf andere. Das haben viele Frauen so gelernt. Solange du die Kontrolle abgibst, gibst du aber auch die Entscheidungsmacht ab, ob und wie dein Geld für dich arbeitet. Den ersten Schritt in die Eigenverantwortung kannst du heute gehen.</p>
+{% elif contact.GELDGLAUBEN_KAT2 >= 31 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Das Thema Finanzen fühlt sich teilweise noch fremd an. Der nächste Schritt ist Überblick schaffen, ein einfaches System, das zeigt, wo dein Geld wirklich hingeht. Ohne diesen Überblick ist echter Vermögensaufbau kaum möglich.</p>
+{% else %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Du hast bereits einen guten Überblick über deine Finanzen und traust dir Entscheidungen zu. Das ist keine Selbstverständlichkeit. Diese Klarheit ist die Grundlage, auf der echter Vermögensaufbau entsteht.</p>
+{% endif %}
+</td></tr>
+</table>
+
+<!-- KAT 3 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:18px;border-left:3px solid #efc11b;">
+<tr><td style="padding:12px 0 12px 16px;">
+<p style="font-size:11px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.8px;">Sparen &amp; Ausgeben</p>
+{% if contact.GELDGLAUBEN_KAT3 >= 66 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Sparen fühlt sich für dich wie etwas an, das kommt, wenn mehr da ist. Genau dieser Gedanke ist eines der größten Hindernisse auf dem Weg zum Vermögensaufbau. Wer wartet, bis alles passt, fängt oft nie an. Der Unterschied liegt nicht im Einkommen, sondern im System dahinter.</p>
+{% elif contact.GELDGLAUBEN_KAT3 >= 31 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Sparen passiert bei dir manchmal eher zufällig als systematisch. Das hat nichts mit Disziplin zu tun, sondern mit Struktur. Wer nicht regelmäßig spart, hat auch nichts, was renditestark investiert werden kann.</p>
+{% else %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Du hast ein gesundes Verhältnis zu Sparen und Ausgeben und legst regelmäßig etwas zur Seite. Das ist das Fundament, auf dem Investieren und echter Vermögensaufbau aufbauen.</p>
+{% endif %}
+</td></tr>
+</table>
+
+<!-- KAT 4 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:18px;border-left:3px solid #efc11b;">
+<tr><td style="padding:12px 0 12px 16px;">
+<p style="font-size:11px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.8px;">Investieren &amp; Verm&#246;gen</p>
+{% if contact.GELDGLAUBEN_KAT4 >= 66 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Diese Überzeugungen halten die meisten Mütter davon ab, wirklich mit dem Investieren anzufangen: zu riskant, zu kompliziert, zu teuer, zu fremd. Das Ergebnis: Das Ersparte liegt auf dem Konto, verliert durch die Inflation an Wert und echter Vermögensaufbau findet nicht statt. Der erste Schritt in die Welt des Investierens ist lernbar. Er verändert alles.</p>
+{% elif contact.GELDGLAUBEN_KAT4 >= 31 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Investieren interessiert dich, fühlt sich aber noch unsicher an. Dieser Schritt fehlt auf dem Weg zu echtem Vermögensaufbau. Ohne Investieren arbeitet dein Geld nicht für dich. Mit dem richtigen Einstieg und Begleitung verändert sich dieses Gefühl nachhaltig.</p>
+{% else %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Du traust dir beim Thema Investieren bereits etwas zu. Das ist entscheidend. Wer investiert, setzt sein Geld für sich an die Arbeit. Das ist der Unterschied zwischen Sparen und echtem Vermögensaufbau.</p>
+{% endif %}
+</td></tr>
+</table>
+
+<!-- KAT 5 -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:32px;border-left:3px solid #efc11b;">
+<tr><td style="padding:12px 0 12px 16px;">
+<p style="font-size:11px;font-weight:bold;color:#8b1130;font-family:Arial,sans-serif;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.8px;">Geld &amp; Familie</p>
+{% if contact.GELDGLAUBEN_KAT5 >= 66 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Du denkst zuerst an deine Familie. Das macht dich zu einer guten Mutter. Aber deine finanzielle Eigenständigkeit ist kein Luxus, sie ist der beste Schutz für deine Kinder. Wer finanziell abhängig bleibt, gibt anderen die Kontrolle über die eigene Zukunft.</p>
+{% elif contact.GELDGLAUBEN_KAT5 >= 31 %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Die Familie hat bei dir Vorrang, wenn es um Geld geht. Das ist verständlich. Und doch: Dein eigenes finanzielles Wohl ist keine Frage des Entweder-oder. Es ist der Weg, wie du langfristig für alle da sein kannst, die du liebst.</p>
+{% else %}
+<p style="font-size:14px;color:#441a32;line-height:1.8;margin:0;font-family:Arial,sans-serif;">Du nimmst dein eigenes finanzielles Wohl ernst, neben der Familie. Das ist stark und wichtig. Finanzielle Eigenständigkeit ist die beste Absicherung für alle, die du liebst, heute und in Zukunft.</p>
+{% endif %}
+</td></tr>
+</table>
+
+<!-- Trennlinie kurz -->
+<table width="120" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto 28px;">
+<tr><td style="height:2px;background:linear-gradient(90deg,transparent,#efc11b,transparent);font-size:0;">&nbsp;</td></tr>
+</table>
+
+<!-- ===== ABSCHLUSSTEXT ===== -->
+<p style="font-size:15px;color:#441a32;line-height:1.8;margin:0 0 16px;font-family:Arial,sans-serif;">
+Dein Ergebnis zeigt klare Muster und gleichzeitig klare Ansatzpunkte. Das ist keine schlechte Nachricht, sondern der wichtigste erste Schritt: Erkennen, was dich bisher zurückgehalten hat.
+</p>
+<p style="font-size:15px;color:#441a32;line-height:1.8;margin:0 0 16px;font-family:Arial,sans-serif;">
+Geldglaubenssätze sind der häufigste Grund, warum Mütter nicht investieren, nicht aufbauen und nicht starten. Nicht weil das Wissen fehlt, sondern weil die Überzeugung dahinter es verhindert.
+</p>
+<p style="font-size:15px;color:#441a32;line-height:1.8;margin:0 0 32px;font-family:Arial,sans-serif;">
+Wer diese Muster kennt und sie aktiv transformiert, schafft sich die Grundlage für echten Vermögensaufbau. Nicht irgendwann, sondern jetzt, mit dem, was da ist. Wenn du möchtest, dass wir gemeinsam auf deine Situation schauen und einen konkreten Plan für dich erstellen, dann bewirb dich jetzt:
+</p>
+
+<!-- ===== PROFILBILD zentriert vor Button ===== -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:24px;">
+<tr>
+<td align="center">
+<img src="https://mommyfinance.de/selbstcheck/cindy-profilfoto.png"
+     width="90" height="90" alt="Cindy Friske"
+     style="width:90px;height:90px;border-radius:50%;border:3px solid #8b1130;display:inline-block;" />
+</td>
+</tr>
+</table>
+
+<!-- ===== BUTTON ===== -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td align="center" style="padding-bottom:16px;">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td style="background:#f8d960;background:linear-gradient(135deg,#f8d960 0%,#e6a400 100%);border-radius:20px;border:2px solid #8b1130;padding:20px 36px;text-align:center;">
+<a href="https://mommyfinance.de/bewerbung" target="_blank" style="text-decoration:none;color:#8b1130;">
+<span style="display:block;font-size:13px;font-weight:400;color:#8b1130;margin-bottom:6px;">Bewirb dich jetzt für dein kostenfreies</span>
+<span style="display:block;font-size:20px;font-weight:700;color:#8b1130;">Beratungsgespräch</span>
+</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!-- Nach Button: Plätze + Link -->
+<p style="font-size:14px;color:#8b1130;text-align:center;margin:0 0 10px;font-weight:700;font-family:Arial,sans-serif;">
+Limitierte Anzahl an Plätzen verfügbar.
+</p>
+<p style="font-size:13px;color:#441a32;text-align:center;margin:0 0 4px;line-height:1.5;font-family:Arial,sans-serif;">
+Weitere Informationen hierzu findest du unter:
+</p>
+<p style="text-align:center;margin:0 0 28px;font-family:Arial,sans-serif;">
+<a href="https://mommyfinance.de" target="_blank" style="font-size:13px;color:#8b1130;font-weight:600;text-decoration:underline;">www.mommyfinance.de</a>
+</p>
+
+<!-- Trennlinie kurz -->
+<table width="120" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto 24px;">
+<tr><td style="height:2px;background:linear-gradient(90deg,transparent,#efc11b,transparent);font-size:0;">&nbsp;</td></tr>
+</table>
+
+<!-- ===== SIGNATUR ===== -->
+<p style="font-size:15px;color:#441a32;line-height:1.7;margin:0 0 24px;font-family:Arial,sans-serif;">
+Liebe Grüße,<br/>
+<strong style="color:#8b1130;">Cindy Friske</strong><br/>
+<span style="font-size:13px;opacity:0.7;">Finanztrainerin | MommyFinance</span>
+</p>
+
+<!-- Slogan kursiv, eine Zeile -->
+<p style="font-size:12px;color:#8b1130;font-style:italic;text-align:center;margin:0;font-family:Arial,sans-serif;white-space:nowrap;">
+Mit Kindergeld und Köpfchen &#8211; für ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.
+</p>
+
+</td>
+</tr>
+
+<!-- Goldlinie unten -->
+<tr>
+<td style="height:4px;background:linear-gradient(90deg,#f8d960,#efc11b,#e6a400);font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+
+<!-- Footer weinrot -->
+<tr>
+<td bgcolor="#8b1130" style="padding:20px;text-align:center;">
+<img src="https://mommyfinance.de/selbstcheck/MommyFinance_Logo_gold.png" alt="MommyFinance" width="210" height="20" style="width:210px;height:20px;max-width:60%;display:inline-block;margin-bottom:12px;" /><br/>
+<p style="font-size:11px;margin:0;font-family:Arial,sans-serif;">
+<a href="https://mommyfinance.de/datenschutz" style="color:#ffebb8;text-decoration:none;">Datenschutz</a>
+&nbsp;|&nbsp;
+<a href="https://mommyfinance.de/impressum" style="color:#ffebb8;text-decoration:none;">Impressum</a>
+&nbsp;|&nbsp;
+<a href="{{ unsubscribeLink }}" style="color:#ffebb8;text-decoration:none;">Abmelden</a>
+</p>
+</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
