@@ -241,27 +241,31 @@ input[type="range"].gl-slider {
 input[type="range"].gl-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 2px;
-  background: linear-gradient(135deg, #fffde7 0%, #f8d960 30%, #efc11b 60%, #8b1130 100%);
+  background:
+    radial-gradient(ellipse at 32% 30%, rgba(255,253,231,0.95) 0%, transparent 52%),
+    linear-gradient(145deg, #fffde7 0%, #f8d960 22%, #efc11b 50%, #c4951a 72%, #8b1130 100%);
   border: 2px solid #efc11b;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(139,17,48,0.30);
+  box-shadow: 0 2px 8px rgba(139,17,48,0.30), inset 0 1px 2px rgba(255,253,231,0.4);
   transform: rotate(45deg);
   transition: transform 0.15s, box-shadow 0.15s;
 }
 
 input[type="range"].gl-slider::-webkit-slider-thumb:hover {
   transform: rotate(45deg) scale(1.15);
-  box-shadow: 0 4px 16px rgba(139,17,48,0.40);
+  box-shadow: 0 4px 16px rgba(139,17,48,0.40), inset 0 1px 2px rgba(255,253,231,0.4);
 }
 
 input[type="range"].gl-slider::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 2px;
-  background: linear-gradient(135deg, #fffde7 0%, #f8d960 30%, #efc11b 60%, #8b1130 100%);
+  background:
+    radial-gradient(ellipse at 32% 30%, rgba(255,253,231,0.95) 0%, transparent 52%),
+    linear-gradient(145deg, #fffde7 0%, #f8d960 22%, #efc11b 50%, #c4951a 72%, #8b1130 100%);
   border: 2px solid #efc11b;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(139,17,48,0.30);
@@ -680,82 +684,84 @@ input[type="range"].gl-slider::-moz-range-thumb {
 
   <!-- Intro-Header -->
   <div class="header" id="introHeader">
-    <div class="diamond-wrap">
-      <svg viewBox="0 0 100 120" width="110" height="132" aria-hidden="true">
-        <defs>
-          <linearGradient id="d5Top" x1="50" y1="28" x2="50" y2="62" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="55%" stop-color="#fffde7"/>
-            <stop offset="100%" stop-color="#f8d960"/>
-          </linearGradient>
-          <linearGradient id="d5Btn" x1="18" y1="34" x2="82" y2="94" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#f8d960"/>
-            <stop offset="50%" stop-color="#efc11b"/>
-            <stop offset="100%" stop-color="#e6a400"/>
-          </linearGradient>
-          <linearGradient id="d5Left" x1="18" y1="62" x2="50" y2="62" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#f8d960"/>
-            <stop offset="100%" stop-color="#efc11b"/>
-          </linearGradient>
-          <linearGradient id="d5BR" x1="82" y1="75" x2="63" y2="94" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#c4951a"/>
-            <stop offset="100%" stop-color="#8b1130"/>
-          </linearGradient>
-          <linearGradient id="d5BL" x1="18" y1="75" x2="37" y2="94" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#c07828"/>
-            <stop offset="100%" stop-color="#8b1130"/>
-          </linearGradient>
-        </defs>
-        <g transform="translate(50,13)">
-          <polygon points="0,-12 2.2,0 0,12 -2.2,0" fill="#f8d960"/>
-          <polygon points="-12,0 0,2.2 12,0 0,-2.2" fill="#f8d960"/>
-          <polygon points="0,-8 1.2,0 0,8 -1.2,0" fill="white" opacity="0.6"/>
-          <polygon points="-8,0 0,1.2 8,0 0,-1.2" fill="white" opacity="0.6"/>
-        </g>
-        <g transform="translate(86,21)">
-          <polygon points="0,-7 1.4,0 0,7 -1.4,0" fill="#f8d960"/>
-          <polygon points="-7,0 0,1.4 7,0 0,-1.4" fill="#f8d960"/>
-          <polygon points="0,-4 0.8,0 0,4 -0.8,0" fill="white" opacity="0.5"/>
-          <polygon points="-4,0 0,0.8 4,0 0,-0.8" fill="white" opacity="0.5"/>
-        </g>
-        <g transform="translate(10,45)">
-          <polygon points="0,-5 1,0 0,5 -1,0" fill="#f8d960" opacity="0.85"/>
-          <polygon points="-5,0 0,1 5,0 0,-1" fill="#f8d960" opacity="0.85"/>
-        </g>
-        <g transform="translate(88,77)">
-          <polygon points="0,-3.5 0.7,0 0,3.5 -0.7,0" fill="#f8d960" opacity="0.65"/>
-          <polygon points="-3.5,0 0,0.7 3.5,0 0,-0.7" fill="#f8d960" opacity="0.65"/>
-        </g>
-        <circle cx="93" cy="52" r="2" fill="#f8d960" opacity="0.45"/>
-        <circle cx="7" cy="67" r="1.4" fill="#f8d960" opacity="0.35"/>
-        <g transform="translate(50,62)">
-          <polygon points="0,0 13,-32 -13,-32" fill="url(#d5Top)"/>
-          <polygon points="0,0 32,-13 13,-32" fill="#fffde7"/>
-          <polygon points="0,0 32,13 32,-13" fill="url(#d5Btn)"/>
-          <polygon points="0,0 13,32 32,13" fill="url(#d5BR)"/>
-          <polygon points="0,0 -13,32 13,32" fill="#8b1130"/>
-          <polygon points="0,0 -32,13 -13,32" fill="url(#d5BL)"/>
-          <polygon points="0,0 -32,-13 -32,13" fill="url(#d5Left)"/>
-          <polygon points="0,0 -13,-32 -32,-13" fill="#f0d050"/>
-          <polygon points="32,-13 13,-32 -13,-32 -32,-13 -32,13 -13,32 13,32 32,13" fill="none" stroke="#efc11b" stroke-width="2.5"/>
-          <line x1="0" y1="0" x2="32" y2="-13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <line x1="0" y1="0" x2="13" y2="-32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <line x1="0" y1="0" x2="-13" y2="-32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <line x1="0" y1="0" x2="-32" y2="-13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <line x1="0" y1="0" x2="-32" y2="13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <line x1="0" y1="0" x2="-13" y2="32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <line x1="0" y1="0" x2="13" y2="32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <line x1="0" y1="0" x2="32" y2="13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
-          <polygon points="13,-5 5,-13 -5,-13 -13,-5 -13,5 -5,13 5,13 13,5" fill="#fffde7" stroke="#efc11b" stroke-width="0.8"/>
-          <ellipse cx="-3" cy="-5" rx="4.5" ry="2.5" fill="white" opacity="0.65"/>
-          <polygon points="0,-5 0.8,0 0,5 -0.8,0" fill="white" opacity="0.45"/>
-          <polygon points="-5,0 0,0.8 5,0 0,-0.8" fill="white" opacity="0.45"/>
-        </g>
-      </svg>
-    </div>
     <h1>Dein Geldglauben-Test</h1>
     <div class="gold-divider"></div>
     <p>15 ehrliche Aussagen – erkenne, welche Überzeugungen über Geld dich begleiten. Keine richtigen oder falschen Antworten, nur dein ehrliches Empfinden.</p>
+  </div>
+
+  <!-- Großer Diamant zwischen Text und scaleIntro -->
+  <div id="introDiamond" class="diamond-wrap">
+    <svg viewBox="0 0 100 120" width="110" height="132" aria-hidden="true">
+      <defs>
+        <linearGradient id="d5Top" x1="50" y1="28" x2="50" y2="62" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="55%" stop-color="#fffde7"/>
+          <stop offset="100%" stop-color="#f8d960"/>
+        </linearGradient>
+        <linearGradient id="d5Btn" x1="18" y1="34" x2="82" y2="94" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#f8d960"/>
+          <stop offset="50%" stop-color="#efc11b"/>
+          <stop offset="100%" stop-color="#e6a400"/>
+        </linearGradient>
+        <linearGradient id="d5Left" x1="18" y1="62" x2="50" y2="62" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#f8d960"/>
+          <stop offset="100%" stop-color="#efc11b"/>
+        </linearGradient>
+        <linearGradient id="d5BR" x1="82" y1="75" x2="63" y2="94" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#c4951a"/>
+          <stop offset="100%" stop-color="#8b1130"/>
+        </linearGradient>
+        <linearGradient id="d5BL" x1="18" y1="75" x2="37" y2="94" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#c07828"/>
+          <stop offset="100%" stop-color="#8b1130"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(50,13)">
+        <polygon points="0,-12 2.2,0 0,12 -2.2,0" fill="#f8d960"/>
+        <polygon points="-12,0 0,2.2 12,0 0,-2.2" fill="#f8d960"/>
+        <polygon points="0,-8 1.2,0 0,8 -1.2,0" fill="white" opacity="0.6"/>
+        <polygon points="-8,0 0,1.2 8,0 0,-1.2" fill="white" opacity="0.6"/>
+      </g>
+      <g transform="translate(86,21)">
+        <polygon points="0,-7 1.4,0 0,7 -1.4,0" fill="#f8d960"/>
+        <polygon points="-7,0 0,1.4 7,0 0,-1.4" fill="#f8d960"/>
+        <polygon points="0,-4 0.8,0 0,4 -0.8,0" fill="white" opacity="0.5"/>
+        <polygon points="-4,0 0,0.8 4,0 0,-0.8" fill="white" opacity="0.5"/>
+      </g>
+      <g transform="translate(10,45)">
+        <polygon points="0,-5 1,0 0,5 -1,0" fill="#f8d960" opacity="0.85"/>
+        <polygon points="-5,0 0,1 5,0 0,-1" fill="#f8d960" opacity="0.85"/>
+      </g>
+      <g transform="translate(88,77)">
+        <polygon points="0,-3.5 0.7,0 0,3.5 -0.7,0" fill="#f8d960" opacity="0.65"/>
+        <polygon points="-3.5,0 0,0.7 3.5,0 0,-0.7" fill="#f8d960" opacity="0.65"/>
+      </g>
+      <circle cx="93" cy="52" r="2" fill="#f8d960" opacity="0.45"/>
+      <circle cx="7" cy="67" r="1.4" fill="#f8d960" opacity="0.35"/>
+      <g transform="translate(50,62)">
+        <polygon points="0,0 13,-32 -13,-32" fill="url(#d5Top)"/>
+        <polygon points="0,0 32,-13 13,-32" fill="#fffde7"/>
+        <polygon points="0,0 32,13 32,-13" fill="url(#d5Btn)"/>
+        <polygon points="0,0 13,32 32,13" fill="url(#d5BR)"/>
+        <polygon points="0,0 -13,32 13,32" fill="#8b1130"/>
+        <polygon points="0,0 -32,13 -13,32" fill="url(#d5BL)"/>
+        <polygon points="0,0 -32,-13 -32,13" fill="url(#d5Left)"/>
+        <polygon points="0,0 -13,-32 -32,-13" fill="#f0d050"/>
+        <polygon points="32,-13 13,-32 -13,-32 -32,-13 -32,13 -13,32 13,32 32,13" fill="none" stroke="#efc11b" stroke-width="2.5"/>
+        <line x1="0" y1="0" x2="32" y2="-13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="13" y2="-32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="-13" y2="-32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="-32" y2="-13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="-32" y2="13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="-13" y2="32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="13" y2="32" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="32" y2="13" stroke="#efc11b" stroke-width="0.5" opacity="0.4"/>
+        <polygon points="13,-5 5,-13 -5,-13 -13,-5 -13,5 -5,13 5,13 13,5" fill="#fffde7" stroke="#efc11b" stroke-width="0.8"/>
+        <ellipse cx="-3" cy="-5" rx="4.5" ry="2.5" fill="white" opacity="0.65"/>
+        <polygon points="0,-5 0.8,0 0,5 -0.8,0" fill="white" opacity="0.45"/>
+        <polygon points="-5,0 0,0.8 5,0 0,-0.8" fill="white" opacity="0.45"/>
+      </g>
+    </svg>
   </div>
 
   <!-- Skala-Erklärung -->
@@ -783,12 +789,7 @@ input[type="range"].gl-slider::-moz-range-thumb {
     <div class="result-card">
       <span class="result-badge">Dein Geldglauben-Profil</span>
 
-      <div class="result-title" id="resultTitle">Dein persönliches Profil</div>
-      <div class="gold-divider"></div>
-
-      <div class="result-intro" id="resultIntro"></div>
-
-      <div style="text-align:center;margin:20px 0 24px;">
+      <div style="text-align:center;margin:12px 0 16px;">
         <svg viewBox="0 0 100 120" width="88" height="106" aria-hidden="true">
           <defs>
             <linearGradient id="dTop" x1="50" y1="28" x2="50" y2="62" gradientUnits="userSpaceOnUse">
@@ -838,6 +839,11 @@ input[type="range"].gl-slider::-moz-range-thumb {
         </svg>
       </div>
 
+      <div class="result-title" id="resultTitle">Dein persönliches Profil</div>
+      <div class="gold-divider"></div>
+
+      <div class="result-intro" id="resultIntro"></div>
+
       <div class="cat-bars" id="catBars"></div>
 
       <div class="result-cta-box">
@@ -862,10 +868,9 @@ input[type="range"].gl-slider::-moz-range-thumb {
           <input type="email" name="EMAIL" placeholder="Deine E-Mail-Adresse *" required>
 
           <div class="email-form-newsletter">
-            <p class="email-form-newsletter-hint">Um dir dein Ergebnis zu senden, benötige ich deine Einwilligung:</p>
             <label>
               <input type="checkbox" name="NEWSLETTER_EINWILLIGUNG">
-              Ja, ich möchte mein Ergebnis per E-Mail erhalten und bin einverstanden, dass Cindy Friske (MommyFinance) mich gelegentlich mit hilfreichen Inhalten zum Thema Finanzen kontaktiert. Die Einwilligung kann ich jederzeit widerrufen.
+              Ja, ich bin einverstanden, dass Cindy Friske meine Daten verwendet, um mir mein persönliches Ergebnis zuzusenden und mich von Zeit zu Zeit per E-Mail über passende Angebote und hilfreiche Inhalte zu informieren. Abmeldung jederzeit mit einem Klick.
             </label>
             <div class="newsletter-error" id="newsletterError">Bitte bestätige die Einwilligung, um dein Ergebnis zu erhalten.</div>
           </div>
@@ -881,6 +886,11 @@ input[type="range"].gl-slider::-moz-range-thumb {
           <div class="email-confirm-title">Fast geschafft!</div>
           <p>Ich habe dir eine Bestätigungs-E-Mail für deinen Geldglauben-Test geschickt. Bitte klick auf den Link darin – dann sende ich dir deine persönliche Auswertung mit deinen 5 Geldglauben-Kategorien zu.</p>
           <p class="email-confirm-hint">Du siehst keine E-Mail? Bitte schau auch in deinem Spam-Ordner nach.</p>
+          <div style="text-align:center;margin-top:28px;">
+            <img src="../selbstcheck/cindy-profilfoto.png" alt="Cindy Friske" style="width:90px;height:90px;border-radius:50%;border:3px solid #efc11b;object-fit:cover;display:block;margin:0 auto 12px;">
+            <div style="font-family:'Alice',serif;font-size:17px;color:#8b1130;font-weight:600;">Cindy Friske</div>
+            <div style="font-size:14px;color:#441a32;opacity:0.75;margin-top:4px;">Finanztrainerin</div>
+          </div>
         </div>
       </div>
 
@@ -1006,7 +1016,7 @@ function updateProgress() {
 
 function goPage(p) {
   document.getElementById('page' + currentPage).classList.remove('active');
-  if (p >= 2) document.getElementById('scaleIntro').style.display = 'none';
+  if (p >= 1) document.getElementById('scaleIntro').style.display = 'none';
   var np = document.getElementById('page' + p);
   np.style.animation = 'none';
   np.offsetHeight;
@@ -1023,6 +1033,7 @@ function showResult() {
   document.getElementById('progressText').textContent = 'Auswertung';
   document.getElementById('progressPct').textContent = '100 %';
   document.getElementById('scaleIntro').style.display = 'none';
+  document.getElementById('introDiamond').style.display = 'none';
 
   var catScores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   var catCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
@@ -1053,7 +1064,7 @@ function showResult() {
   document.getElementById('resultIntro').innerHTML =
     'Du erkennst dich am stärksten in Aussagen rund um <strong>' + catNames[maxCat] + '</strong>. ' +
     catTeaser[maxCat] +
-    '<br><br>So sieht dein vollständiges Profil aus:';
+    '<br><br>So sieht dein Geldglauben-Profil aus:';
 
   /* Balken rendern */
   var barsHtml = '';
