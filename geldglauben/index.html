@@ -241,29 +241,31 @@ input[type="range"].gl-slider {
 input[type="range"].gl-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--weinrot);
-  border: 3px solid var(--gold2);
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #fffde7 0%, #f8d960 30%, #efc11b 60%, #8b1130 100%);
+  border: 2px solid #efc11b;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(139,17,48,0.25);
+  box-shadow: 0 2px 8px rgba(139,17,48,0.30);
+  transform: rotate(45deg);
   transition: transform 0.15s, box-shadow 0.15s;
 }
 
 input[type="range"].gl-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.12);
-  box-shadow: 0 4px 16px rgba(139,17,48,0.35);
+  transform: rotate(45deg) scale(1.15);
+  box-shadow: 0 4px 16px rgba(139,17,48,0.40);
 }
 
 input[type="range"].gl-slider::-moz-range-thumb {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--weinrot);
-  border: 3px solid var(--gold2);
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #fffde7 0%, #f8d960 30%, #efc11b 60%, #8b1130 100%);
+  border: 2px solid #efc11b;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(139,17,48,0.25);
+  box-shadow: 0 2px 8px rgba(139,17,48,0.30);
+  transform: rotate(45deg);
 }
 
 .slider-ticks {
@@ -781,28 +783,33 @@ input[type="range"].gl-slider::-moz-range-thumb {
     <div class="result-card">
       <span class="result-badge">Dein Geldglauben-Profil</span>
 
-      <div class="result-diamond">
-        <svg viewBox="0 0 100 120" width="80" height="96" aria-hidden="true">
+      <div class="result-title" id="resultTitle">Dein persönliches Profil</div>
+      <div class="gold-divider"></div>
+
+      <div class="result-intro" id="resultIntro"></div>
+
+      <div style="text-align:center;margin:20px 0 24px;">
+        <svg viewBox="0 0 100 120" width="88" height="106" aria-hidden="true">
           <defs>
-            <linearGradient id="r5Top" x1="50" y1="28" x2="50" y2="62" gradientUnits="userSpaceOnUse">
+            <linearGradient id="dTop" x1="50" y1="28" x2="50" y2="62" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#ffffff"/>
               <stop offset="55%" stop-color="#fffde7"/>
               <stop offset="100%" stop-color="#f8d960"/>
             </linearGradient>
-            <linearGradient id="r5Btn" x1="18" y1="34" x2="82" y2="94" gradientUnits="userSpaceOnUse">
+            <linearGradient id="dBtn" x1="18" y1="34" x2="82" y2="94" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#f8d960"/>
               <stop offset="50%" stop-color="#efc11b"/>
               <stop offset="100%" stop-color="#e6a400"/>
             </linearGradient>
-            <linearGradient id="r5Left" x1="18" y1="62" x2="50" y2="62" gradientUnits="userSpaceOnUse">
+            <linearGradient id="dLeft" x1="18" y1="62" x2="50" y2="62" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#f8d960"/>
               <stop offset="100%" stop-color="#efc11b"/>
             </linearGradient>
-            <linearGradient id="r5BR" x1="82" y1="75" x2="63" y2="94" gradientUnits="userSpaceOnUse">
+            <linearGradient id="dBR" x1="82" y1="75" x2="63" y2="94" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#c4951a"/>
               <stop offset="100%" stop-color="#8b1130"/>
             </linearGradient>
-            <linearGradient id="r5BL" x1="18" y1="75" x2="37" y2="94" gradientUnits="userSpaceOnUse">
+            <linearGradient id="dBL" x1="18" y1="75" x2="37" y2="94" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#c07828"/>
               <stop offset="100%" stop-color="#8b1130"/>
             </linearGradient>
@@ -816,13 +823,13 @@ input[type="range"].gl-slider::-moz-range-thumb {
             <polygon points="-6,0 0,1.2 6,0 0,-1.2" fill="#f8d960"/>
           </g>
           <g transform="translate(50,62)">
-            <polygon points="0,0 13,-32 -13,-32" fill="url(#r5Top)"/>
+            <polygon points="0,0 13,-32 -13,-32" fill="url(#dTop)"/>
             <polygon points="0,0 32,-13 13,-32" fill="#fffde7"/>
-            <polygon points="0,0 32,13 32,-13" fill="url(#r5Btn)"/>
-            <polygon points="0,0 13,32 32,13" fill="url(#r5BR)"/>
+            <polygon points="0,0 32,13 32,-13" fill="url(#dBtn)"/>
+            <polygon points="0,0 13,32 32,13" fill="url(#dBR)"/>
             <polygon points="0,0 -13,32 13,32" fill="#8b1130"/>
-            <polygon points="0,0 -32,13 -13,32" fill="url(#r5BL)"/>
-            <polygon points="0,0 -32,-13 -32,13" fill="url(#r5Left)"/>
+            <polygon points="0,0 -32,13 -13,32" fill="url(#dBL)"/>
+            <polygon points="0,0 -32,-13 -32,13" fill="url(#dLeft)"/>
             <polygon points="0,0 -13,-32 -32,-13" fill="#f0d050"/>
             <polygon points="32,-13 13,-32 -13,-32 -32,-13 -32,13 -13,32 13,32 32,13" fill="none" stroke="#efc11b" stroke-width="2.5"/>
             <polygon points="13,-5 5,-13 -5,-13 -13,-5 -13,5 -5,13 5,13 13,5" fill="#fffde7" stroke="#efc11b" stroke-width="0.8"/>
@@ -830,11 +837,6 @@ input[type="range"].gl-slider::-moz-range-thumb {
           </g>
         </svg>
       </div>
-
-      <div class="result-title" id="resultTitle">Dein persönliches Profil</div>
-      <div class="gold-divider"></div>
-
-      <div class="result-intro" id="resultIntro"></div>
 
       <div class="cat-bars" id="catBars"></div>
 
@@ -877,13 +879,8 @@ input[type="range"].gl-slider::-moz-range-thumb {
 
         <div class="email-confirm" id="emailConfirm">
           <div class="email-confirm-title">Fast geschafft!</div>
-          <p>Ich habe dir eine Bestätigungs-E-Mail geschickt. Bitte klick auf den Link darin – dann bekommst du sofort deine vollständige Auswertung.</p>
+          <p>Ich habe dir eine Bestätigungs-E-Mail für deinen Geldglauben-Test geschickt. Bitte klick auf den Link darin – dann sende ich dir deine persönliche Auswertung mit deinen 5 Geldglauben-Kategorien zu.</p>
           <p class="email-confirm-hint">Du siehst keine E-Mail? Bitte schau auch in deinem Spam-Ordner nach.</p>
-
-          <a href="https://www.mommyfinance.de/bewerbung/" class="cta-button">
-            <span class="cta-line1">Du möchtest mehr als ein Profil?</span>
-            <span class="cta-line2">Jetzt für mein Beratungsgespräch bewerben</span>
-          </a>
         </div>
       </div>
 
@@ -914,7 +911,7 @@ input[type="range"].gl-slider::-moz-range-thumb {
 /* Kategorie 1=Geldgeschichte, 2=Kontrolle, 3=Sparen, 4=Investieren, 5=Familie */
 var questions = [
   { q: "In meiner Familie wurde über Geld kaum oder gar nicht gesprochen.", cat: 1 },
-  { q: "Ich schaue am Monatsende, was noch übrig ist, und spare, wenn etwas da ist.", cat: 3 },
+  { q: "Ich schaue am Monatsende, was noch übrig ist und spare, wenn etwas da ist.", cat: 3 },
   { q: "Mein Partner kümmert sich um die Finanzen, das haben wir so aufgeteilt.", cat: 5, hint: "Wenn du keinen Partner hast, wähle eher die linke Seite." },
   { q: "Ich weiß ehrlich gesagt nicht genau, wieviel Geld jeden Monat rein- und rausgeht.", cat: 2 },
   { q: "Zum Investieren fehlt mir noch das nötige Kleingeld.", cat: 4 },
@@ -966,11 +963,11 @@ questions.forEach(function(item, i) {
       '<div class="q-text">' + item.q + '</div>' +
       hintHtml +
       '<div class="slider-wrap">' +
-        (i === 0 ? '<div class="slider-labels">' +
+        '<div class="slider-labels">' +
           '<span class="slider-label-left">Das bin nicht ich</span>' +
           '<span class="slider-label-mid">teils teils</span>' +
           '<span class="slider-label-right">Das erkenne ich in mir</span>' +
-        '</div>' : '') +
+        '</div>' +
         '<input type="range" class="gl-slider" min="1" max="7" step="1" value="4" id="slider' + i + '" oninput="setScore(' + i + ', this.value); updateSliderTrack(this)">' +
         '<div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>' +
       '</div>' +
@@ -1009,6 +1006,7 @@ function updateProgress() {
 
 function goPage(p) {
   document.getElementById('page' + currentPage).classList.remove('active');
+  if (p >= 2) document.getElementById('scaleIntro').style.display = 'none';
   var np = document.getElementById('page' + p);
   np.style.animation = 'none';
   np.offsetHeight;
@@ -1148,7 +1146,7 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
           NEWSLETTER_EINWILLIGUNG: 'Ja'
         },
         includeListIds: [6],
-        templateId: 1,
+        templateId: 8,
         redirectionUrl: 'https://www.mommyfinance.de'
       })
     });
