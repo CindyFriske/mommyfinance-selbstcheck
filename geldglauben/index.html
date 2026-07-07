@@ -1162,13 +1162,17 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
       })
     });
     if (res.status === 204 || res.ok) {
+      document.querySelector('.result-cta-box').style.display = 'none';
       document.getElementById('emailFormSection').style.display = 'none';
       document.getElementById('emailConfirm').style.display = 'block';
+      document.getElementById('emailConfirm').scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       var data = await res.json().catch(function() { return {}; });
       if (data.code === 'duplicate_parameter') {
+        document.querySelector('.result-cta-box').style.display = 'none';
         document.getElementById('emailFormSection').style.display = 'none';
         document.getElementById('emailConfirm').style.display = 'block';
+        document.getElementById('emailConfirm').scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
         btn.textContent = 'Mein Ergebnis per E-Mail erhalten';
         btn.disabled = false;
