@@ -1157,7 +1157,7 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
           NEWSLETTER_EINWILLIGUNG: 'Ja'
         },
         includeListIds: [6],
-        templateId: 8,
+        templateId: 1,
         redirectionUrl: 'https://www.mommyfinance.de'
       })
     });
@@ -1172,11 +1172,15 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
       } else {
         btn.textContent = 'Mein Ergebnis per E-Mail erhalten';
         btn.disabled = false;
+        document.getElementById('newsletterError').textContent = 'Etwas hat nicht geklappt. Bitte versuche es noch einmal.';
+        document.getElementById('newsletterError').style.display = 'block';
       }
     }
   } catch (err) {
     btn.textContent = 'Mein Ergebnis per E-Mail erhalten';
     btn.disabled = false;
+    document.getElementById('newsletterError').textContent = 'Verbindungsfehler. Bitte versuche es noch einmal.';
+    document.getElementById('newsletterError').style.display = 'block';
   }
 });
 
