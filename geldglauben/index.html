@@ -1018,7 +1018,10 @@ function updateProgress() {
 
 function goPage(p) {
   document.getElementById('page' + currentPage).classList.remove('active');
-  if (p >= 1) document.getElementById('scaleIntro').style.display = 'none';
+  if (p >= 1) {
+    document.getElementById('scaleIntro').style.display = 'none';
+    document.getElementById('introDiamond').style.display = 'none';
+  }
   var np = document.getElementById('page' + p);
   np.style.animation = 'none';
   np.offsetHeight;
