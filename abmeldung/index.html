@@ -446,6 +446,7 @@ p {
       method: 'PATCH', headers: h,
       body: JSON.stringify({ emailBlacklisted: false, listIds: [3] })
     }).then(function () {
+      sendWiederanmeldungNotification(email, API_KEY);
       btn.style.display = 'none';
       document.getElementById('step3Confirm').style.display = 'block';
     }).catch(function () {
@@ -530,7 +531,7 @@ p {
       method: 'POST',
       headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': key },
       body: JSON.stringify({
-        sender: { name: 'Cindy Friske', email: 'friske.cindy@gmail.com' },
+        sender: { name: 'Cindy Friske', email: 'cindy@mommyfinance.de' },
         to: [{ email: userEmail }],
         subject: 'Deine Abmeldung bei MommyFinance ist bestätigt',
         htmlContent: html
@@ -559,13 +560,41 @@ p {
       method: 'POST',
       headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': key },
       body: JSON.stringify({
-        sender: { name: 'MommyFinance', email: 'friske.cindy@gmail.com' },
-        to: [{ email: 'friske.cindy@gmail.com', name: 'Cindy Friske' }],
+        sender: { name: 'MommyFinance', email: 'cindy@mommyfinance.de' },
+        to: [{ email: 'cindy@mommyfinance.de', name: 'Cindy Friske' }],
         subject: 'Abmeldung: ' + userEmail + ' – ' + grund,
         htmlContent: html
       })
     }).catch(function () {});
   }
+  function sendWiederanmeldungNotification(userEmail, key) {
+    var now = new Date();
+    var dateStr = now.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+      ', ' + now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }) + ' Uhr';
+
+    var html =
+      '<div style="font-family:Helvetica,Arial,sans-serif;background:#f5f5f5;padding:32px;">' +
+      '<div style="max-width:480px;margin:0 auto;background:white;border-radius:12px;padding:32px;border-left:4px solid #efc11b;">' +
+      '<h2 style="color:#efc11b;margin:0 0 20px;font-size:18px;font-family:Georgia,serif;">Wiederanmeldung &#9670;</h2>' +
+      '<table cellpadding="8" cellspacing="0" style="width:100%;font-size:14px;color:#441a32;border-collapse:collapse;">' +
+      '<tr style="border-bottom:1px solid #f0e8e4;"><td style="font-weight:700;white-space:nowrap;padding-right:20px;vertical-align:top;">E-Mail</td><td>' + userEmail + '</td></tr>' +
+      '<tr><td style="font-weight:700;padding-right:20px;vertical-align:top;">Datum</td><td>' + dateStr + '</td></tr>' +
+      '</table>' +
+      '<p style="font-size:12px;color:#999;margin:20px 0 0;line-height:1.5;">Diese Person hat auf &bdquo;Ja, ich bin wieder dabei!&ldquo; geklickt und wurde automatisch wieder in die Brevo-Liste aufgenommen.</p>' +
+      '</div></div>';
+
+    fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': key },
+      body: JSON.stringify({
+        sender: { name: 'MommyFinance', email: 'cindy@mommyfinance.de' },
+        to: [{ email: 'cindy@mommyfinance.de', name: 'Cindy Friske' }],
+        subject: 'Wiederanmeldung: ' + userEmail,
+        htmlContent: html
+      })
+    }).catch(function () {});
+  }
+
 })();
 </script>
 </body>
