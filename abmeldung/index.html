@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abmeldung bestätigt | MommyFinance</title>
+<title>Abmeldung | MommyFinance</title>
 <meta name="robots" content="noindex, nofollow">
 <link href="https://fonts.googleapis.com/css2?family=Alice&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -58,16 +58,15 @@ body {
   background: white;
   border-radius: 16px;
   padding: 48px 40px;
-  max-width: 480px;
+  max-width: 500px;
   width: 100%;
   text-align: center;
   box-shadow: 0 2px 16px rgba(68, 26, 50, 0.08);
 }
 
-.check-icon {
+.icon-circle {
   width: 56px;
   height: 56px;
-  background: var(--goldgelb);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -75,20 +74,25 @@ body {
   margin: 0 auto 24px;
 }
 
-.check-icon svg {
+.icon-circle.gold { background: var(--goldgelb); }
+.icon-circle.weinrot-bg { background: var(--weinrot); }
+
+.icon-circle svg {
   width: 28px;
   height: 28px;
-  stroke: var(--weinrot);
   stroke-width: 2.5;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
+.icon-circle.gold svg { stroke: var(--weinrot); }
+.icon-circle.weinrot-bg svg { stroke: var(--gold1); }
+
 h1 {
   font-family: 'Alice', serif;
   color: var(--weinrot);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin-bottom: 16px;
   line-height: 1.3;
 }
@@ -100,9 +104,135 @@ p {
   margin-bottom: 14px;
 }
 
+.hint-text {
+  font-size: 0.85rem;
+  color: var(--dunkelrot);
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+/* Reason radio buttons */
+.reason-list {
+  text-align: left;
+  margin: 20px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reason-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid #e8d9d0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 0.95rem;
+  color: var(--dunkelrot);
+}
+
+.reason-item:hover {
+  border-color: var(--gold2);
+  background: #fffbf0;
+}
+
+.reason-item input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  border: 2px solid #c5a090;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.reason-item input[type="radio"]:checked {
+  border-color: var(--weinrot);
+  background: var(--weinrot);
+}
+
+.reason-item input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.reason-item:has(input:checked) {
+  border-color: var(--weinrot);
+  background: #fff5f7;
+}
+
+/* Buttons */
+.btn-primary {
+  display: block;
+  width: 100%;
+  background: var(--weinrot);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: #6e0d26; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary {
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: var(--weinrot);
+  border: 2px solid var(--weinrot);
+  border-radius: 10px;
+  padding: 13px 24px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover { background: #fff0f2; }
+
+.btn-gold {
+  display: block;
+  width: 100%;
+  background: var(--gold1);
+  color: var(--weinrot);
+  border: 2px solid var(--weinrot);
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.btn-gold:hover { background: var(--gold2); }
+.btn-gold:disabled { opacity: 0.6; cursor: not-allowed; }
+
 .back-link {
   display: inline-block;
-  margin-top: 8px;
+  margin-top: 20px;
   color: var(--weinrot);
   text-decoration: none;
   font-size: 0.9rem;
@@ -111,11 +241,20 @@ p {
   padding-bottom: 2px;
 }
 
-.back-link:hover {
-  color: var(--gold3);
-  border-color: var(--gold3);
+.back-link:hover { color: var(--gold3); border-color: var(--gold3); }
+
+.success-box {
+  background: #f0fff4;
+  border: 1.5px solid #7fc99a;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 16px;
+  font-size: 0.95rem;
+  color: #2d6a4f;
+  line-height: 1.5;
 }
 
+/* Bottom */
 .kernbotschaft-above {
   font-family: 'Alice', serif;
   font-size: 13px;
@@ -138,15 +277,11 @@ p {
   padding: 16px 0;
 }
 
-.bottom-bar-content {
-  padding: 20px 0;
-}
+.bottom-bar-content { padding: 20px 0; }
 
 .bottom-bar img { height: 22px; }
 
-.footer-nav {
-  margin-top: 20px;
-}
+.footer-nav { margin-top: 20px; }
 
 .footer-nav a {
   color: var(--goldgelb);
@@ -156,17 +291,15 @@ p {
   opacity: 0.8;
 }
 
-.footer-nav a:hover {
-  text-decoration: underline;
-  opacity: 1;
-}
+.footer-nav a:hover { text-decoration: underline; opacity: 1; }
 
 @media (max-width: 600px) {
   .card { padding: 36px 24px; }
-  h1 { font-size: 1.4rem; }
+  h1 { font-size: 1.35rem; }
   .top-bar img { height: 60px; }
   .top-bar { padding: 16px 0 0; }
   .kernbotschaft-above { font-size: 12px; padding: 10px 16px 8px; }
+  .footer-nav a { margin: 0 8px; }
 }
 </style>
 </head>
@@ -178,15 +311,68 @@ p {
 <div class="top-bar-gold"></div>
 
 <div class="main-wrap">
-  <div class="card">
-    <div class="check-icon">
+
+  <!-- Schritt 1: Grundauswahl -->
+  <div class="card" id="step1">
+    <div class="icon-circle gold">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+    </div>
+    <h1>Schade, dass du gehen möchtest.</h1>
+    <p>Damit ich meine E-Mails für dich verbessern kann, wähle bitte kurz einen Grund:</p>
+    <p class="hint-text">Ein Grund ist hilfreich, aber optional.</p>
+
+    <div class="reason-list">
+      <label class="reason-item">
+        <input type="radio" name="grund" value="Ich bekomme zu viele E-Mails">
+        <span>Ich bekomme zu viele E-Mails</span>
+      </label>
+      <label class="reason-item">
+        <input type="radio" name="grund" value="Die Themen passen gerade nicht zu mir">
+        <span>Die Themen passen gerade nicht zu mir</span>
+      </label>
+      <label class="reason-item">
+        <input type="radio" name="grund" value="Ich habe mich versehentlich angemeldet">
+        <span>Ich habe mich versehentlich angemeldet</span>
+      </label>
+      <label class="reason-item">
+        <input type="radio" name="grund" value="Ich setze das gerade selbst um">
+        <span>Ich setze das gerade selbst um</span>
+      </label>
+      <label class="reason-item">
+        <input type="radio" name="grund" value="Anderer Grund">
+        <span>Anderer Grund</span>
+      </label>
+    </div>
+
+    <button class="btn-primary" id="btnAbmelden" onclick="doAbmelden()">Ja, jetzt abmelden</button>
+    <a href="https://www.mommyfinance.de" class="btn-secondary">Nein, ich bleibe lieber</a>
+  </div>
+
+  <!-- Schritt 2: Abmeldung bestätigt -->
+  <div class="card" id="step2" style="display:none">
+    <div class="icon-circle gold">
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
     </div>
     <h1>Du hast dich erfolgreich abgemeldet.</h1>
     <p>Du erhältst von mir keine weiteren E-Mails mehr. Deine Abmeldung ist sofort wirksam.</p>
-    <p>Solltest du deine Meinung ändern, kannst du dich jederzeit erneut eintragen.</p>
-    <a href="/selbstcheck" class="back-link">Zurück zum Selbstcheck</a>
+    <p>Ich habe dir gerade eine Abmeldebestätigung per E-Mail geschickt – dort kannst du es dir mit einem einzigen Klick noch einmal anders überlegen.</p>
+    <a href="https://www.mommyfinance.de" class="back-link">Zurück zur Startseite</a>
   </div>
+
+  <!-- Schritt 3: Wieder anmelden (aus Goodbye-Mail) -->
+  <div class="card" id="step3" style="display:none">
+    <div class="icon-circle weinrot-bg">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+    </div>
+    <h1>Schön, dass du zurückkommst!</h1>
+    <p>Ich freue mich sehr, dass du dabei bleiben möchtest. Du musst nichts neu eingeben – ein Klick genügt.</p>
+    <button class="btn-gold" id="btnWiedereintragen" onclick="doWiedereintragen()">Ja, ich bin wieder dabei!</button>
+    <div id="step3Confirm" style="display:none">
+      <div class="success-box">Perfekt! Du bist wieder dabei. Schön, dich zurück zu haben!</div>
+      <a href="https://www.mommyfinance.de" class="back-link">Zur Startseite</a>
+    </div>
+  </div>
+
 </div>
 
 <div class="kernbotschaft-above">Mit Kindergeld und Köpfchen – für ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
@@ -204,20 +390,182 @@ p {
   </div>
 </div>
 
-
 <script>
 (function () {
   var params = new URLSearchParams(window.location.search);
   var email = params.get('e');
-  if (!email) return;
-  var key = '%%BREVO_API_KEY%%';
-  var h = { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': key };
-  fetch('https://api.brevo.com/v3/contacts/lists/3/contacts/remove', {
-    method: 'POST', headers: h, body: JSON.stringify({ emails: [email] })
-  }).catch(function () {});
-  fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
-    method: 'PATCH', headers: h, body: JSON.stringify({ emailBlacklisted: true })
-  }).catch(function () {});
+  var comeback = params.get('comeback');
+  var API_KEY = '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';
+
+  if (comeback === '1' && email) {
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step3').style.display = 'block';
+  }
+
+  window.doAbmelden = function () {
+    if (!email) return;
+
+    var selected = document.querySelector('input[name="grund"]:checked');
+    var grund = selected ? selected.value : 'Kein Grund angegeben';
+
+    var btn = document.getElementById('btnAbmelden');
+    btn.disabled = true;
+    btn.textContent = 'Bitte warten…';
+
+    var h = { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': API_KEY };
+
+    var p1 = fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
+      method: 'PATCH', headers: h,
+      body: JSON.stringify({ emailBlacklisted: true })
+    }).catch(function () {});
+
+    var p2 = fetch('https://api.brevo.com/v3/contacts/lists/3/contacts/remove', {
+      method: 'POST', headers: h,
+      body: JSON.stringify({ emails: [email] })
+    }).catch(function () {});
+
+    Promise.all([p1, p2]).then(function () {
+      sendGoodbyeEmail(email, grund, API_KEY);
+      sendNotification(email, grund, API_KEY);
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+      window.scrollTo({ top: 0 });
+    });
+  };
+
+  window.doWiedereintragen = function () {
+    if (!email) return;
+
+    var btn = document.getElementById('btnWiedereintragen');
+    btn.disabled = true;
+    btn.textContent = 'Bitte warten…';
+
+    var h = { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': API_KEY };
+
+    fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
+      method: 'PATCH', headers: h,
+      body: JSON.stringify({ emailBlacklisted: false, listIds: [3] })
+    }).then(function () {
+      btn.style.display = 'none';
+      document.getElementById('step3Confirm').style.display = 'block';
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = 'Ja, ich bin wieder dabei!';
+    });
+  };
+
+  function sendGoodbyeEmail(userEmail, grund, key) {
+    var comebackUrl = 'https://www.mommyfinance.de/abmeldung/?comeback=1&e=' + encodeURIComponent(userEmail);
+
+    var html =
+      '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' +
+      '<html xmlns="http://www.w3.org/1999/xhtml"><head>' +
+      '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1" />' +
+      '</head><body style="margin:0;padding:0;background:#fbf2ed;font-family:Helvetica,Arial,sans-serif;">' +
+      '<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#fbf2ed"><tr><td align="center">' +
+      '<table width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;">' +
+
+      // Header
+      '<tr><td bgcolor="#8b1130" style="padding:24px 0;text-align:center;">' +
+      '<a href="https://www.mommyfinance.de" style="display:inline-block;">' +
+      '<img src="https://mommyfinance.de/selbstcheck/cf-logo-elfenbein.png" alt="Cindy Friske" width="50" height="60" style="width:50px;height:60px;display:inline-block;" /></a>' +
+      '</td></tr>' +
+
+      // Gold line
+      '<tr><td style="height:4px;background:linear-gradient(90deg,#f8d960,#efc11b,#e6a400);font-size:0;line-height:0;">&nbsp;</td></tr>' +
+
+      // Content
+      '<tr><td bgcolor="#ffffff" style="padding:40px 32px 12px;">' +
+      '<p style="font-size:16px;color:#441a32;line-height:1.6;margin:0 0 20px;">Hey meine Liebe,</p>' +
+      '<p style="font-size:16px;color:#441a32;line-height:1.6;margin:0 0 20px;">ich habe deine Abmeldung vom MommyFinance Newsletter erhalten &ndash; und das ist nat&uuml;rlich in Ordnung.</p>' +
+      '<p style="font-size:16px;color:#441a32;line-height:1.6;margin:0 0 28px;">Ich w&uuml;nsche dir von Herzen viel Erfolg auf deinem finanziellen Weg &ndash; und bin &uuml;berzeugt, dass du das schaffst!</p>' +
+
+      // Diamond separator
+      '<table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 24px;">' +
+      '<tr><td align="center" style="font-size:36px;color:#f8d960;line-height:1.2;font-family:Arial,sans-serif;">&#9670;</td></tr>' +
+      '</table>' +
+
+      '<p style="font-size:16px;color:#441a32;line-height:1.6;margin:0 0 8px;font-weight:600;">Du hast es dir anders &uuml;berlegt?</p>' +
+      '<p style="font-size:15px;color:#441a32;line-height:1.6;margin:0 0 24px;">Kein Problem &ndash; mit einem einzigen Klick bist du sofort wieder dabei:</p>' +
+
+      // Comeback button
+      '<table width="100%" cellspacing="0" cellpadding="0" border="0"><tr><td align="center" style="padding-bottom:28px;">' +
+      '<a href="' + comebackUrl + '" target="_blank" style="display:inline-block;background:#f8d960;color:#8b1130;font-size:16px;font-weight:700;text-decoration:none;padding:15px 32px;border-radius:10px;border:2px solid #8b1130;">' +
+      'Doch lieber dabei bleiben' +
+      '</a></td></tr></table>' +
+
+      // Thin gold divider
+      '<table width="120" cellspacing="0" cellpadding="0" border="0" style="margin:4px auto 24px;">' +
+      '<tr><td style="height:2px;background:linear-gradient(90deg,transparent,#efc11b,transparent);font-size:0;">&nbsp;</td></tr>' +
+      '</table>' +
+
+      // Signature
+      '<p style="font-size:15px;color:#441a32;line-height:1.6;margin:0;">Herzliche Gr&uuml;&szlig;e,<br/>' +
+      '<strong style="color:#8b1130;">Cindy Friske</strong><br/>' +
+      '<span style="font-size:13px;opacity:0.7;">Finanztrainerin | MommyFinance</span></p>' +
+
+      // Motto
+      '<p style="font-size:12px;color:#8b1130;font-style:italic;text-align:center;margin:24px 0 0;">' +
+      'Mit Kindergeld und K&ouml;pfchen &ndash; f&uuml;r ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.' +
+      '</p>' +
+
+      '</td></tr>' +
+
+      // Gold line bottom
+      '<tr><td style="height:4px;background:linear-gradient(90deg,#f8d960,#efc11b,#e6a400);font-size:0;line-height:0;">&nbsp;</td></tr>' +
+
+      // Footer
+      '<tr><td bgcolor="#8b1130" style="padding:20px;text-align:center;">' +
+      '<img src="https://mommyfinance.de/selbstcheck/MommyFinance_Logo_gold.png" alt="MommyFinance" width="210" height="20" style="width:210px;height:20px;max-width:60%;display:inline-block;margin-bottom:12px;" /><br/>' +
+      '<p style="font-size:11px;margin:0;color:#ffebb8;">' +
+      '<a href="https://mommyfinance.de/datenschutz" style="color:#ffebb8;text-decoration:none;">Datenschutz</a>' +
+      '&emsp;&emsp;' +
+      '<a href="https://mommyfinance.de/impressum" style="color:#ffebb8;text-decoration:none;">Impressum</a>' +
+      '</p></td></tr>' +
+
+      '</table></td></tr></table></body></html>';
+
+    fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': key },
+      body: JSON.stringify({
+        sender: { name: 'Cindy Friske', email: 'friske.cindy@gmail.com' },
+        to: [{ email: userEmail }],
+        subject: 'Deine Abmeldung bei MommyFinance ist bestätigt',
+        htmlContent: html
+      })
+    }).catch(function () {});
+  }
+
+  function sendNotification(userEmail, grund, key) {
+    var now = new Date();
+    var dateStr = now.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+      ', ' + now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }) + ' Uhr';
+
+    var html =
+      '<div style="font-family:Helvetica,Arial,sans-serif;background:#f5f5f5;padding:32px;">' +
+      '<div style="max-width:480px;margin:0 auto;background:white;border-radius:12px;padding:32px;border-left:4px solid #8b1130;">' +
+      '<h2 style="color:#8b1130;margin:0 0 20px;font-size:18px;font-family:Georgia,serif;">Abmeldung eingegangen</h2>' +
+      '<table cellpadding="8" cellspacing="0" style="width:100%;font-size:14px;color:#441a32;border-collapse:collapse;">' +
+      '<tr style="border-bottom:1px solid #f0e8e4;"><td style="font-weight:700;white-space:nowrap;padding-right:20px;vertical-align:top;">E-Mail</td><td>' + userEmail + '</td></tr>' +
+      '<tr style="border-bottom:1px solid #f0e8e4;"><td style="font-weight:700;padding-right:20px;vertical-align:top;">Grund</td><td>' + grund + '</td></tr>' +
+      '<tr><td style="font-weight:700;padding-right:20px;vertical-align:top;">Datum</td><td>' + dateStr + '</td></tr>' +
+      '</table>' +
+      '<p style="font-size:12px;color:#999;margin:20px 0 0;line-height:1.5;">Diese Person wurde automatisch aus der Brevo-Liste entfernt und als abgemeldet markiert. In Brevo findest du sie unter Kontakte &rarr; Filter &bdquo;E-Mail-Blacklist: Ja&ldquo;.</p>' +
+      '</div></div>';
+
+    fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': key },
+      body: JSON.stringify({
+        sender: { name: 'MommyFinance', email: 'friske.cindy@gmail.com' },
+        to: [{ email: 'friske.cindy@gmail.com', name: 'Cindy Friske' }],
+        subject: 'Abmeldung: ' + userEmail + ' – ' + grund,
+        htmlContent: html
+      })
+    }).catch(function () {});
+  }
 })();
 </script>
 </body>
