@@ -192,12 +192,17 @@ p {
 .btn-primary:hover { background: #6e0d26; }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.btn-secondary {
+.btn-primary {
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-rosa {
   display: block;
   width: 100%;
-  background: transparent;
-  color: var(--weinrot);
-  border: 2px solid var(--weinrot);
+  background: #fce8ec;
+  color: #8b1130;
+  border: 2px solid #e8a0b0;
   border-radius: 10px;
   padding: 13px 24px;
   font-family: 'Barlow', sans-serif;
@@ -205,11 +210,11 @@ p {
   font-weight: 600;
   cursor: pointer;
   margin-top: 12px;
-  text-decoration: none;
   transition: background 0.2s;
 }
 
-.btn-secondary:hover { background: #fff0f2; }
+.btn-rosa:hover { background: #f8d0d8; }
+.btn-rosa:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .btn-gold {
   display: block;
@@ -344,8 +349,8 @@ p {
       </label>
     </div>
 
-    <button class="btn-primary" id="btnAbmelden" onclick="doAbmelden()">Ja, jetzt abmelden</button>
-    <a href="https://www.mommyfinance.de" class="btn-secondary">Nein, ich bleibe lieber</a>
+    <a href="https://www.mommyfinance.de" class="btn-primary">Nein, ich bleibe lieber</a>
+    <button class="btn-rosa" id="btnAbmelden" onclick="doAbmelden()">Ja, jetzt abmelden</button>
   </div>
 
   <!-- Schritt 2: Abmeldung bestätigt -->
@@ -354,8 +359,8 @@ p {
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
     </div>
     <h1>Du hast dich erfolgreich abgemeldet.</h1>
-    <p>Du erhältst von mir keine weiteren E-Mails mehr. Deine Abmeldung ist sofort wirksam.</p>
-    <p>Ich habe dir gerade eine Abmeldebestätigung per E-Mail geschickt – dort kannst du es dir mit einem einzigen Klick noch einmal anders überlegen.</p>
+    <p>Deine Abmeldung ist sofort wirksam – du wirst keine Newsletter mehr von mir erhalten.</p>
+    <p>Ich habe dir soeben noch eine letzte E-Mail geschickt. Falls du es dir anders überlegst, kannst du dich dort mit einem einzigen Klick wieder anmelden.</p>
     <a href="https://www.mommyfinance.de" class="back-link">Zurück zur Startseite</a>
   </div>
 
@@ -412,6 +417,10 @@ p {
     btn.disabled = true;
     btn.textContent = 'Bitte warten…';
 
+    // Goodbye-Mail zuerst senden – BEVOR der Kontakt als Blacklist markiert wird,
+    // da Brevo sonst keine E-Mails mehr an blackgelistete Adressen schickt
+    sendGoodbyeEmail(email, grund, API_KEY);
+
     var h = { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': API_KEY };
 
     var p1 = fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
@@ -425,7 +434,6 @@ p {
     }).catch(function () {});
 
     Promise.all([p1, p2]).then(function () {
-      sendGoodbyeEmail(email, grund, API_KEY);
       sendNotification(email, grund, API_KEY);
       document.getElementById('step1').style.display = 'none';
       document.getElementById('step2').style.display = 'block';
