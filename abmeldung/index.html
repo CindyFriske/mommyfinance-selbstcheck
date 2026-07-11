@@ -216,6 +216,22 @@ p {
 .btn-rosa:hover { background: #f8d0d8; }
 .btn-rosa:disabled { opacity: 0.6; cursor: not-allowed; }
 
+.email-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e8d9d0;
+  border-radius: 10px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  color: var(--dunkelrot);
+  background: white;
+  margin-bottom: 4px;
+  transition: border-color 0.2s;
+}
+.email-field:focus { outline: none; border-color: var(--weinrot); }
+.email-field.error { border-color: #c0392b; }
+.email-error { font-size: 0.85rem; color: #c0392b; margin-bottom: 8px; display: none; text-align: left; }
+
 .btn-gold {
   display: block;
   width: 100%;
@@ -349,6 +365,12 @@ p {
       </label>
     </div>
 
+    <div style="margin: 16px 0 4px; text-align: left;">
+      <p style="font-size: 0.9rem; margin-bottom: 6px; color: var(--dunkelrot); opacity: 0.8;">Deine E-Mail-Adresse:</p>
+      <input type="email" id="emailInput" class="email-field" placeholder="deine@email.de" autocomplete="email" />
+      <div class="email-error" id="emailError">Bitte gib deine E-Mail-Adresse ein.</div>
+    </div>
+
     <a href="https://www.mommyfinance.de" class="btn-primary">Nein, ich bleibe lieber</a>
     <button class="btn-rosa" id="btnAbmelden" onclick="doAbmelden()">Ja, jetzt abmelden</button>
   </div>
@@ -398,7 +420,8 @@ p {
 <script>
 (function () {
   var params = new URLSearchParams(window.location.search);
-  var email = params.get('e');
+  var _rawE = (window.location.search.match(/[?&]e=([^&]*)/) || [])[1];
+  var email = _rawE ? decodeURIComponent(_rawE) : null;
   var comeback = params.get('comeback');
   var API_KEY = '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';
 
@@ -407,8 +430,21 @@ p {
     document.getElementById('step3').style.display = 'block';
   }
 
+  if (email) {
+    document.getElementById('emailInput').value = email;
+  }
+
   window.doAbmelden = function () {
-    if (!email) return;
+    var inputEl = document.getElementById('emailInput');
+    var resolvedEmail = inputEl.value.trim();
+
+    if (!resolvedEmail || resolvedEmail.indexOf('@') < 1) {
+      inputEl.classList.add('error');
+      document.getElementById('emailError').style.display = 'block';
+      return;
+    }
+    inputEl.classList.remove('error');
+    document.getElementById('emailError').style.display = 'none';
 
     var selected = document.querySelector('input[name="grund"]:checked');
     var grund = selected ? selected.value : 'Kein Grund angegeben';
@@ -417,24 +453,22 @@ p {
     btn.disabled = true;
     btn.textContent = 'Bitte warten…';
 
-    // Goodbye-Mail zuerst senden – BEVOR der Kontakt als Blacklist markiert wird,
-    // da Brevo sonst keine E-Mails mehr an blackgelistete Adressen schickt
-    sendGoodbyeEmail(email, grund, API_KEY);
+    sendGoodbyeEmail(resolvedEmail, grund, API_KEY);
 
     var h = { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': API_KEY };
 
-    var p1 = fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
+    var p1 = fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(resolvedEmail), {
       method: 'PATCH', headers: h,
       body: JSON.stringify({ emailBlacklisted: true })
     }).catch(function () {});
 
     var p2 = fetch('https://api.brevo.com/v3/contacts/lists/3/contacts/remove', {
       method: 'POST', headers: h,
-      body: JSON.stringify({ emails: [email] })
+      body: JSON.stringify({ emails: [resolvedEmail] })
     }).catch(function () {});
 
     Promise.all([p1, p2]).then(function () {
-      sendNotification(email, grund, API_KEY);
+      sendNotification(resolvedEmail, grund, API_KEY);
       document.getElementById('step1').style.display = 'none';
       document.getElementById('step2').style.display = 'block';
       window.scrollTo({ top: 0 });
