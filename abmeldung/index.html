@@ -382,7 +382,16 @@ p {
     </div>
     <h1>Du hast dich erfolgreich abgemeldet.</h1>
     <p>Deine Abmeldung ist sofort wirksam – du wirst keine Newsletter mehr von mir erhalten.</p>
-    <p>Ich habe dir soeben noch eine letzte E-Mail geschickt. Falls du es dir anders überlegst, kannst du dich dort mit einem einzigen Klick wieder anmelden.</p>
+    <p id="step2MsgGoodbye">Ich habe dir soeben noch eine letzte E-Mail geschickt. Falls du es dir anders überlegst, kannst du dich dort mit einem einzigen Klick wieder anmelden.</p>
+    <div id="step2GoodbyeSection" style="display:none; margin-top:16px; border-top:1px solid #e8d9d0; padding-top:16px;">
+      <p style="font-size:0.95rem; margin-bottom:10px;">Soll ich dir noch eine persönliche Abschluss-E-Mail schicken – mit der Möglichkeit, mit einem Klick wieder zurückzukommen?</p>
+      <input type="email" id="step2EmailInput" class="email-field" placeholder="deine@email.de" autocomplete="email" />
+      <div class="email-error" id="step2EmailError">Bitte gib deine E-Mail-Adresse ein.</div>
+      <button class="btn-primary" id="btnGoodbyeMail" onclick="sendGoodbyeFromStep2()" style="margin-top:8px;">Ja, E-Mail schicken</button>
+      <div id="step2GoodbyeConfirm" style="display:none; margin-top:16px;">
+        <div class="success-box">Abschluss-E-Mail ist unterwegs! Du kannst dich dort mit einem Klick wieder anmelden.</div>
+      </div>
+    </div>
     <a href="https://www.mommyfinance.de" class="back-link">Zurück zur Startseite</a>
   </div>
 
@@ -428,6 +437,11 @@ p {
   if (comeback === '1' && email) {
     document.getElementById('step1').style.display = 'none';
     document.getElementById('step3').style.display = 'block';
+  } else if (!email) {
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+    document.getElementById('step2MsgGoodbye').style.display = 'none';
+    document.getElementById('step2GoodbyeSection').style.display = 'block';
   }
 
   if (email) {
@@ -495,6 +509,25 @@ p {
       btn.disabled = false;
       btn.textContent = 'Ja, ich bin wieder dabei!';
     });
+  };
+
+  window.sendGoodbyeFromStep2 = function () {
+    var inputEl = document.getElementById('step2EmailInput');
+    var userEmail = inputEl.value.trim();
+    if (!userEmail || userEmail.indexOf('@') < 1) {
+      inputEl.classList.add('error');
+      document.getElementById('step2EmailError').style.display = 'block';
+      return;
+    }
+    inputEl.classList.remove('error');
+    document.getElementById('step2EmailError').style.display = 'none';
+    var btn = document.getElementById('btnGoodbyeMail');
+    btn.disabled = true;
+    btn.textContent = 'Bitte warten…';
+    sendGoodbyeEmail(userEmail, 'Kein Grund angegeben', API_KEY);
+    sendNotification(userEmail, 'Kein Grund angegeben', API_KEY);
+    btn.style.display = 'none';
+    document.getElementById('step2GoodbyeConfirm').style.display = 'block';
   };
 
   function sendGoodbyeEmail(userEmail, grund, key) {
