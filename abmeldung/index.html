@@ -481,7 +481,12 @@ p {
       body: JSON.stringify({ emails: [resolvedEmail] })
     }).catch(function () {});
 
-    Promise.all([p1, p2]).then(function () {
+    var p3 = fetch('https://api.brevo.com/v3/contacts/lists/6/contacts/remove', {
+      method: 'POST', headers: h,
+      body: JSON.stringify({ emails: [resolvedEmail] })
+    }).catch(function () {});
+
+    Promise.all([p1, p2, p3]).then(function () {
       sendNotification(resolvedEmail, grund, API_KEY);
       document.getElementById('step1').style.display = 'none';
       document.getElementById('step2').style.display = 'block';
