@@ -58,36 +58,112 @@ body {
   width: 100%;
 }
 
-/* ===== HERO ===== */
-.hero {
-  text-align: center;
-  padding: 52px 0 48px;
+.content-wide {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
 }
 
+/* ===== HERO (V5: zweispaltig, Text links, Video rechts) ===== */
+.hero {
+  padding: 18px 0 6px;
+}
+
+.hero-head {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.hero-cta {
+  text-align: center;
+}
+
+.hero-grid {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.hero-left { flex: 1.1; }
+
+.hero-right { flex: 1; }
+
 .hero-eyebrow {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--gold3);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .hero h1 {
   font-family: 'Alice', serif;
-  font-size: 2.8rem;
+  font-size: 2.3rem;
   color: var(--weinrot);
-  line-height: 1.25;
-  margin-bottom: 20px;
+  line-height: 1.2;
+  margin-bottom: 0;
 }
 
 .hero-sub {
-  font-size: 1.15rem;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.62;
   color: var(--dunkelrot);
   font-weight: 300;
-  max-width: 520px;
-  margin: 0 auto 36px;
+  margin: 0 0 16px;
+}
+
+.hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.hero-bullets li {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--dunkelrot);
+  padding: 5px 0 5px 28px;
+  position: relative;
+}
+
+.hero-bullets li strong { font-weight: 600; color: var(--weinrot); }
+
+.hero-bullets li::before {
+  content: '\203A';
+  position: absolute;
+  left: 2px;
+  top: 3px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold3);
+  line-height: 1;
+}
+
+.hero-video-wrap {
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(68, 26, 50, 0.14);
+}
+
+.hero-video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
+.hero-video-caption {
+  font-family: 'Alice', serif;
+  font-size: 0.92rem;
+  color: var(--weinrot);
+  line-height: 1.55;
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+  padding: 0 12px;
 }
 
 /* ===== BUTTONS ===== */
@@ -97,7 +173,7 @@ body {
   color: var(--weinrot);
   background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
   border: none;
-  padding: 16px 40px;
+  padding: 14px 40px;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s;
@@ -125,6 +201,87 @@ body {
   margin-top: 2px;
 }
 
+.btn-micro {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--dunkelrot);
+  font-weight: 400;
+}
+
+.btn-limit {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--weinrot);
+  letter-spacing: 0.5px;
+}
+
+/* ===== DESKTOP-ZEILENUMBRUCH ===== */
+.br-desktop { display: none; }
+
+@media (min-width: 641px) {
+  .br-desktop { display: inline; }
+}
+
+/* ===== SCROLL-HINWEIS ===== */
+.scroll-hint {
+  text-align: center;
+  padding: 0 0 2px;
+  line-height: 1;
+}
+
+.scroll-hint span {
+  display: inline-block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--gold3);
+  line-height: 1;
+  transform: rotate(90deg);
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: rotate(90deg) translateX(0); }
+  50% { transform: rotate(90deg) translateX(6px); }
+}
+
+/* ===== PROOF BAR ===== */
+.proof-bar {
+  background: var(--weinrot);
+  padding: 15px 24px;
+  margin-top: 4px;
+}
+
+.proof-bar-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 28px;
+}
+
+.proof-item {
+  color: var(--goldgelb);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.proof-item::before {
+  content: '\203A';
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold2);
+  line-height: 1;
+}
+
 /* ===== SECTION BASICS ===== */
 .section-title {
   font-family: 'Alice', serif;
@@ -149,7 +306,7 @@ body {
 }
 
 /* ===== PAIN POINTS ===== */
-.pain-section { padding: 0 0 56px; }
+.pain-section { padding: 48px 0 56px; }
 
 .pain-cards {
   display: flex;
@@ -181,6 +338,60 @@ body {
 }
 
 .pain-bridge strong { color: var(--weinrot); }
+
+/* ===== TESTIMONIALS ===== */
+.testi-section { padding: 8px 0 48px; }
+
+.testi-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testi-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 26px 28px 22px;
+  border-left: 3px solid var(--gold3);
+  box-shadow: 0 1px 3px rgba(68, 26, 50, 0.04);
+  position: relative;
+}
+
+.testi-card::before {
+  content: '\201E';
+  font-family: 'Alice', serif;
+  font-size: 3rem;
+  color: var(--gold2);
+  position: absolute;
+  top: -6px;
+  left: 18px;
+  line-height: 1;
+}
+
+.testi-text {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--dunkelrot);
+  font-style: italic;
+}
+
+.testi-name {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--weinrot);
+  letter-spacing: 0.5px;
+}
+
+.testi-note {
+  margin-top: 24px;
+  text-align: center;
+  font-family: 'Alice', serif;
+  font-size: 1.05rem;
+  color: var(--weinrot);
+  font-style: italic;
+  line-height: 1.6;
+}
 
 /* ===== CTA BLOCK ===== */
 .cta-block {
@@ -361,54 +572,6 @@ body {
   line-height: 1;
 }
 
-/* ===== VIDEO ===== */
-.video-section {
-  padding: 48px 0;
-  text-align: center;
-}
-
-.video-placeholder {
-  max-width: 640px;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, rgba(139, 17, 48, 0.06), rgba(68, 26, 50, 0.08));
-  border-radius: 16px;
-  border: 2px dashed rgba(139, 17, 48, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.video-play-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--weinrot), var(--dunkelrot));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(139, 17, 48, 0.2);
-}
-
-.video-play-icon::after {
-  content: '';
-  display: block;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 10px 0 10px 18px;
-  border-color: transparent transparent transparent #fff;
-  margin-left: 4px;
-}
-
-.video-caption {
-  font-family: 'Alice', serif;
-  font-size: 0.95rem;
-  color: var(--weinrot);
-  opacity: 0.6;
-}
-
 /* ===== FINANZCHECK BOX ===== */
 .check-section { padding: 48px 0 56px; }
 
@@ -479,30 +642,6 @@ body {
 
 .check-limit {
   margin-top: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--weinrot);
-  letter-spacing: 0.5px;
-}
-
-/* ===== FINAL CTA ===== */
-.final-cta {
-  text-align: center;
-  padding: 48px 0 56px;
-}
-
-.final-cta-title {
-  font-family: 'Alice', serif;
-  font-size: 1.4rem;
-  color: var(--weinrot);
-  margin-bottom: 24px;
-  line-height: 1.4;
-}
-
-/* ===== BTN LIMIT ===== */
-.btn-limit {
-  display: block;
-  margin-top: 14px;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--weinrot);
@@ -607,10 +746,41 @@ body {
 .footer-nav a:hover { text-decoration: underline; opacity: 1; }
 
 /* ===== RESPONSIVE ===== */
+@media (min-width: 941px) and (max-height: 700px) {
+  .hero { padding: 12px 0 2px; }
+  .hero-head { margin-bottom: 12px; }
+  .hero-eyebrow { margin-bottom: 6px; }
+  .hero h1 { font-size: 1.95rem; margin-bottom: 10px; }
+  .hero-sub { font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px; }
+  .hero-bullets { margin-bottom: 12px; }
+  .hero-bullets li { font-size: 0.93rem; padding: 3px 0 3px 26px; }
+  .btn-cta { padding: 12px 34px; }
+  .btn-micro { margin-top: 6px; }
+  .btn-limit { margin-top: 4px; }
+  .hero-video-caption { font-size: 0.85rem; margin-top: 8px; }
+  .scroll-hint span { font-size: 1.3rem; }
+  .proof-bar { padding: 10px 24px; margin-top: 4px; }
+}
+
+@media (max-width: 940px) {
+  .hero-grid {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .hero-left, .hero-right { width: 100%; }
+
+  .hero-bullets { text-align: left; max-width: 480px; margin-left: auto; margin-right: auto; }
+}
+
 @media (max-width: 640px) {
-  .hero h1 { font-size: 2.1rem; }
-  .hero { padding: 36px 0 40px; }
+  .hero h1 { font-size: 2rem; }
+  .hero { padding: 36px 0 32px; }
   .hero-sub { font-size: 1.05rem; }
+
+  .proof-bar-inner { gap: 6px 24px; }
+  .proof-item { font-size: 0.85rem; }
 
   .about-grid {
     flex-direction: column;
@@ -634,7 +804,7 @@ body {
 
 @media (max-width: 400px) {
   .hero h1 { font-size: 1.7rem; }
-  .content { padding: 0 16px; }
+  .content, .content-wide { padding: 0 16px; }
   .btn-cta { padding: 14px 28px; }
   .btn-cta .btn-line2 { font-size: 1.05rem; }
 }
@@ -648,18 +818,55 @@ body {
 </div>
 <div class="top-bar-gold"></div>
 
-<!-- ===== HERO ===== -->
-<div class="content">
+<!-- ===== HERO (V5: Text links, Video rechts) ===== -->
+<div class="content-wide">
   <section class="hero">
-    <div class="hero-eyebrow">Souver&auml;n investieren &ndash; f&uuml;r dich und dein Kind</div>
-    <h1>Das gute Gef&uuml;hl,<br>deine Finanzen selbst in der Hand zu haben.</h1>
-    <p class="hero-sub">Kein Bankberater, kein schlechtes Gewissen, keine schlaflosen N&auml;chte mehr wegen Geld. Daf&uuml;r Klarheit, ein Plan und die Sicherheit, dass du und dein Kind finanziell gut aufgestellt seid.</p>
-    <a href="/bewerbung" class="btn-cta">
-      <span class="btn-line1">Bewirb dich jetzt f&uuml;r dein kostenfreies</span>
-      <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
-    </a>
-    <span class="btn-limit">Limitierte Anzahl an Pl&auml;tzen verf&uuml;gbar.</span>
+    <div class="hero-head">
+      <div class="hero-eyebrow">Souver&auml;n investieren &ndash; f&uuml;r dich und dein Kind</div>
+      <h1>&Uuml;ber 100.000&nbsp;&euro; f&uuml;r meine Kinder.<br>Aufgebaut allein aus Kindergeld.</h1>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <p class="hero-sub">Alle drei Kinderdepots zusammen sind heute sechsstellig &ndash; ohne Zockerei, mit einfachen ETF-Sparpl&auml;nen. Ich zeige dir Schritt f&uuml;r Schritt, wie du das f&uuml;r dein Kind aufbaust und deine Finanzen selbst in die Hand nimmst.</p>
+        <ul class="hero-bullets">
+          <li>Am Ende hast du <strong>ein laufendes Depot</strong> &ndash; f&uuml;r dich und eines je Kind.</li>
+          <li>Kindergeld <strong>renditestark investiert</strong>, statt dass es auf dem Konto an Wert verliert.</li>
+          <li><strong>Pers&ouml;nliche Begleitung</strong>, die in deinen Familienalltag passt &ndash; kein anonymer Onlinekurs.</li>
+        </ul>
+        <div class="hero-cta">
+          <a href="/bewerbung" class="btn-cta">
+            <span class="btn-line1">Bewirb dich jetzt f&uuml;r dein kostenfreies</span>
+            <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
+          </a>
+          <span class="btn-micro">Kostenfrei &amp; unverbindlich. Ich rufe dich pers&ouml;nlich zur&uuml;ck.</span>
+          <span class="btn-limit">Ich begleite nur wenige Mamas gleichzeitig &ndash; deshalb sind die Pl&auml;tze limitiert.</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-video-wrap">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/PJPF6ebaRDc"
+            title="Cindy Friske &ndash; MommyFinance Vorstellung"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="hero-video-caption">Meine Geschichte in 90 Sekunden: Warum ich wei&szlig;, dass Vorsorge tr&auml;gt &ndash; auch wenn das Leben pl&ouml;tzlich stillsteht.</p>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>&rsaquo;</span></div>
   </section>
+</div>
+
+<!-- ===== PROOF BAR ===== -->
+<div class="proof-bar">
+  <div class="proof-bar-inner">
+    <span class="proof-item">&Uuml;ber 25 Jahre Investment-Erfahrung</span>
+    <span class="proof-item">Ehemalige Bankerin</span>
+    <span class="proof-item">Dreifach-Mama</span>
+    <span class="proof-item">&Uuml;ber 100.000&nbsp;&euro; Kinderdepot-Verm&ouml;gen aufgebaut</span>
+  </div>
 </div>
 
 <!-- ===== PAIN POINTS ===== -->
@@ -695,6 +902,43 @@ body {
   </section>
 </div>
 
+<!-- ===== TESTIMONIALS =====
+     WICHTIG: Vor Livegang die schriftliche Einwilligung jeder Genannten einholen
+     (Katrin, Eileen, Mama-einer-Tochter-Zitat). Namen ggf. anpassen. -->
+<div class="content">
+  <section class="testi-section">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Das sagen Mamas, die den ersten Schritt gemacht haben</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="testi-cards">
+      <div class="testi-card">
+        <p class="testi-text">Danke f&uuml;r dein Zuh&ouml;ren, deine genau richtigen Fragen und deine hilfreichen Antworten! Ich f&uuml;hle mich nicht mehr so &uuml;berfordert von dem ganzen Thema finanzielle Absicherung, sondern habe endlich tats&auml;chlich sowas wie einen Plan im Kopf. Von Herzen Danke f&uuml;r deine Expertise &ndash; auch im Namen meiner Tochter.</p>
+        <p class="testi-name">&ndash; Katrin</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-text">Yay &ndash; der Depot-Vertrag ist abgeschickt! Ich kann es kaum erwarten, dass das Depot f&uuml;r unser T&ouml;chterchen endlich er&ouml;ffnet ist. Es kribbelt mir schon in den Fingern, den ausgew&auml;hlten ETF mit Sparplan anzulegen. Sch&ouml;nes Gef&uuml;hl, mitten in der Umsetzung zu sein.</p>
+        <p class="testi-name">&ndash; Mama einer Tochter, in der pers&ouml;nlichen Begleitung</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-text">Vielen Dank, liebe Cindy, f&uuml;r diese tolle und aufschlussreiche Beratung und das Erkl&auml;ren der ETFs &ndash; hat mir schon jetzt sehr weitergeholfen.</p>
+        <p class="testi-name">&ndash; Eileen</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-text">Yes! Es ist nie zu sp&auml;t anzufangen! Und ich bin dankbar f&uuml;r deine Unterst&uuml;tzung.</p>
+        <p class="testi-name">&ndash; Katja, Vierfach-Mama, in pers&ouml;nlicher Begleitung</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-text">Du hast viel, viel mehr gegeben als besprochen &ndash; &uuml;ber die Finanzthematik hinaus. Ich finde mich mit dem Thema rund um ETFs zurecht und wei&szlig;, dass ich dich immer auch mal fragen kann!</p>
+        <p class="testi-name">&ndash; Stefanie</p>
+      </div>
+    </div>
+
+    <p class="testi-note">Genau da will ich dich auch hinbegleiten: raus aus dem Kopf-Chaos, rein in die Umsetzung.</p>
+  </section>
+</div>
+
 <!-- ===== CTA ===== -->
 <div class="content">
   <div class="cta-block">
@@ -702,7 +946,8 @@ body {
       <span class="btn-line1">Bewirb dich jetzt f&uuml;r dein kostenfreies</span>
       <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
     </a>
-    <span class="btn-limit">Limitierte Anzahl an Pl&auml;tzen verf&uuml;gbar.</span>
+    <span class="btn-micro">Kostenfrei &amp; unverbindlich. Ich rufe dich pers&ouml;nlich zur&uuml;ck.</span>
+    <span class="btn-limit">Ich begleite nur wenige Mamas gleichzeitig &ndash; deshalb sind die Pl&auml;tze limitiert.</span>
   </div>
 </div>
 
@@ -750,7 +995,8 @@ body {
       <span class="btn-line1">Bewirb dich jetzt f&uuml;r dein kostenfreies</span>
       <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
     </a>
-    <span class="btn-limit">Limitierte Anzahl an Pl&auml;tzen verf&uuml;gbar.</span>
+    <span class="btn-micro">Kostenfrei &amp; unverbindlich. Ich rufe dich pers&ouml;nlich zur&uuml;ck.</span>
+    <span class="btn-limit">Ich begleite nur wenige Mamas gleichzeitig &ndash; deshalb sind die Pl&auml;tze limitiert.</span>
   </div>
 </div>
 
@@ -774,6 +1020,7 @@ body {
           <li>&Uuml;ber 25 Jahre eigene Investment-Erfahrung.</li>
           <li>Ehemalige Bankerin &ndash; ich kenne das System von innen.</li>
           <li>Dreifach-Mama. Ich predige nicht, ich lebe es.</li>
+          <li>F&uuml;r meine drei Kinder zusammen habe ich Depots im sechsstelligen Bereich aufgebaut &ndash; allein durch investiertes Kindergeld.</li>
           <li>Pers&ouml;nliche Begleitung statt anonymer Gro&szlig;gruppe.</li>
         </ul>
 
@@ -786,34 +1033,6 @@ body {
       </div>
     </div>
   </section>
-</div>
-
-<!-- ===== VIDEO ===== -->
-<div class="content">
-  <section class="video-section">
-    <div style="text-align: center;">
-      <div class="section-title-wrap">
-        <h2 class="section-title">Lern mich kennen</h2>
-        <div class="title-underline" style="margin: 12px auto 32px;"></div>
-      </div>
-    </div>
-
-    <div class="video-placeholder">
-      <div class="video-play-icon"></div>
-      <span class="video-caption">Willkommensvideo folgt</span>
-    </div>
-  </section>
-</div>
-
-<!-- ===== CTA nach Video ===== -->
-<div class="content">
-  <div class="cta-block">
-    <a href="/bewerbung" class="btn-cta">
-      <span class="btn-line1">Bewirb dich jetzt f&uuml;r dein kostenfreies</span>
-      <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
-    </a>
-    <span class="btn-limit">Limitierte Anzahl an Pl&auml;tzen verf&uuml;gbar.</span>
-  </div>
 </div>
 
 <!-- ===== ERGEBNISSE ===== -->
@@ -843,15 +1062,45 @@ body {
       </li>
       <li class="result-item">
         <span class="result-chevron">&rsaquo;</span>
-        <p>wie du regelm&auml;&szlig;ig, automatisiert f&uuml;r dein eigenes <strong>Zukunfts-ICH</strong> vorsorgst, um entspannt dem Alter entgegenzugehen.</p>
+        <p>wie du regelm&auml;&szlig;ig, automatisiert f&uuml;r dein eigenes <strong>Zukunfts-ICH</strong> vorsorgst,<br class="br-desktop"> um entspannt dem Alter entgegenzugehen.</p>
       </li>
       <li class="result-item">
         <span class="result-chevron">&rsaquo;</span>
-        <p>dass du das <strong>schaffen kannst</strong>, auch ohne Finanzstudium, auch ohne viel Zeit, auch ohne technisches Vorwissen.</p>
+        <p>dass du das <strong>schaffen kannst</strong>, auch ohne Finanzstudium, auch ohne viel Zeit,<br class="br-desktop"> auch ohne technisches Vorwissen.</p>
       </li>
     </ul>
 
     <p class="result-footer">Klarheit statt Chaos. In nur einem Gespr&auml;ch.</p>
+  </section>
+</div>
+
+<!-- ===== VERTRAUEN (vor dem finalen CTA) =====
+     WICHTIG: Einwilligung von Stefanie einholen. Beide Saetze stammen von
+     derselben Stefanie (zwei Nachrichten) — deshalb bewusst NUR EIN Zitat. -->
+<div class="content">
+  <div class="cta-block">
+    <a href="/bewerbung" class="btn-cta">
+      <span class="btn-line1">Bewirb dich jetzt f&uuml;r dein kostenfreies</span>
+      <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
+    </a>
+    <span class="btn-micro">Kostenfrei &amp; unverbindlich. Ich rufe dich pers&ouml;nlich zur&uuml;ck.</span>
+    <span class="btn-limit">Ich begleite nur wenige Mamas gleichzeitig &ndash; deshalb sind die Pl&auml;tze limitiert.</span>
+  </div>
+</div>
+
+<div class="content">
+  <section class="testi-section" style="padding-top: 8px;">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Und wenn du gerade zweifelst ...</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="testi-cards">
+      <div class="testi-card">
+        <p class="testi-text">Es hilft mir konkret zu vertrauen. Nicht beim Zweifel stehen zu bleiben: &bdquo;Meint sie es wirklich? Ist sie echt? Sagt sie das zu jedem?&ldquo; Es ermutigt mich sehr weiterzugehen. Dieses Coaching habe ich mir eigentlich oft gew&uuml;nscht &ndash; es ist ein Geschenk!</p>
+        <p class="testi-name">&ndash; Stefanie, Kundin</p>
+      </div>
+    </div>
   </section>
 </div>
 
@@ -876,7 +1125,8 @@ body {
         <span class="btn-line2">Finanzcheck-Beratungsgespr&auml;ch</span>
       </a>
 
-      <p class="check-limit">Limitierte Anzahl an Pl&auml;tzen verf&uuml;gbar.</p>
+      <span class="btn-micro">Kostenfrei &amp; unverbindlich. Ich rufe dich pers&ouml;nlich zur&uuml;ck.</span>
+      <p class="check-limit">Ich begleite nur wenige Mamas gleichzeitig &ndash; deshalb sind die Pl&auml;tze limitiert.</p>
     </div>
   </section>
 </div>
@@ -903,6 +1153,7 @@ body {
     <img src="/MommyFinance_Logo_gold.png" alt="MommyFinance">
     <div class="footer-nav">
       <a href="/selbstcheck">Selbstcheck</a>
+      <a href="/geldglauben/">Geldglauben</a>
       <a href="/bewerbung">Bewerbung</a>
       <a href="/datenschutz">Datenschutz</a>
       <a href="/impressum">Impressum</a>
