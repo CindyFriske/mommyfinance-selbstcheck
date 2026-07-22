@@ -432,7 +432,7 @@ p {
   var _rawE = (window.location.search.match(/[?&]e=([^&]*)/) || [])[1];
   var email = _rawE ? decodeURIComponent(_rawE) : null;
   var comeback = params.get('comeback');
-  var API_KEY = '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';
+  var API_KEY = '%%BREVO_API_KEY%%';
 
   if (comeback === '1' && email) {
     document.getElementById('step1').style.display = 'none';
