@@ -555,6 +555,22 @@ input[type="range"].gl-slider::-moz-range-thumb {
   display: none;
 }
 
+.form-error-box {
+  background: #fdeeee;
+  border: 1px solid var(--weinrot);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 16px 0 4px;
+  color: var(--weinrot);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+  display: none;
+}
+
+.form-error-box strong { display: block; margin-bottom: 4px; }
+.form-error-box a { color: var(--weinrot); font-weight: 600; }
+
 .email-form-privacy {
   font-size: 12px;
   color: var(--dunkelrot);
@@ -875,6 +891,8 @@ input[type="range"].gl-slider::-moz-range-thumb {
             <div class="newsletter-error" id="newsletterError">Bitte bestätige die Einwilligung, um dein Ergebnis zu erhalten.</div>
           </div>
 
+          <div id="submitError" class="form-error-box"></div>
+
           <button type="submit" class="email-form-btn">Mein Ergebnis per E-Mail erhalten</button>
 
           <p class="email-form-privacy">
@@ -888,6 +906,17 @@ input[type="range"].gl-slider::-moz-range-thumb {
         <div class="email-confirm-title">Fast geschafft!</div>
         <p>Ich habe dir eine Bestätigungs-E-Mail für deinen Geldglauben-Test geschickt. Bitte klick auf den Link darin – dann sende ich dir deine persönliche Auswertung mit deinen 5 Geldglauben-Kategorien zu.</p>
         <p class="email-confirm-hint">Du siehst keine E-Mail? Bitte schau auch in deinem Spam-Ordner nach.</p>
+        <div style="text-align:center;margin-top:28px;">
+          <img src="../selbstcheck/cindy-profilfoto.png" alt="Cindy Friske" style="width:90px;height:90px;border-radius:50%;border:3px solid #efc11b;object-fit:cover;display:block;margin:0 auto 12px;">
+          <div style="font-family:'Alice',serif;font-size:17px;color:#8b1130;font-weight:600;">Cindy Friske</div>
+          <div style="font-size:14px;color:#441a32;opacity:0.75;margin-top:4px;">Finanztrainerin</div>
+        </div>
+      </div>
+
+      <div class="email-confirm" id="emailFallback">
+        <div class="email-confirm-title">Deine Anfrage ist angekommen!</div>
+        <p>Mein automatischer Versand streikt gerade – deine Auswertung liegt aber bei mir auf dem Tisch. Ich schicke sie dir persönlich zu, in der Regel innerhalb eines Tages.</p>
+        <p class="email-confirm-hint">Danke für deine Geduld.</p>
         <div style="text-align:center;margin-top:28px;">
           <img src="../selbstcheck/cindy-profilfoto.png" alt="Cindy Friske" style="width:90px;height:90px;border-radius:50%;border:3px solid #efc11b;object-fit:cover;display:block;margin:0 auto 12px;">
           <div style="font-family:'Alice',serif;font-size:17px;color:#8b1130;font-weight:600;">Cindy Friske</div>
@@ -1122,6 +1151,62 @@ function showResult() {
   }, 100);
 }
 
+/* ===== ERGEBNIS-ANZEIGE & NOTFALL-STRECKE ===== */
+function zeigeBestaetigung() {
+  document.querySelector('.result-cta-box').style.display = 'none';
+  document.getElementById('emailFormSection').style.display = 'none';
+  document.getElementById('emailConfirm').style.display = 'block';
+  document.getElementById('emailConfirm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function zeigeFallback() {
+  document.querySelector('.result-cta-box').style.display = 'none';
+  document.getElementById('emailFormSection').style.display = 'none';
+  document.getElementById('emailFallback').style.display = 'block';
+  document.getElementById('emailFallback').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function zeigeFehler(btn) {
+  btn.textContent = 'Mein Ergebnis per E-Mail erhalten';
+  btn.disabled = false;
+  var box = document.getElementById('submitError');
+  box.innerHTML = '<strong>Das hat leider nicht geklappt.</strong>Bitte versuche es in ein paar Minuten noch einmal. Wenn es dann immer noch hakt, schreib mir kurz an <a href="mailto:cindy@mommyfinance.de?subject=Geldglauben-Test%20Ergebnis">cindy@mommyfinance.de</a> – ich schicke dir dein Ergebnis dann von Hand.';
+  box.style.display = 'block';
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* Wenn Brevo nicht erreichbar ist: Ergebnis direkt an Cindy schicken, damit kein Lead verloren geht. */
+async function notfallStrecke(email, vorname, btn) {
+  var angekommen = false;
+  try {
+    var res = await fetch('https://formsubmit.co/ajax/cindy@mommyfinance.de', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        '_subject': 'NOTFALL Geldglauben-Test – Brevo hat nicht angenommen',
+        'Hinweis': 'Brevo-Versand fehlgeschlagen. Diese Person hat KEINE Bestaetigungsmail bekommen. Bitte Ergebnis manuell schicken und den API-Key pruefen.',
+        'E-Mail': email,
+        'Vorname': vorname || '(nicht angegeben)',
+        'Kategorie 1 Geldgeschichte': document.getElementById('formKat1').value,
+        'Kategorie 2 Finanzen & Kontrolle': document.getElementById('formKat2').value,
+        'Kategorie 3 Sparen & Ausgeben': document.getElementById('formKat3').value,
+        'Kategorie 4 Investieren & Vermoegen': document.getElementById('formKat4').value,
+        'Kategorie 5 Geld & Familie': document.getElementById('formKat5').value,
+        'Gesamt': document.getElementById('formGesamt').value,
+        'Top 2': document.getElementById('formTop2').value,
+        'Newsletter-Einwilligung': 'Ja'
+      })
+    });
+    /* FormSubmit antwortet auch bei Fehlern mit Status 200 und meldet das erst im Text. */
+    var antwort = await res.json().catch(function() { return {}; });
+    angekommen = res.ok && String(antwort.success) === 'true';
+  } catch (err) {
+    angekommen = false;
+  }
+  /* Anzeige bewusst ausserhalb von try/catch: ein Anzeigefehler darf nicht als Sendefehler erscheinen. */
+  if (angekommen) { zeigeFallback(); } else { zeigeFehler(btn); }
+}
+
 /* ===== BREVO FORM ===== */
 document.getElementById('brevoForm').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -1133,12 +1218,14 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
     return;
   }
   errorEl.style.display = 'none';
+  document.getElementById('submitError').style.display = 'none';
   var btn = document.querySelector('.email-form-btn');
   btn.textContent = 'Wird gesendet…';
   btn.disabled = true;
 
   var email = document.querySelector('[name="EMAIL"]').value.trim();
   var vorname = document.querySelector('[name="VORNAME"]').value.trim();
+  var brevoErfolg = false;
 
   try {
     var res = await fetch('https://api.brevo.com/v3/contacts/doubleOptinConfirmation', {
@@ -1167,30 +1254,17 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
       })
     });
     if (res.status === 204 || res.ok) {
-      document.querySelector('.result-cta-box').style.display = 'none';
-      document.getElementById('emailFormSection').style.display = 'none';
-      document.getElementById('emailConfirm').style.display = 'block';
-      document.getElementById('emailConfirm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      brevoErfolg = true;
     } else {
       var data = await res.json().catch(function() { return {}; });
-      if (data.code === 'duplicate_parameter') {
-        document.querySelector('.result-cta-box').style.display = 'none';
-        document.getElementById('emailFormSection').style.display = 'none';
-        document.getElementById('emailConfirm').style.display = 'block';
-        document.getElementById('emailConfirm').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        btn.textContent = 'Mein Ergebnis per E-Mail erhalten';
-        btn.disabled = false;
-        document.getElementById('newsletterError').textContent = 'Etwas hat nicht geklappt. Bitte versuche es noch einmal.';
-        document.getElementById('newsletterError').style.display = 'block';
-      }
+      /* Bereits eingetragene Adresse zaehlt als Erfolg – Brevo verschickt die Mail trotzdem. */
+      brevoErfolg = (data.code === 'duplicate_parameter');
     }
   } catch (err) {
-    btn.textContent = 'Mein Ergebnis per E-Mail erhalten';
-    btn.disabled = false;
-    document.getElementById('newsletterError').textContent = 'Verbindungsfehler. Bitte versuche es noch einmal.';
-    document.getElementById('newsletterError').style.display = 'block';
+    brevoErfolg = false;
   }
+  /* Anzeige bewusst ausserhalb von try/catch: ein Anzeigefehler darf keine Notfall-Mail ausloesen. */
+  if (brevoErfolg) { zeigeBestaetigung(); } else { await notfallStrecke(email, vorname, btn); }
 });
 
 document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]').addEventListener('change', function() {

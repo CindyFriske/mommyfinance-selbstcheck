@@ -578,6 +578,21 @@ body {
   margin-top: 6px;
 }
 
+.form-error-box {
+  background: #fdeeee;
+  border: 1px solid var(--weinrot);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 16px 0 4px;
+  color: var(--weinrot);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.form-error-box strong { display: block; margin-bottom: 4px; }
+.form-error-box a { color: var(--weinrot); font-weight: 600; }
+
 .email-form-privacy {
   font-size: 12px;
   color: var(--dunkelrot);
@@ -839,6 +854,7 @@ body {
             <label><input type="checkbox" name="NEWSLETTER_EINWILLIGUNG" value="Ja" /> Ja, ich bin einverstanden, dass Cindy Friske meine Daten verwendet, um mir mein persönliches Ergebnis zuzusenden und mich von Zeit zu Zeit per E-Mail über passende Angebote und hilfreiche Inhalte zu informieren. Abmeldung jederzeit mit einem Klick.</label>
             <p id="newsletterError" class="newsletter-error" style="display:none;">Bitte stimme zu, damit ich dir dein Ergebnis schicken darf.</p>
           </div>
+          <div id="submitError" class="form-error-box" style="display:none;"></div>
           <button type="submit" class="email-form-btn">Ergebnis per E-Mail erhalten</button>
         </form>
         <p class="email-form-privacy">Deine Daten sind sicher. <a href="/datenschutz">Datenschutz</a></p>
@@ -848,6 +864,12 @@ body {
         <div class="email-confirm-title">Fast geschafft!</div>
         <p>Ich habe dir eine Bestätigungs-E-Mail geschickt.<br/>Bitte klick auf den Link in der E-Mail – dann sende ich dir dein ausführliches Ergebnis zu.</p>
         <p class="email-confirm-hint">Schau auch im Spam-Ordner nach, falls die E-Mail nicht sofort ankommt.</p>
+      </div>
+
+      <div class="email-confirm" id="emailFallback" style="display:none;">
+        <div class="email-confirm-title">Deine Anfrage ist angekommen!</div>
+        <p>Mein automatischer Versand streikt gerade – deine Auswertung liegt aber bei mir auf dem Tisch.<br/>Ich schicke sie dir persönlich zu, in der Regel innerhalb eines Tages.</p>
+        <p class="email-confirm-hint">Danke für deine Geduld.</p>
       </div>
 
       <div class="profile-section">
@@ -1045,6 +1067,62 @@ function showResult() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* ===== ERGEBNIS-ANZEIGE & NOTFALL-STRECKE ===== */
+function zeigeBestaetigung() {
+  document.getElementById('emailFormSection').style.display = 'none';
+  document.getElementById('emailConfirm').style.display = 'block';
+  document.getElementById('emailConfirm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function zeigeFallback() {
+  document.getElementById('emailFormSection').style.display = 'none';
+  document.getElementById('emailFallback').style.display = 'block';
+  document.getElementById('emailFallback').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function zeigeFehler(btn) {
+  btn.textContent = 'Ergebnis per E-Mail erhalten';
+  btn.disabled = false;
+  var box = document.getElementById('submitError');
+  box.innerHTML = '<strong>Das hat leider nicht geklappt.</strong>Bitte versuche es in ein paar Minuten noch einmal. Wenn es dann immer noch hakt, schreib mir kurz an <a href="mailto:cindy@mommyfinance.de?subject=Selbstcheck%20Ergebnis">cindy@mommyfinance.de</a> – ich schicke dir dein Ergebnis dann von Hand.';
+  box.style.display = 'block';
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* Wenn Brevo nicht erreichbar ist: Ergebnis direkt an Cindy schicken, damit kein Lead verloren geht. */
+async function notfallStrecke(email, vorname, btn) {
+  var angekommen = false;
+  try {
+    var daten = {
+      '_subject': 'NOTFALL Selbstcheck – Brevo hat nicht angenommen',
+      'Hinweis': 'Brevo-Versand fehlgeschlagen. Diese Person hat KEINE Bestaetigungsmail bekommen. Bitte Ergebnis manuell schicken und den API-Key pruefen.',
+      'E-Mail': email,
+      'Vorname': vorname || '(nicht angegeben)',
+      'Newsletter-Einwilligung': 'Ja',
+      'Score gesamt': document.getElementById('formScore').value,
+      'Kategorie': document.getElementById('formKategorie').value,
+      'Staerken': document.getElementById('formStaerken').value,
+      'Schwaechen': document.getElementById('formSchwaechen').value
+    };
+    /* Einzelwerte mitschicken, damit die Ergebnis-Mail vollstaendig nachgebaut werden kann */
+    for (var i = 1; i <= 13; i++) {
+      daten['Frage ' + i + ' (%)'] = document.getElementById('formQ' + i).value;
+    }
+    var res = await fetch('https://formsubmit.co/ajax/cindy@mommyfinance.de', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(daten)
+    });
+    /* FormSubmit antwortet auch bei Fehlern mit Status 200 und meldet das erst im Text. */
+    var antwort = await res.json().catch(function() { return {}; });
+    angekommen = res.ok && String(antwort.success) === 'true';
+  } catch (err) {
+    angekommen = false;
+  }
+  /* Anzeige bewusst ausserhalb von try/catch: ein Anzeigefehler darf nicht als Sendefehler erscheinen. */
+  if (angekommen) { zeigeFallback(); } else { zeigeFehler(btn); }
+}
+
 document.getElementById('brevoForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   var checkbox = document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]');
@@ -1055,11 +1133,13 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
     return;
   }
   errorEl.style.display = 'none';
+  document.getElementById('submitError').style.display = 'none';
   var btn = document.querySelector('.email-form-btn');
   btn.textContent = 'Wird gesendet…';
   btn.disabled = true;
   var email = document.querySelector('[name="EMAIL"]').value.trim();
   var vorname = document.querySelector('[name="VORNAME"]').value.trim();
+  var brevoErfolg = false;
   try {
     var res = await fetch('https://api.brevo.com/v3/contacts/doubleOptinConfirmation', {
       method: 'POST',
@@ -1097,22 +1177,17 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
       })
     });
     if (res.status === 204 || res.ok) {
-      document.getElementById('emailFormSection').style.display = 'none';
-      document.getElementById('emailConfirm').style.display = 'block';
+      brevoErfolg = true;
     } else {
       var data = await res.json().catch(function() { return {}; });
-      if (data.code === 'duplicate_parameter') {
-        document.getElementById('emailFormSection').style.display = 'none';
-        document.getElementById('emailConfirm').style.display = 'block';
-      } else {
-        btn.textContent = 'Ergebnis per E-Mail erhalten';
-        btn.disabled = false;
-      }
+      /* Bereits eingetragene Adresse zaehlt als Erfolg – Brevo verschickt die Mail trotzdem. */
+      brevoErfolg = (data.code === 'duplicate_parameter');
     }
   } catch (err) {
-    btn.textContent = 'Ergebnis per E-Mail erhalten';
-    btn.disabled = false;
+    brevoErfolg = false;
   }
+  /* Anzeige bewusst ausserhalb von try/catch: ein Anzeigefehler darf keine Notfall-Mail ausloesen. */
+  if (brevoErfolg) { zeigeBestaetigung(); } else { await notfallStrecke(email, vorname, btn); }
 });
 
 document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]').addEventListener('change', function() {

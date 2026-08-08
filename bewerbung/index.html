@@ -512,6 +512,22 @@ body {
 
 .consent-error.visible { display: block; }
 
+.form-error-box {
+  background: #fdeeee;
+  border: 1px solid var(--weinrot);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 16px 0 4px;
+  color: var(--weinrot);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+  display: none;
+}
+
+.form-error-box strong { display: block; margin-bottom: 4px; }
+.form-error-box a { color: var(--weinrot); font-weight: 600; }
+
 /* Validation shake */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -1011,6 +1027,7 @@ screens.forEach(function(s, i) {
     html += '</div>';
     html += '<div class="consent-error" id="consentError">Bitte stimme den Datenschutzhinweisen zu, um fortzufahren.</div>';
     html += '</div>';
+    html += '<div class="form-error-box" id="submitError"></div>';
     html += '<button class="btn-submit" id="btnSubmit" onclick="submitForm()">Bewerbung absenden</button>';
     html += '<div class="nav-row">';
     html += '<button class="btn-back" onclick="goBack()">← Zurück</button>';
@@ -1268,6 +1285,7 @@ function submitForm() {
   var btn = document.getElementById('btnSubmit');
   btn.textContent = 'Wird gesendet...';
   btn.classList.add('sending');
+  document.getElementById('submitError').style.display = 'none';
 
   var labels = {
     vorname: 'Vorname',
@@ -1301,8 +1319,27 @@ function submitForm() {
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify(formData)
   })
-  .then(function() { showThankYou(); })
-  .catch(function() { showThankYou(); });
+  .then(function(res) {
+    /* FormSubmit antwortet auch bei Fehlern mit Status 200 und meldet das erst im Text. */
+    return res.json().catch(function() { return {}; }).then(function(antwort) {
+      return res.ok && String(antwort.success) === 'true';
+    });
+  })
+  .catch(function() { return false; })
+  /* Anzeige bewusst getrennt: ein Anzeigefehler darf nicht als Sendefehler erscheinen. */
+  .then(function(angekommen) {
+    if (angekommen) { showThankYou(); } else { zeigeSendefehler(); }
+  });
+}
+
+function zeigeSendefehler() {
+  var btn = document.getElementById('btnSubmit');
+  btn.textContent = 'Bewerbung absenden';
+  btn.classList.remove('sending');
+  var box = document.getElementById('submitError');
+  box.innerHTML = '<strong>Deine Bewerbung konnte nicht gesendet werden.</strong>Bitte versuche es in ein paar Minuten noch einmal. Wenn es dann immer noch hakt, schreib mir kurz an <a href="mailto:cindy@mommyfinance.de?subject=Bewerbung%20Finanzcheck-Beratungsgespr%C3%A4ch">cindy@mommyfinance.de</a> – ich melde mich dann persönlich bei dir.';
+  box.style.display = 'block';
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function showThankYou() {
