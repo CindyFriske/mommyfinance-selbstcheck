@@ -1108,30 +1108,58 @@ function zeigeFehler(btn) {
   box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+/* Baut die Datensammlung fuer die Mails an Cindy. Reihenfolge = Reihenfolge in der Mail. */
+function datenFuerCindy(betreff, status, email, vorname) {
+  var daten = {
+    '_subject': betreff,
+    'STATUS': status,
+    'E-Mail': email,
+    'Vorname': vorname || '(nicht angegeben)',
+    'Newsletter-Einwilligung': 'Ja',
+    'Score gesamt': document.getElementById('formScore').value,
+    'Kategorie': document.getElementById('formKategorie').value,
+    'Staerken': document.getElementById('formStaerken').value,
+    'Schwaechen': document.getElementById('formSchwaechen').value
+  };
+  /* Einzelwerte mitschicken, damit die Ergebnis-Mail vollstaendig nachgebaut werden kann */
+  for (var i = 1; i <= 13; i++) {
+    daten['Frage ' + i + ' (%)'] = document.getElementById('formQ' + i).value;
+  }
+  return daten;
+}
+
+function anCindySenden(daten) {
+  return fetch('https://formsubmit.co/ajax/cindy@mommyfinance.de', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(daten)
+  });
+}
+
+/* Regelfall: Brevo hat angenommen. Cindy bekommt die Daten sofort zur Kenntnis –
+   ausdruecklich mit dem Hinweis, dass noch nicht bestaetigt wurde und niemand angeschrieben werden darf.
+   Laeuft im Hintergrund und darf die Anzeige fuer die Interessentin nie beeinflussen. */
+function benachrichtigungAnCindy(email, vorname) {
+  try {
+    var daten = datenFuerCindy(
+      'Neue Selbstcheck-Anmeldung – noch nicht bestaetigt',
+      'NOCH NICHT BESTAETIGT – bitte noch nicht anschreiben. Sobald die Adresse bestaetigt ist, meldet sich Brevo mit "Neue Selbstcheck-Anmeldung".',
+      email, vorname
+    );
+    anCindySenden(daten).catch(function() {});
+  } catch (err) { /* bewusst still: darf den Ablauf fuer die Interessentin nicht stoeren */ }
+}
+
 /* Wenn Brevo nicht erreichbar ist: Ergebnis direkt an Cindy schicken, damit kein Lead verloren geht. */
 async function notfallStrecke(email, vorname, btn) {
   var angekommen = false;
   try {
-    var daten = {
-      '_subject': 'NOTFALL Selbstcheck – Brevo hat nicht angenommen',
-      'Hinweis': 'Brevo-Versand fehlgeschlagen. Diese Person hat KEINE Bestaetigungsmail bekommen. Bitte Ergebnis manuell schicken und den API-Key pruefen.',
-      'E-Mail': email,
-      'Vorname': vorname || '(nicht angegeben)',
-      'Newsletter-Einwilligung': 'Ja',
-      'Score gesamt': document.getElementById('formScore').value,
-      'Kategorie': document.getElementById('formKategorie').value,
-      'Staerken': document.getElementById('formStaerken').value,
-      'Schwaechen': document.getElementById('formSchwaechen').value
-    };
-    /* Einzelwerte mitschicken, damit die Ergebnis-Mail vollstaendig nachgebaut werden kann */
-    for (var i = 1; i <= 13; i++) {
-      daten['Frage ' + i + ' (%)'] = document.getElementById('formQ' + i).value;
-    }
-    var res = await fetch('https://formsubmit.co/ajax/cindy@mommyfinance.de', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(daten)
-    });
+    var daten = datenFuerCindy(
+      'NOTFALL Selbstcheck – Brevo hat nicht angenommen',
+      'Brevo-Versand fehlgeschlagen. Diese Person hat KEINE Bestaetigungsmail bekommen. Bitte Ergebnis manuell schicken und den API-Key pruefen.',
+      email, vorname
+    );
+    var res = await anCindySenden(daten);
     /* FormSubmit antwortet auch bei Fehlern mit Status 200 und meldet das erst im Text. */
     var antwort = await res.json().catch(function() { return {}; });
     angekommen = res.ok && String(antwort.success) === 'true';
@@ -1199,7 +1227,12 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
     brevoErfolg = false;
   }
   /* Anzeige bewusst ausserhalb von try/catch: ein Anzeigefehler darf keine Notfall-Mail ausloesen. */
-  if (brevoErfolg) { zeigeBestaetigung(); } else { await notfallStrecke(email, vorname, btn); }
+  if (brevoErfolg) {
+    zeigeBestaetigung();
+    benachrichtigungAnCindy(email, vorname);
+  } else {
+    await notfallStrecke(email, vorname, btn);
+  }
 });
 
 document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]').addEventListener('change', function() {

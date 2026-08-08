@@ -1194,28 +1194,56 @@ function zeigeFehler(btn) {
   box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+/* Baut die Datensammlung fuer die Mails an Cindy. Reihenfolge = Reihenfolge in der Mail. */
+function datenFuerCindy(betreff, status, email, vorname) {
+  return {
+    '_subject': betreff,
+    'STATUS': status,
+    'E-Mail': email,
+    'Vorname': vorname || '(nicht angegeben)',
+    'Newsletter-Einwilligung': 'Ja',
+    'Top 2': document.getElementById('formTop2').value,
+    'Gesamt': document.getElementById('formGesamt').value,
+    'Kategorie 1 Geldgeschichte': document.getElementById('formKat1').value,
+    'Kategorie 2 Finanzen & Kontrolle': document.getElementById('formKat2').value,
+    'Kategorie 3 Sparen & Ausgeben': document.getElementById('formKat3').value,
+    'Kategorie 4 Investieren & Vermoegen': document.getElementById('formKat4').value,
+    'Kategorie 5 Geld & Familie': document.getElementById('formKat5').value
+  };
+}
+
+function anCindySenden(daten) {
+  return fetch('https://formsubmit.co/ajax/cindy@mommyfinance.de', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(daten)
+  });
+}
+
+/* Regelfall: Brevo hat angenommen. Cindy bekommt die Daten sofort zur Kenntnis –
+   ausdruecklich mit dem Hinweis, dass noch nicht bestaetigt wurde und niemand angeschrieben werden darf.
+   Laeuft im Hintergrund und darf die Anzeige fuer die Interessentin nie beeinflussen. */
+function benachrichtigungAnCindy(email, vorname) {
+  try {
+    var daten = datenFuerCindy(
+      'Neue Geldglauben-Anmeldung – noch nicht bestaetigt',
+      'NOCH NICHT BESTAETIGT – bitte noch nicht anschreiben. Sobald die Adresse bestaetigt ist, meldet sich Brevo.',
+      email, vorname
+    );
+    anCindySenden(daten).catch(function() {});
+  } catch (err) { /* bewusst still: darf den Ablauf fuer die Interessentin nicht stoeren */ }
+}
+
 /* Wenn Brevo nicht erreichbar ist: Ergebnis direkt an Cindy schicken, damit kein Lead verloren geht. */
 async function notfallStrecke(email, vorname, btn) {
   var angekommen = false;
   try {
-    var res = await fetch('https://formsubmit.co/ajax/cindy@mommyfinance.de', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        '_subject': 'NOTFALL Geldglauben-Test – Brevo hat nicht angenommen',
-        'Hinweis': 'Brevo-Versand fehlgeschlagen. Diese Person hat KEINE Bestaetigungsmail bekommen. Bitte Ergebnis manuell schicken und den API-Key pruefen.',
-        'E-Mail': email,
-        'Vorname': vorname || '(nicht angegeben)',
-        'Kategorie 1 Geldgeschichte': document.getElementById('formKat1').value,
-        'Kategorie 2 Finanzen & Kontrolle': document.getElementById('formKat2').value,
-        'Kategorie 3 Sparen & Ausgeben': document.getElementById('formKat3').value,
-        'Kategorie 4 Investieren & Vermoegen': document.getElementById('formKat4').value,
-        'Kategorie 5 Geld & Familie': document.getElementById('formKat5').value,
-        'Gesamt': document.getElementById('formGesamt').value,
-        'Top 2': document.getElementById('formTop2').value,
-        'Newsletter-Einwilligung': 'Ja'
-      })
-    });
+    var daten = datenFuerCindy(
+      'NOTFALL Geldglauben-Test – Brevo hat nicht angenommen',
+      'Brevo-Versand fehlgeschlagen. Diese Person hat KEINE Bestaetigungsmail bekommen. Bitte Ergebnis manuell schicken und den API-Key pruefen.',
+      email, vorname
+    );
+    var res = await anCindySenden(daten);
     /* FormSubmit antwortet auch bei Fehlern mit Status 200 und meldet das erst im Text. */
     var antwort = await res.json().catch(function() { return {}; });
     angekommen = res.ok && String(antwort.success) === 'true';
@@ -1276,7 +1304,12 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
     brevoErfolg = false;
   }
   /* Anzeige bewusst ausserhalb von try/catch: ein Anzeigefehler darf keine Notfall-Mail ausloesen. */
-  if (brevoErfolg) { zeigeBestaetigung(); } else { await notfallStrecke(email, vorname, btn); }
+  if (brevoErfolg) {
+    zeigeBestaetigung();
+    benachrichtigungAnCindy(email, vorname);
+  } else {
+    await notfallStrecke(email, vorname, btn);
+  }
 });
 
 document.querySelector('[name="NEWSLETTER_EINWILLIGUNG"]').addEventListener('change', function() {
