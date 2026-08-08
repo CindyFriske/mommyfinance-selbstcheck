@@ -1151,6 +1151,25 @@ function showResult() {
   }, 100);
 }
 
+/* ===== BREVO ===== */
+function anBrevoSenden(email, attribute) {
+  return fetch('https://api.brevo.com/v3/contacts/doubleOptinConfirmation', {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'api-key': '%%BREVO_API_KEY%%'
+    },
+    body: JSON.stringify({
+      email: email,
+      attributes: attribute,
+      includeListIds: [6],
+      templateId: 9,
+      redirectionUrl: 'https://www.mommyfinance.de'
+    })
+  });
+}
+
 /* ===== ERGEBNIS-ANZEIGE & NOTFALL-STRECKE ===== */
 function zeigeBestaetigung() {
   document.querySelector('.result-cta-box').style.display = 'none';
@@ -1228,38 +1247,31 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
   var brevoErfolg = false;
 
   try {
-    var res = await fetch('https://api.brevo.com/v3/contacts/doubleOptinConfirmation', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'api-key': '%%BREVO_API_KEY%%'
-      },
-      body: JSON.stringify({
-        email: email,
-        attributes: {
-          VORNAME: vorname,
-          GELDGLAUBEN_KAT1: parseInt(document.getElementById('formKat1').value) || 0,
-          GELDGLAUBEN_KAT2: parseInt(document.getElementById('formKat2').value) || 0,
-          GELDGLAUBEN_KAT3: parseInt(document.getElementById('formKat3').value) || 0,
-          GELDGLAUBEN_KAT4: parseInt(document.getElementById('formKat4').value) || 0,
-          GELDGLAUBEN_KAT5: parseInt(document.getElementById('formKat5').value) || 0,
-          GELDGLAUBEN_GESAMT: parseInt(document.getElementById('formGesamt').value) || 0,
-          GELDGLAUBEN_TOP2: document.getElementById('formTop2').value,
-          NEWSLETTER_EINWILLIGUNG: 'Ja'
-        },
-        includeListIds: [6],
-        templateId: 9,
-        redirectionUrl: 'https://www.mommyfinance.de'
-      })
-    });
-    if (res.status === 204 || res.ok) {
-      brevoErfolg = true;
-    } else {
-      var data = await res.json().catch(function() { return {}; });
-      /* Bereits eingetragene Adresse zaehlt als Erfolg – Brevo verschickt die Mail trotzdem. */
-      brevoErfolg = (data.code === 'duplicate_parameter');
+    var attribute = {
+      VORNAME: vorname,
+      GELDGLAUBEN_KAT1: parseInt(document.getElementById('formKat1').value) || 0,
+      GELDGLAUBEN_KAT2: parseInt(document.getElementById('formKat2').value) || 0,
+      GELDGLAUBEN_KAT3: parseInt(document.getElementById('formKat3').value) || 0,
+      GELDGLAUBEN_KAT4: parseInt(document.getElementById('formKat4').value) || 0,
+      GELDGLAUBEN_KAT5: parseInt(document.getElementById('formKat5').value) || 0,
+      GELDGLAUBEN_GESAMT: parseInt(document.getElementById('formGesamt').value) || 0,
+      GELDGLAUBEN_TOP2: document.getElementById('formTop2').value,
+      NEWSLETTER_EINWILLIGUNG: 'Ja',
+      /* Zieladresse fuer die Benachrichtigung an Cindy (Automatisierung liest dieses Feld). */
+      BENACHRICHTIGUNG_AN: 'cindy@mommyfinance.de'
+    };
+    var res = await anBrevoSenden(email, attribute);
+    var data = (res.status === 204) ? {} : await res.json().catch(function() { return {}; });
+    var gescheitert = !(res.status === 204 || res.ok) && data.code !== 'duplicate_parameter';
+    /* Sicherheitsnetz: Lehnt Brevo wegen des Benachrichtigungsfeldes ab, ohne dieses erneut senden.
+       Eine Anmeldung darf niemals an diesem Zusatzfeld scheitern. */
+    if (gescheitert && attribute.BENACHRICHTIGUNG_AN) {
+      delete attribute.BENACHRICHTIGUNG_AN;
+      res = await anBrevoSenden(email, attribute);
+      data = (res.status === 204) ? {} : await res.json().catch(function() { return {}; });
     }
+    /* Bereits eingetragene Adresse zaehlt als Erfolg – Brevo verschickt die Mail trotzdem. */
+    brevoErfolg = (res.status === 204 || res.ok || data.code === 'duplicate_parameter');
   } catch (err) {
     brevoErfolg = false;
   }
