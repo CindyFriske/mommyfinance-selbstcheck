@@ -848,7 +848,7 @@ var screens = [
       'Einen eigenen ETF-Sparplan, der automatisch läuft',
       'Ein Kinderdepot für mein Kind, mit Kindergeld clever aufgebaut',
       'Meine Altersvorsorge endlich selbst in die Hand nehmen',
-      'Unabhängig sein und eigene Entscheidungen treffen, ohne von anderen abhängig zu sein',
+      'Unabhängig sein (von Bank, Berater, Partner) und eigene Entscheidungen treffen können',
       'Einen klaren Überblick über meine Finanzen haben',
       'Endlich ruhig einschlafen können, wenn ich an Geld denke'
     ]
@@ -888,6 +888,7 @@ var screens = [
     block: 'Deine Bereitschaft',
     key: 'invest',
     q: 'Welcher Betrag steht dir theoretisch zur Verfügung, um in eine persönliche Finanzbegleitung zu investieren?',
+    hint: 'Auch in monatlichen Raten möglich – schätz einfach, was insgesamt für dich machbar wäre.',
     options: ['Unter 1.000 Euro', '1.000 – 2.500 Euro', 'Über 2.500 Euro']
   },
   {
@@ -943,6 +944,7 @@ screens.forEach(function(s, i) {
     html += '<input class="text-input" type="text" id="field_' + s.key + '" placeholder="' + (s.placeholder || '') + '">';
   } else if (s.type === 'radio') {
     html += '<div class="q-text">' + s.q + '</div>';
+    if (s.hint) html += '<div class="q-hint">' + s.hint + '</div>';
     html += '<div class="options-list" id="opts_' + i + '">';
     s.options.forEach(function(opt, oi) {
       html += '<div class="option-card" data-screen="' + i + '" data-idx="' + oi + '" onclick="selectRadio(' + i + ',' + oi + ')">';
