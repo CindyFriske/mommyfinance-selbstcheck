@@ -735,7 +735,7 @@ body {
 <body>
 
 <div class="top-bar">
-  <a href="https://www.mommyfinance.de"><img src="cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin"></a>
+  <a href="https://www.mommyfinance.de"><img src="/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin"></a>
 </div>
 <div class="top-bar-gold"></div>
 
@@ -744,7 +744,7 @@ body {
 
     <div class="progress-wrap" id="progressWrap">
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-label"><span id="progressText">Schritt 1 von 14</span><span id="progressPct">0 %</span></div>
+      <div class="progress-label"><span id="progressText">Schritt 1 von 9</span><span id="progressPct">0 %</span></div>
     </div>
 
     <!-- INTRO -->
@@ -753,9 +753,9 @@ body {
         <h1>Bewirb dich jetzt f&uuml;r dein kostenfreies <strong>Finanzcheck-Beratungsgespr&auml;ch</strong></h1>
         <div class="gold-divider"></div>
         <p>Sch&ouml;n, dass du diesen Schritt gehst. Beantworte die folgenden Fragen in Ruhe &ndash; sie helfen mir, unser Gespr&auml;ch so pers&ouml;nlich und hilfreich wie m&ouml;glich f&uuml;r dich zu gestalten.</p>
-        <div class="intro-time">Dauert nur 3&ndash;4 Minuten</div>
+        <div class="intro-time">Dauert nur 2&ndash;3 Minuten</div>
         <div class="profile-section">
-          <img src="cindy-profilfoto.png" alt="Cindy Friske" class="profile-photo">
+          <img src="/cindy-profilfoto.png" alt="Cindy Friske" class="profile-photo">
           <div class="profile-name">Cindy Friske</div>
           <div class="profile-title">Finanztrainerin</div>
         </div>
@@ -772,13 +772,14 @@ body {
         <h2>Deine Bewerbung ist angekommen</h2>
         <div class="gold-divider"></div>
         <p>Ich freue mich, dass du diesen Schritt gegangen bist.</p>
-        <p>Ich schaue mir deine Antworten in Ruhe an und melde mich in den n&auml;chsten Tagen telefonisch bei dir.</p>
+        <p>Bitte best&auml;tige noch kurz die E-Mail, die ich dir gerade geschickt habe &ndash; erst danach ist deine Anmeldung vollst&auml;ndig.</p>
+        <p>Danach schaue ich mir deine Antworten in Ruhe an und melde mich in den n&auml;chsten Tagen telefonisch bei dir.</p>
         <div class="highlight-box">
           Bitte achte auf einen Anruf von einer unbekannten Nummer &ndash; das bin ich.
         </div>
         <p>Bis bald!</p>
         <div class="profile-section" style="margin-top:20px">
-          <img src="cindy-profilfoto.png" alt="Cindy Friske" class="profile-photo">
+          <img src="/cindy-profilfoto.png" alt="Cindy Friske" class="profile-photo">
           <div class="profile-name">Cindy Friske</div>
           <div class="profile-title">Finanztrainerin</div>
         </div>
@@ -793,7 +794,7 @@ body {
   <div class="bottom-bar-gold"></div>
   <div class="bottom-bar">
     <div class="bottom-bar-content">
-      <img src="MommyFinance_Logo_gold.png" alt="MommyFinance">
+      <img src="/MommyFinance_Logo_gold.png" alt="MommyFinance">
       <div class="footer-nav">
         <a href="/selbstcheck">Selbstcheck</a>
         <a href="/geldglauben/">Geldglauben</a>
@@ -819,43 +820,10 @@ var screens = [
     ]
   },
   {
-    type: 'radio',
-    block: 'Über dich',
-    key: 'alter',
-    q: 'In welcher Altersgruppe bist du?',
-    options: ['Unter 25 Jahre', '25 – 35 Jahre', '36 – 45 Jahre', '46 – 55 Jahre', 'Über 55 Jahre']
-  },
-  {
-    type: 'radio',
-    block: 'Über dich',
-    key: 'familie',
-    q: 'Wie sieht deine Familiensituation aus?',
-    options: ['Alleinerziehend', 'In Partnerschaft (nicht verheiratet)', 'Verheiratet']
-  },
-  {
     type: 'children',
     block: 'Über dich',
     key: 'kinder',
     q: 'Wie viele Kinder hast du und wie alt sind sie?'
-  },
-  {
-    type: 'radio',
-    block: 'Finanzielle Ausgangslage',
-    key: 'finanzen',
-    q: 'Wo stehst du finanziell gerade?',
-    options: [
-      'Ich habe Konsumschulden (Kredit, Finanzierung, Dispo).',
-      'Ich bin bei plus/minus null – keine Schulden, aber auch kein Vermögen.',
-      'Ich habe keine Schulden und einen Notgroschen angespart.',
-      'Ich habe einen Notgroschen und zusätzlich etwas Geld auf der Seite.'
-    ]
-  },
-  {
-    type: 'radio',
-    block: 'Finanzielle Ausgangslage',
-    key: 'einkommen',
-    q: 'Wie hoch ist dein eigenes Nettoeinkommen pro Monat?',
-    options: ['Bis 1.500 Euro', 'Bis 3.000 Euro', 'Mehr als 3.000 Euro']
   },
   {
     type: 'radio',
@@ -872,29 +840,15 @@ var screens = [
   {
     type: 'checkbox',
     block: 'Was dich antreibt',
-    key: 'motivation',
-    q: 'Was treibt dich <strong>besonders</strong> an, dich jetzt mit deinen Finanzen zu beschäftigen?',
-    hint: 'Du kannst mehrere Antworten wählen.',
-    options: [
-      'Ich will finanziell unabhängig sein – egal was passiert.',
-      'Ich möchte mit dem Kindergeld clever für mein Kind vorsorgen.',
-      'Ich will meine Altersvorsorge endlich selbst in die Hand nehmen.',
-      'Mein Geld soll nicht länger auf dem Konto liegen und nichts tun.',
-      'Ich will Entscheidungen treffen können, ohne von anderen abhängig zu sein.'
-    ]
-  },
-  {
-    type: 'checkbox',
-    block: 'Was dich antreibt',
     key: 'ziel',
-    q: 'Was möchtest du <strong>vor allem</strong> am Ende erreicht haben?',
+    q: 'Was möchtest du für dich und dein Kind erreichen?',
     hint: 'Du kannst mehrere Antworten wählen.',
     options: [
       'Einen eigenen ETF-Sparplan, der automatisch läuft',
-      'Ein Kinderdepot für mein Kind / meine Kinder',
-      'Mit Kindergeld clever finanziell fürs Kind vorsorgen',
-      'Einen klaren Überblick über meine Finanzen',
-      'Unabhängigkeit von Bankberatern und Finanzberatern',
+      'Ein Kinderdepot für mein Kind, mit Kindergeld clever aufgebaut',
+      'Meine Altersvorsorge endlich selbst in die Hand nehmen',
+      'Unabhängig sein (von Bank, Berater, Partner) und eigene Entscheidungen treffen können',
+      'Einen klaren Überblick über meine Finanzen haben',
       'Endlich ruhig einschlafen können, wenn ich an Geld denke'
     ]
   },
@@ -933,7 +887,8 @@ var screens = [
     block: 'Deine Bereitschaft',
     key: 'invest',
     q: 'Welcher Betrag steht dir theoretisch zur Verfügung, um in eine persönliche Finanzbegleitung zu investieren?',
-    options: ['Bis 2.000 Euro', 'Bis 3.000 Euro', 'Bis 4.000 Euro', 'Nicht auf einmal, aber in monatlichen Raten.', 'Das kann ich aktuell nicht einschätzen.']
+    hint: 'Auch in Raten möglich – schätz einfach, was insgesamt für dich machbar wäre.',
+    options: ['Unter 1.000 Euro', '1.000 – 2.500 Euro', 'Über 2.500 Euro']
   },
   {
     type: 'radio',
@@ -988,6 +943,7 @@ screens.forEach(function(s, i) {
     html += '<input class="text-input" type="text" id="field_' + s.key + '" placeholder="' + (s.placeholder || '') + '">';
   } else if (s.type === 'radio') {
     html += '<div class="q-text">' + s.q + '</div>';
+    if (s.hint) html += '<div class="q-hint">' + s.hint + '</div>';
     html += '<div class="options-list" id="opts_' + i + '">';
     s.options.forEach(function(opt, oi) {
       html += '<div class="option-card" data-screen="' + i + '" data-idx="' + oi + '" onclick="selectRadio(' + i + ',' + oi + ')">';
@@ -1287,49 +1243,33 @@ function submitForm() {
   btn.classList.add('sending');
   document.getElementById('submitError').style.display = 'none';
 
-  var labels = {
-    vorname: 'Vorname',
-    email: 'E-Mail',
-    telefon: 'Telefon',
-    alter: 'Altersgruppe',
-    familie: 'Familiensituation',
-    kinder: 'Kinder',
-    finanzen: 'Finanzielle Situation',
-    einkommen: 'Nettoeinkommen',
-    geldanlage: 'Stand Geldanlage',
-    motivation: 'Motivation',
-    ziel: 'Ziel',
-    hindernisse: 'Hindernisse',
-    entwicklung: 'Weiterentwicklung investiert',
-    zeit: 'Zeitverfuegbarkeit',
-    invest: 'Investbereitschaft',
-    erreichbar: 'Erreichbarkeit'
+  var payload = {
+    vorname: answers.vorname || '',
+    email: answers.email || '',
+    telefon: answers.telefon || '',
+    kinder: answers.kinder || '',
+    geldanlage: answers.geldanlage || '',
+    ziel: answers.ziel || [],
+    hindernisse: answers.hindernisse || [],
+    entwicklung: answers.entwicklung || '',
+    zeit: answers.zeit || '',
+    betrag: answers.invest || '',
+    erreichbar: answers.erreichbar || '',
+    einwilligung: true
   };
 
-  var formData = { '_subject': 'Neue Bewerbung: Finanzcheck-Beratungsgespraech' };
-  for (var key in answers) {
-    var label = labels[key] || key;
-    var val = answers[key];
-    if (Array.isArray(val)) val = val.join(', ');
-    formData[label] = val;
-  }
-
-  fetch('https://formsubmit.co/ajax/cindy@mommyfinance.de', {
+  fetch('https://funnel.mommyfinance.de/finanzcheck/bewerbung', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(formData)
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
   })
   .then(function(res) {
-    /* FormSubmit antwortet auch bei Fehlern mit Status 200 und meldet das erst im Text. */
-    return res.json().catch(function() { return {}; }).then(function(antwort) {
-      return res.ok && String(antwort.success) === 'true';
-    });
+    return res.json().catch(function() { return {}; });
   })
-  .catch(function() { return false; })
-  /* Anzeige bewusst getrennt: ein Anzeigefehler darf nicht als Sendefehler erscheinen. */
-  .then(function(angekommen) {
-    if (angekommen) { showThankYou(); } else { zeigeSendefehler(); }
-  });
+  .then(function(antwort) {
+    if (antwort && antwort.ok) { showThankYou(); } else { zeigeSendefehler(); }
+  })
+  .catch(function() { zeigeSendefehler(); });
 }
 
 function zeigeSendefehler() {
