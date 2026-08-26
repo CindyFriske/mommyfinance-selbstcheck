@@ -1151,6 +1151,18 @@ function benachrichtigungAnCindy(email, vorname) {
   } catch (err) { /* bewusst still: darf den Ablauf fuer die Interessentin nicht stoeren */ }
 }
 
+/* Nicht-blockierender Zusatz-Aufruf ans interne Funnel-Dashboard, damit dieser Lead dort sichtbar wird.
+   Rein additiv: beeinflusst weder Brevo noch die Anzeige fuer die Interessentin, Fehler werden verschluckt. */
+function andockeAnDashboard(email, vorname, ergebnis) {
+  try {
+    fetch('https://funnel.mommyfinance.de/extern-lead/selbstcheck', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: vorname, email: email, ergebnis: ergebnis })
+    }).catch(function() {});
+  } catch (err) { /* bewusst still: darf den Ablauf fuer die Interessentin nicht stoeren */ }
+}
+
 /* Wenn Brevo nicht erreichbar ist: Ergebnis direkt an Cindy schicken, damit kein Lead verloren geht. */
 async function notfallStrecke(email, vorname, btn) {
   var angekommen = false;
@@ -1188,6 +1200,7 @@ document.getElementById('brevoForm').addEventListener('submit', async function(e
   var email = document.querySelector('[name="EMAIL"]').value.trim();
   var vorname = document.querySelector('[name="VORNAME"]').value.trim();
   var brevoErfolg = false;
+  andockeAnDashboard(email, vorname, document.getElementById('formScore').value + ' – ' + document.getElementById('formKategorie').value);
   try {
     var attribute = {
       VORNAME: vorname,
