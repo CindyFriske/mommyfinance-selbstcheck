@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starte hier | MommyFinance</title>
+<meta name="description" content="Such dir aus, was gerade zu dir passt. Kostenfreie Tests, Checks und dein Finanzcheck-Beratungsgespräch mit Cindy Friske, Finanztrainerin für Mütter.">
+<meta property="og:title" content="Starte hier | MommyFinance">
+<meta property="og:description" content="Mit Kindergeld und Köpfchen – für ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Alice&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --weinrot: #8b1130;
+  --dunkelrot: #441a32;
+  --elfenbein: #fbf2ed;
+  --goldgelb: #ffebb8;
+  --gold1: #f8d960;
+  --gold2: #efc11b;
+  --gold3: #e6a400;
+}
+
+html { height: 100%; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--elfenbein);
+  color: var(--dunkelrot);
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+.top-bar {
+  background: var(--weinrot);
+  padding: 14px 0 0;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.top-bar img { height: 60px; margin-bottom: 12px; }
+
+.top-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+  flex-shrink: 0;
+}
+
+.content {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  flex: 1;
+}
+
+.gold-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold1), var(--gold2), var(--gold3), transparent);
+  margin: 0 auto;
+}
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center;
+  padding: 22px 0 4px;
+}
+
+.hero-photo {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 22%;
+  border: 3px solid var(--weinrot);
+  box-shadow: 0 0 0 2px var(--gold3), 0 6px 18px rgba(68, 26, 50, 0.12);
+  background: rgba(139, 17, 48, 0.06);
+}
+
+.hero h1 {
+  font-family: 'Alice', serif;
+  font-size: 1.7rem;
+  color: var(--weinrot);
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 14px 0 10px;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.hero-kostenfrei {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--weinrot);
+  background: transparent;
+  border: 1.5px solid var(--weinrot);
+  border-radius: 999px;
+  padding: 7px 24px;
+}
+
+.hero .gold-divider { width: 220px; margin-top: 22px; }
+
+/* ===== KATEGORIEN (aufklappbar) ===== */
+.kategorien { margin-top: 26px; }
+
+.kategorie {
+  background: #fff;
+  border: 1px solid rgba(139, 17, 48, 0.16);
+  border-radius: 14px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(68, 26, 50, 0.05);
+}
+
+.kategorie > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 20px;
+  border-left: 5px solid var(--gold2);
+  background: rgba(248, 217, 96, 0.16);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  line-height: 1.35;
+}
+
+.kategorie > summary::-webkit-details-marker { display: none; }
+
+.kategorie > summary:hover { background: rgba(248, 217, 96, 0.3); }
+
+.kat-titel {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--weinrot);
+}
+
+.kat-pfeil {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold1), var(--gold3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s;
+}
+
+.kat-pfeil svg { width: 12px; height: 12px; display: block; }
+
+.kategorie[open] > summary .kat-pfeil { transform: rotate(180deg); }
+
+.kat-inhalt { padding: 0 14px 14px; }
+
+/* ===== KARTEN ===== */
+.karte {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--elfenbein);
+  border-left: 4px solid var(--gold2);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 10px;
+  transition: all 0.25s;
+}
+
+.karte:hover {
+  background: #fff;
+  border-left-color: var(--weinrot);
+  transform: translateX(3px);
+  box-shadow: 0 4px 14px rgba(68, 26, 50, 0.09);
+}
+
+.karte-kopf {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.karte-titel {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--weinrot);
+}
+
+.karte-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--weinrot);
+  background: linear-gradient(135deg, var(--gold1), var(--gold2));
+  border-radius: 20px;
+  padding: 3px 9px;
+}
+
+.karte-text {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.karte-nutzen {
+  margin-top: 9px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(230, 164, 0, 0.55);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.nutzen-label {
+  display: block;
+  font-weight: 600;
+  color: var(--weinrot);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 1px;
+}
+
+.karte-meta {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--weinrot);
+  opacity: 0.72;
+  font-weight: 500;
+}
+
+/* ===== GESPRAECH (dezent, immer sichtbar) ===== */
+.gespraech {
+  margin: 26px 0 6px;
+  background: #fff;
+  border: 1px solid rgba(139, 17, 48, 0.2);
+  border-radius: 14px;
+  padding: 22px 22px 20px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(68, 26, 50, 0.05);
+}
+
+.gespraech h2 {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--weinrot);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.gespraech p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 430px;
+  margin: 0 auto 18px;
+}
+
+.btn-schlicht {
+  display: inline-block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--weinrot);
+  background: transparent;
+  border: 1.5px solid var(--gold3);
+  border-radius: 10px;
+  padding: 12px 26px;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.btn-schlicht:hover {
+  background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+  border-color: var(--gold3);
+  color: var(--weinrot);
+  box-shadow: 0 4px 16px rgba(248, 217, 96, 0.4);
+}
+
+.btn-micro {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.84rem;
+  color: var(--dunkelrot);
+  opacity: 0.72;
+  line-height: 1.5;
+}
+
+.abschluss {
+  text-align: center;
+  font-family: 'Alice', serif;
+  font-size: 1rem;
+  color: var(--weinrot);
+  font-style: italic;
+  padding: 28px 0 8px;
+  line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
+.kernbotschaft-above {
+  font-family: 'Alice', serif;
+  font-size: 13px;
+  color: var(--weinrot);
+  opacity: 0.7;
+  font-style: italic;
+  text-align: center;
+  padding: 18px 20px 14px;
+  line-height: 1.6;
+}
+
+.bottom-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+}
+
+.bottom-bar {
+  background: var(--weinrot);
+  text-align: center;
+  padding: 16px 0;
+}
+
+.bottom-bar-content { padding: 20px 0; }
+.bottom-bar img { height: 22px; }
+
+.footer-nav { margin-top: 20px; }
+
+.footer-nav a {
+  color: var(--goldgelb);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin: 0 12px;
+  line-height: 2.2;
+  opacity: 0.8;
+}
+
+.footer-nav a:hover { text-decoration: underline; opacity: 1; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 560px) {
+  .top-bar img { height: 48px; }
+  .top-bar { padding: 10px 0 0; }
+
+  .hero { padding: 18px 0 2px; }
+  .hero-photo { width: 96px; height: 96px; }
+  .hero h1 { font-size: 1.45rem; margin: 12px 0 8px; }
+  .hero-sub { font-size: 0.94rem; }
+  .hero-kostenfrei { font-size: 0.95rem; padding: 7px 20px; margin-top: 12px; }
+  .hero .gold-divider { width: 180px; margin-top: 18px; }
+
+  .kategorien { margin-top: 22px; }
+  .kategorie > summary { padding: 16px 16px; gap: 10px; }
+  .kat-titel { font-size: 1.06rem; }
+  .kat-inhalt { padding: 0 10px 12px; }
+  .karte { padding: 14px 15px; }
+  .karte-titel { font-size: 1.02rem; }
+
+  .gespraech { padding: 20px 18px 18px; }
+  .gespraech h2 { font-size: 1.06rem; }
+  .btn-schlicht { width: 100%; padding: 13px 20px; }
+
+  .kernbotschaft-above { font-size: 12px; padding: 10px 16px 8px; }
+  .footer-nav a { margin: 0 9px; font-size: 0.82rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="top-bar">
+  <img src="/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin">
+</div>
+<div class="top-bar-gold"></div>
+
+<div class="content">
+
+  <!-- ===== HERO ===== -->
+  <div class="hero">
+    <img src="/cindy-about-web.jpg" alt="Cindy Friske" class="hero-photo">
+    <h1>Sch&ouml;n, dass du hier bist.</h1>
+    <p class="hero-sub">Ich bin Cindy, Finanztrainerin f&uuml;r M&uuml;tter.<br>Such dir aus, was gerade zu dir passt.</p>
+    <span class="hero-kostenfrei">Alles kostenfrei</span>
+    <div class="gold-divider"></div>
+  </div>
+
+  <div class="kategorien">
+
+    <!-- ===== KATEGORIE 1 ===== -->
+    <details class="kategorie" id="anfang">
+      <summary>
+        <span class="kat-titel">Ich fange gerade erst an.</span>
+        <span class="kat-pfeil" aria-hidden="true">
+          <svg viewBox="0 0 12 12"><path d="M1 3.5 L6 8.5 L11 3.5" fill="none" stroke="#8b1130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </summary>
+      <div class="kat-inhalt">
+
+        <a class="karte" href="/geldglauben/" data-ziel="geldglauben">
+          <div class="karte-kopf">
+            <span class="karte-titel">Geldglauben-Test</span>
+            <span class="karte-badge">Bester Einstieg</span>
+          </div>
+          <p class="karte-text">Welche &Uuml;berzeugungen &uuml;ber Geld tr&auml;gst du in dir, oft schon seit deiner Kindheit? 15 ehrliche Aussagen machen es sichtbar.</p>
+          <p class="karte-nutzen"><span class="nutzen-label">Das nimmst du mit:</span>Du siehst genau, wie stark f&uuml;nf typische Geldmuster bei dir ausgepr&auml;gt sind und was jedes davon in deinem Alltag mit dir macht.</p>
+          <p class="karte-meta">5 Minuten &middot; Auswertung per E-Mail &middot; kostenfrei</p>
+        </a>
+
+        <a class="karte" href="/selbstcheck" data-ziel="selbstcheck">
+          <div class="karte-kopf">
+            <span class="karte-titel">Online-Selbstcheck</span>
+          </div>
+          <p class="karte-text">Wo stehst du finanziell gerade wirklich? 13 Fragen, keine falschen Antworten, nur dein ehrlicher Startpunkt.</p>
+          <p class="karte-nutzen"><span class="nutzen-label">Das nimmst du mit:</span>Deine St&auml;rken, dein Potenzial und ein klarer n&auml;chster Schritt, den du sofort gehen kannst.</p>
+          <p class="karte-meta">5 Minuten &middot; Auswertung per E-Mail &middot; kostenfrei</p>
+        </a>
+
+        <a class="karte" href="https://funnel.mommyfinance.de/spartyp" data-ziel="spartyp">
+          <div class="karte-kopf">
+            <span class="karte-titel">Spar-Typ-Quiz</span>
+          </div>
+          <p class="karte-text">7 Fragen aus dem Alltag zeigen dir, welcher von vier Spar-Typen du bist.</p>
+          <p class="karte-nutzen"><span class="nutzen-label">Das nimmst du mit:</span>Du verstehst, warum Sparen bei dir bisher so lief, wie es lief, und was zu deinem Typ wirklich passt, statt gegen dich zu arbeiten.</p>
+          <p class="karte-meta">3 Minuten &middot; Auswertung per E-Mail &middot; kostenfrei</p>
+        </a>
+
+      </div>
+    </details>
+
+    <!-- ===== KATEGORIE 2 ===== -->
+    <details class="kategorie" id="depot">
+      <summary>
+        <span class="kat-titel">Ich investiere schon.</span>
+        <span class="kat-pfeil" aria-hidden="true">
+          <svg viewBox="0 0 12 12"><path d="M1 3.5 L6 8.5 L11 3.5" fill="none" stroke="#8b1130" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </summary>
+      <div class="kat-inhalt">
+
+        <a class="karte" href="https://funnel.mommyfinance.de/durchleuchtung" data-ziel="durchleuchtung">
+          <div class="karte-kopf">
+            <span class="karte-titel">Depot-Durchleuchtung</span>
+          </div>
+          <p class="karte-text">Du hast ein Depot, aber weniger Klarheit, als du gern h&auml;ttest? Trag deine Positionen ein, ich schaue pers&ouml;nlich drauf.</p>
+          <p class="karte-nutzen"><span class="nutzen-label">Das nimmst du mit:</span>Vier Antworten, die dir kein Depot-Auszug gibt: deine &Uuml;berschneidungen, deine gr&ouml;&szlig;ten Unternehmen und wie sich dein Geld auf Regionen und Branchen verteilt. In Euro und Prozent.</p>
+          <p class="karte-meta">10 Minuten Eingabe &middot; Auswertung per E-Mail &middot; kostenfrei</p>
+        </a>
+
+      </div>
+    </details>
+
+  </div>
+
+  <!-- ===== GESPRAECH ===== -->
+  <div class="gespraech" id="gespraech">
+    <h2>Ich m&ouml;chte das nicht mehr allein machen.</h2>
+    <p>Wenn du schon vieles versucht hast und trotzdem nicht weiterkommst: Im Finanzcheck-Beratungsgespr&auml;ch schauen wir gemeinsam auf deine Lage. Danach wei&szlig;t du genau, was dein n&auml;chster Schritt ist.</p>
+    <a href="/bewerbung" class="btn-schlicht" data-ziel="bewerbung">Zum Finanzcheck-Beratungsgespr&auml;ch</a>
+    <span class="btn-micro">Kostenfrei und unverbindlich.<br>Ich melde mich pers&ouml;nlich bei dir.</span>
+  </div>
+
+  <p class="abschluss">Ich freue mich, dich kennenzulernen.<br>Deine Cindy</p>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="kernbotschaft-above">Mit Kindergeld und K&ouml;pfchen &ndash; f&uuml;r ein finanziell entspanntes Zukunfts-ICH von Mama und Kind.</div>
+<div class="bottom-bar-gold"></div>
+<div class="bottom-bar">
+  <div class="bottom-bar-content">
+    <img src="/MommyFinance_Logo_gold.png" alt="MommyFinance">
+    <div class="footer-nav">
+      <a href="/">Startseite</a>
+      <a href="https://www.instagram.com/mommyfinance.de/">Instagram</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <a href="/impressum">Impressum</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Direktlinks aus Storys und Reels: mommyfinance.de/start#depot klappt die
+// passende Kategorie gleich auf, statt nur dorthin zu scrollen.
+(function () {
+  function kategorieOeffnen() {
+    var id = window.location.hash.replace('#', '');
+    if (!id) return;
+    var ziel = document.getElementById(id);
+    if (ziel && ziel.tagName.toLowerCase() === 'details') {
+      ziel.open = true;
+      ziel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  kategorieOeffnen();
+  window.addEventListener('hashchange', kategorieOeffnen);
+})();
+</script>
+
+</body>
+</html>
