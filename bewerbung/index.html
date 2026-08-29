@@ -772,7 +772,7 @@ body {
         <h2>Deine Bewerbung ist angekommen</h2>
         <div class="gold-divider"></div>
         <p>Ich freue mich, dass du diesen Schritt gegangen bist.</p>
-        <p>Bitte best&auml;tige noch kurz die E-Mail, die ich dir gerade geschickt habe &ndash; erst danach ist deine Anmeldung vollst&auml;ndig.</p>
+        <p id="satzBestaetigung">Bitte best&auml;tige noch kurz die E-Mail, die ich dir gerade geschickt habe &ndash; erst danach ist deine Anmeldung vollst&auml;ndig.</p>
         <p>Danach schaue ich mir deine Antworten in Ruhe an und melde mich in den n&auml;chsten Tagen telefonisch bei dir.</p>
         <div class="highlight-box">
           Bitte achte auf einen Anruf von einer unbekannten Nummer &ndash; das bin ich.
@@ -1268,7 +1268,7 @@ function submitForm() {
     return res.json().catch(function() { return {}; });
   })
   .then(function(antwort) {
-    if (antwort && antwort.ok) { showThankYou(); } else { zeigeSendefehler(); }
+    if (antwort && antwort.ok) { showThankYou(antwort.bestaetigungNoetig !== false); } else { zeigeSendefehler(); }
   })
   .catch(function() { zeigeSendefehler(); });
 }
@@ -1283,7 +1283,13 @@ function zeigeSendefehler() {
   box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-function showThankYou() {
+/* Wer ihre Adresse schon bei einem anderen Angebot bestaetigt hat, bekommt von Brevo keine
+   zweite Bestaetigungsmail. Dann darf hier auch nicht stehen, sie solle eine bestaetigen. */
+function showThankYou(bestaetigungNoetig) {
+  var satz = document.getElementById('satzBestaetigung');
+  if (satz && bestaetigungNoetig === false) {
+    satz.innerHTML = 'Du musst nichts weiter tun. Deine E-Mail-Adresse kenne ich schon, deine Bewerbung ist damit vollständig.';
+  }
   document.getElementById('screen' + currentScreen).classList.remove('active');
   document.getElementById('progressFill').style.width = '100%';
   document.getElementById('progressText').textContent = 'Fertig';
