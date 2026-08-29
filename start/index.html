@@ -507,6 +507,42 @@ body {
   kategorieOeffnen();
   window.addEventListener('hashchange', kategorieOeffnen);
 })();
+
+// Zählt mit, wie oft die Seite geöffnet und welches Angebot angetippt wird.
+//
+// Gezählt wird nur das Ziel und der Tag, sonst nichts. Keine IP, keine Kennung, kein
+// Cookie, kein fremder Dienst. Die Zahlen landen im eigenen Dashboard.
+//
+// sendBeacon ist hier wichtig: Die Meldung geht auch dann noch raus, wenn der Browser
+// im selben Moment schon die nächste Seite lädt. Ein normaler Aufruf würde beim
+// Seitenwechsel oft abgebrochen und der Klick ginge verloren.
+(function () {
+  var ZAEHLER = 'https://funnel.mommyfinance.de/start/klick';
+
+  function melde(ziel) {
+    try {
+      var daten = JSON.stringify({ ziel: ziel });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(ZAEHLER, new Blob([daten], { type: 'text/plain' }));
+      } else if (window.fetch) {
+        fetch(ZAEHLER, { method: 'POST', body: daten, mode: 'no-cors', keepalive: true });
+      }
+    } catch (fehler) {
+      // Zählen ist Beiwerk. Geht es nicht, merkt die Besucherin davon nichts.
+    }
+  }
+
+  melde('seitenaufruf');
+
+  var links = document.querySelectorAll('a[data-ziel]');
+  for (var i = 0; i < links.length; i++) {
+    (function (link) {
+      link.addEventListener('click', function () {
+        melde(link.getAttribute('data-ziel'));
+      });
+    })(links[i]);
+  }
+})();
 </script>
 
 </body>
