@@ -625,6 +625,11 @@ body {
   line-height: 1.3;
 }
 
+.email-confirm-hint {
+  font-size: 13px;
+  opacity: 0.6;
+  font-style: italic;
+}
 .thankyou-card p {
   font-size: 15px;
   line-height: 1.7;
@@ -773,6 +778,7 @@ body {
         <div class="gold-divider"></div>
         <p>Ich freue mich, dass du diesen Schritt gegangen bist.</p>
         <p id="satzBestaetigung">Bitte best&auml;tige noch kurz die E-Mail, die ich dir gerade geschickt habe &ndash; erst danach ist deine Anmeldung vollst&auml;ndig.</p>
+        <p id="hinweisSpam" class="email-confirm-hint">Nichts angekommen? Schau bitte im Spam-Ordner nach und bei Gmail auch unter &bdquo;Werbung&ldquo;. Wenn du sie dort findest, tippe auf <strong>&bdquo;Kein Spam&ldquo;</strong> und zieh sie in deinen Posteingang &ndash; dann kommen meine n&auml;chsten Mails direkt bei dir an.</p>
         <p>Danach schaue ich mir deine Antworten in Ruhe an und melde mich in den n&auml;chsten Tagen telefonisch bei dir.</p>
         <div class="highlight-box">
           Bitte achte auf einen Anruf von einer unbekannten Nummer &ndash; das bin ich.
@@ -1289,6 +1295,9 @@ function showThankYou(bestaetigungNoetig) {
   var satz = document.getElementById('satzBestaetigung');
   if (satz && bestaetigungNoetig === false) {
     satz.innerHTML = 'Du musst nichts weiter tun. Deine E-Mail-Adresse kenne ich schon, deine Bewerbung ist damit vollständig.';
+    /* Ohne Bestaetigungsmail waere der Spam-Hinweis sinnlos und wuerde nur verunsichern. */
+    var hinweis = document.getElementById('hinweisSpam');
+    if (hinweis) hinweis.style.display = 'none';
   }
   document.getElementById('screen' + currentScreen).classList.remove('active');
   document.getElementById('progressFill').style.width = '100%';
