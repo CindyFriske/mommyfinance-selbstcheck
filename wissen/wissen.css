@@ -1,0 +1,515 @@
+/* ==========================================================================
+   MommyFinance Wissensbibliothek
+   Gemeinsame Gestaltung für die Übersichtsseite und alle Themenseiten.
+   Farben und Schriften wie auf mommyfinance.de/start.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --weinrot: #8b1130;
+  --dunkelrot: #441a32;
+  --elfenbein: #fbf2ed;
+  --goldgelb: #ffebb8;
+  --gold1: #f8d960;
+  --gold2: #efc11b;
+  --gold3: #e6a400;
+}
+
+html { height: 100%; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--elfenbein);
+  color: var(--dunkelrot);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.7;
+}
+
+/* ===== KOPF ===== */
+.top-bar {
+  background: var(--weinrot);
+  padding: 14px 0 0;
+  text-align: center;
+  flex-shrink: 0;
+}
+/* 68 statt der 60 px der übrigen Seiten. Bewusst etwas größer, weil der Kopf hier gegen
+   das Profilfoto direkt darunter ankommen muss. Die Bewerbungsseite steht bei 80 px. */
+.top-bar img { height: 68px; margin-bottom: 12px; }
+.top-bar-gold {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
+  flex-shrink: 0;
+}
+
+.content {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+  width: 100%;
+  flex: 1;
+}
+
+.gold-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold1), var(--gold2), var(--gold3), transparent);
+  margin: 34px auto;
+}
+
+/* ===== BROTKRUME ===== */
+.krume {
+  font-size: 0.85rem;
+  padding: 16px 0 0;
+  color: rgba(68, 26, 50, 0.6);
+}
+.krume a { color: var(--weinrot); text-decoration: none; }
+.krume a:hover { text-decoration: underline; }
+
+/* ===== ÜBERSCHRIFTEN UND FLIESSTEXT ===== */
+h1 {
+  font-family: 'Alice', serif;
+  font-size: 2rem;
+  color: var(--weinrot);
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 18px 0 14px;
+}
+
+.vorspann { font-size: 1.08rem; line-height: 1.7; }
+
+h2 {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--weinrot);
+  margin: 34px 0 12px;
+  line-height: 1.35;
+}
+
+h3 {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 1.08rem;
+  color: var(--dunkelrot);
+  margin: 24px 0 8px;
+}
+
+p { margin-bottom: 14px; }
+strong { font-weight: 600; color: var(--weinrot); }
+
+/* ===== KENNZAHL ===== */
+.zahl-kasten {
+  background: #fff;
+  border-left: 4px solid var(--gold2);
+  border-radius: 10px;
+  padding: 20px 22px;
+  margin: 24px 0;
+  box-shadow: 0 3px 12px rgba(68, 26, 50, 0.06);
+}
+.zahl-kasten .zahl {
+  font-family: 'Alice', serif;
+  font-size: 2.1rem;
+  color: var(--weinrot);
+  display: block;
+  line-height: 1.1;
+}
+.zahl-kasten .zahl-text { font-size: 0.95rem; margin-top: 6px; display: block; }
+
+/* ===== NUMMERIERTE SCHRITTE ===== */
+.schritte { list-style: none; counter-reset: schritt; margin: 18px 0; }
+.schritte > li {
+  counter-increment: schritt;
+  position: relative;
+  padding: 0 0 4px 44px;
+  margin-bottom: 20px;
+}
+.schritte > li::before {
+  content: counter(schritt);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold1), var(--gold3));
+  color: var(--weinrot);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.schritte > li b {
+  display: block;
+  font-weight: 600;
+  color: var(--weinrot);
+  margin-bottom: 3px;
+}
+
+/* ===== AUFZÄHLUNG MIT HAKEN ===== */
+.haken { list-style: none; margin: 16px 0; }
+.haken li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+}
+.haken li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold1), var(--gold3));
+}
+
+/* ===== GLOSSAR =====
+   Ein erklärtes Wort im Fließtext. Bewusst sehr zurückhaltend markiert, damit der Text
+   beim Lesen nicht unruhig wird: kein Farbwechsel, nur eine feine gepunktete Linie darunter.
+   Funktioniert per Überfahren mit der Maus UND per Antippen auf dem Handy, weil es dort
+   kein Überfahren gibt. */
+.glossar {
+  border-bottom: 1px dotted rgba(139, 17, 48, 0.55);
+  cursor: help;
+  position: relative;
+}
+.glossar:hover, .glossar.offen { border-bottom-color: var(--weinrot); }
+
+.glossar-blase {
+  position: absolute;
+  z-index: 50;
+  max-width: 300px;
+  background: var(--dunkelrot);
+  color: var(--elfenbein);
+  font-size: 0.88rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  padding: 12px 15px;
+  border-radius: 10px;
+  box-shadow: 0 6px 22px rgba(68, 26, 50, 0.28);
+  pointer-events: none;
+}
+.glossar-blase b {
+  display: block;
+  color: var(--gold1);
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+/* ===== TIPP ===== */
+.tipp {
+  border-left: 3px solid var(--gold2);
+  padding: 4px 0 4px 16px;
+  margin: 18px 0;
+  font-size: 0.97rem;
+  font-style: italic;
+}
+.tipp b {
+  font-style: normal;
+  color: var(--gold3);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  display: block;
+  text-transform: uppercase;
+}
+
+/* ===== DOWNLOADBEREICH ===== */
+.downloads {
+  background: #fff;
+  border-radius: 14px;
+  padding: 26px 24px;
+  margin: 30px 0;
+  box-shadow: 0 4px 18px rgba(68, 26, 50, 0.08);
+}
+.downloads h2 { margin-top: 0; }
+.downloads-sub { font-size: 0.98rem; margin-bottom: 18px; }
+
+.pdf-liste { list-style: none; margin: 0 0 22px; }
+.pdf-liste li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-top: 1px solid rgba(68, 26, 50, 0.09);
+}
+.pdf-liste li:last-child { border-bottom: 1px solid rgba(68, 26, 50, 0.09); }
+/* Das Deckblatt des Leitfadens statt eines gleichförmigen PDF-Kästchens.
+   Ergänzt am 10.09.2026. Bewusst klein und alle im selben Seitenverhältnis, damit die
+   Liste ruhig bleibt und nicht wie eine Collage wirkt. Die Bilder entstehen mit
+   PDF-Bibliothek/04_Quellcode/vorschaubilder_bauen.py. */
+.pdf-bild {
+  flex-shrink: 0;
+  width: 36px;
+  height: 51px;
+  object-fit: cover;
+  border: 1px solid rgba(139, 17, 48, 0.22);
+  border-radius: 4px;
+  background: var(--elfenbein);
+  display: block;
+}
+.pdf-titel { font-weight: 600; color: var(--weinrot); display: block; line-height: 1.4; }
+.pdf-text { font-size: 0.92rem; line-height: 1.55; display: block; }
+
+/* ===== FORMULAR ===== */
+.formular label { display: block; font-size: 0.92rem; font-weight: 600; margin-bottom: 5px; }
+.formular input[type="email"], .formular input[type="text"] {
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  padding: 12px 14px;
+  border: 1.5px solid rgba(139, 17, 48, 0.28);
+  border-radius: 8px;
+  background: var(--elfenbein);
+  color: var(--dunkelrot);
+  margin-bottom: 14px;
+}
+.formular input:focus { outline: none; border-color: var(--weinrot); }
+
+.checkbox-zeile {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.checkbox-zeile input { margin-top: 4px; flex-shrink: 0; width: 17px; height: 17px; accent-color: var(--weinrot); }
+.checkbox-zeile label { font-weight: 400; }
+.checkbox-zeile a { color: var(--weinrot); }
+
+.btn-gold {
+  display: block;
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--weinrot);
+  background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+  border: none;
+  border-radius: 999px;
+  padding: 15px 20px;
+  cursor: pointer;
+  margin-top: 6px;
+  box-shadow: 0 4px 14px rgba(230, 164, 0, 0.3);
+}
+.btn-gold:hover { filter: brightness(1.05); }
+
+.formular-hinweis {
+  font-size: 0.82rem;
+  color: rgba(68, 26, 50, 0.65);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ===== HINWEIS AUF EINEN ONLINE-TEST ===== */
+.test-karte {
+  background: linear-gradient(135deg, rgba(248, 217, 96, 0.16), rgba(230, 164, 0, 0.1));
+  border: 1.5px solid rgba(230, 164, 0, 0.4);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 28px 0;
+}
+.test-karte h3 { margin-top: 0; color: var(--weinrot); font-weight: 700; }
+.test-karte p { font-size: 0.96rem; margin-bottom: 16px; }
+/* Sah vorher aus wie eine unterstrichene Überschrift. Jetzt derselbe Knopf wie überall,
+   nur eine Spur kleiner, damit er den goldenen Hauptknopf nicht überstrahlt. */
+.test-karte a {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: var(--weinrot);
+  text-decoration: none;
+  background: #fff;
+  border: 1.5px solid var(--gold3);
+  border-radius: 999px;
+  padding: 11px 24px;
+  transition: background 0.15s;
+}
+.test-karte a:hover { background: linear-gradient(135deg, var(--gold1), var(--gold3)); }
+
+/* ===== WEG ZUM GESPRAECH =====
+   Bewusst NICHT weiss wie der Downloadkasten, sonst sehen beide gleich aus. Ein zarter
+   weinroter Hauch mit etwas kräftigerem Rahmen setzt ihn ab, ohne laut zu werden.
+   Der Test-Hinweis darüber ist golden getönt, deshalb hier weinrot statt gold. */
+.gespraech {
+  text-align: center;
+  background: linear-gradient(160deg, #fffdfc, rgba(139, 17, 48, 0.045));
+  border: 1.5px solid rgba(139, 17, 48, 0.22);
+  border-radius: 14px;
+  padding: 26px 24px;
+  margin: 34px 0 10px;
+}
+.gespraech h2 { margin-top: 0; }
+.gespraech p { font-size: 0.98rem; }
+/* Das Profilfoto bringt seinen weinrot-goldenen Rahmen schon mit, deshalb hier bewusst
+   kein zusätzlicher CSS-Rahmen. Sonst entsteht ein doppelter Ring. */
+.gespraech-foto {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 14px;
+}
+/* Deutlich abgesetzt vom Absatz über dem Button, nämlich weinrot statt dunkelrot, kursiv,
+   kleiner und leicht gesperrt. Dezent genug, um nicht mit dem Button zu konkurrieren.
+   Der Selektor muss `.gespraech .gespraech-micro` heißen, sonst gewinnt die Regel
+   `.gespraech p` bei der Schriftgröße und der Text bleibt genauso gross wie der Absatz
+   darüber. Genau das war vorher der Fall. */
+.gespraech .gespraech-micro {
+  font-size: 0.82rem;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--weinrot);
+  opacity: 0.85;
+  margin: 16px auto 0;
+  max-width: 420px;
+  line-height: 1.55;
+}
+.btn-schlicht {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--weinrot);
+  text-decoration: none;
+  border: 1.5px solid var(--gold3);
+  border-radius: 999px;
+  padding: 12px 28px;
+  transition: background 0.15s;
+}
+.btn-schlicht:hover { background: linear-gradient(135deg, var(--gold1), var(--gold3)); }
+
+/* ===== WEITERE THEMEN ===== */
+.weitere { margin-top: 30px; }
+.weitere-liste { list-style: none; display: flex; flex-wrap: wrap; gap: 9px; margin-top: 12px; }
+.weitere-liste a {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--weinrot);
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid rgba(139, 17, 48, 0.2);
+  border-radius: 999px;
+  padding: 7px 16px;
+}
+.weitere-liste a:hover { border-color: var(--gold3); }
+
+/* ===== UEBERSICHTSSEITE ===== */
+.hero-mitte { text-align: center; padding: 22px 0 4px; }
+.hero-mitte h1 { margin-top: 10px; }
+.hero-foto {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+.plakette {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  color: var(--weinrot);
+  border: 1.5px solid var(--weinrot);
+  border-radius: 999px;
+  padding: 7px 24px;
+}
+
+.themen { display: grid; gap: 14px; margin-top: 26px; }
+.thema-karte {
+  display: block;
+  background: #fff;
+  border: 1px solid rgba(139, 17, 48, 0.14);
+  border-radius: 12px;
+  padding: 20px 22px;
+  text-decoration: none;
+  color: var(--dunkelrot);
+  box-shadow: 0 3px 12px rgba(68, 26, 50, 0.05);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.thema-karte:hover { border-color: var(--gold3); transform: translateY(-2px); }
+.thema-titel {
+  display: block;
+  font-weight: 700;
+  font-size: 1.12rem;
+  color: var(--weinrot);
+  margin-bottom: 5px;
+}
+.thema-text { display: block; font-size: 0.96rem; line-height: 1.6; }
+.thema-anzahl {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gold3);
+  letter-spacing: 0.03em;
+}
+
+/* ===== FUSSZEILE ===== */
+footer {
+  background: var(--weinrot);
+  color: var(--elfenbein);
+  text-align: center;
+  padding: 22px 20px 26px;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 24px;
+}
+footer img { height: 30px; margin-bottom: 12px; opacity: 0.95; }
+footer a { color: var(--goldgelb); text-decoration: none; margin: 0 8px; }
+footer a:hover { text-decoration: underline; }
+.footer-hinweis {
+  font-size: 0.78rem;
+  opacity: 0.75;
+  margin: 12px auto 0;
+  line-height: 1.5;
+  max-width: 520px;
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.18rem; }
+  .content { padding: 0 18px 30px; }
+  .downloads, .gespraech, .thema-karte { padding: 22px 18px; }
+  /* Auf dem Handy schrumpft der Kopf, so wie auf /start auch. Das hatte hier gefehlt. */
+  .top-bar img { height: 54px; }
+  .top-bar { padding: 10px 0 0; }
+}
+
+/* ===== Rückmeldung des Anmeldeformulars =====
+   Ergänzt am 11.09.2026. Der Kasten wird von wissen.js erzeugt und sitzt direkt über
+   dem Knopf. Drei Zustände, damit sofort klar ist, woran man ist. */
+.formular-meldung {
+  display: none;
+  margin: 4px 0 16px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.formular-meldung a {
+  color: inherit;
+  font-weight: 600;
+}
+.formular-meldung.laeuft {
+  background: rgba(139, 17, 48, 0.06);
+  border: 1px solid rgba(139, 17, 48, 0.2);
+  color: var(--dunkelrot);
+}
+.formular-meldung.erfolg {
+  background: #fdf8de;
+  border: 1px solid var(--gold3, #e6a400);
+  color: var(--dunkelrot);
+}
+.formular-meldung.fehler {
+  background: #fdecef;
+  border: 1px solid var(--weinrot);
+  color: var(--weinrot);
+}
