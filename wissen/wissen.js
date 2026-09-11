@@ -222,13 +222,17 @@
           if (knopf) knopf.textContent = beschriftung;
         })
         .catch(function (fehler) {
+          // Geändert am 11.09.2026. Vorher stand hier, Cindy schalte den Zugang von Hand
+          // frei. Das kann sie gar nicht, es gibt dafür keinen Weg im Dashboard. Eine
+          // Zusage, die niemand einlösen kann, ist schlimmer als keine. Jetzt steht hier
+          // der Rat, es noch einmal zu versuchen, und die Adresse ohne Versprechen.
           var text = String(fehler && fehler.message) || '';
           var bekannt = text && text !== 'unbekannt' && text.indexOf('Failed to fetch') === -1;
           zeige(feld, 'fehler',
-            (bekannt ? text : 'Da ist gerade etwas schiefgelaufen.') +
-            '<br>Schreib mir bitte kurz an ' +
+            (bekannt ? text : 'Da ist gerade etwas schiefgelaufen. Bitte versuch es in ein paar Minuten noch einmal.') +
+            '<br><span class="meldung-leise">Klappt es dann immer noch nicht, schreib mir kurz an ' +
             '<a href="mailto:cindy@mommyfinance.de?subject=Zugang%20zur%20PDF-Bibliothek">' +
-            'cindy@mommyfinance.de</a>, dann schalte ich dich von Hand frei.');
+            'cindy@mommyfinance.de</a>.</span>');
           if (knopf) { knopf.disabled = false; knopf.textContent = beschriftung; }
         });
     });

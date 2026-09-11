@@ -513,3 +513,12 @@ footer a:hover { text-decoration: underline; }
   border: 1px solid var(--weinrot);
   color: var(--weinrot);
 }
+
+/* Die zweite Zeile im Fehlerkasten, leiser als die erste. Der Rat, es noch einmal zu
+   versuchen, ist das Wichtige. Die Adresse ist nur der Notnagel dahinter. */
+.formular-meldung .meldung-leise {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.88rem;
+  opacity: 0.8;
+}
