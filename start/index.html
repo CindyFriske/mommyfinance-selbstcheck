@@ -42,7 +42,7 @@ body {
   flex-shrink: 0;
 }
 
-.top-bar img { height: 60px; margin-bottom: 12px; }
+.top-bar img { height: 80px; margin-bottom: 12px; }
 
 .top-bar-gold {
   height: 4px;
@@ -352,7 +352,7 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 560px) {
-  .top-bar img { height: 48px; }
+  .top-bar img { height: 60px; }
   .top-bar { padding: 10px 0 0; }
 
   .hero { padding: 18px 0 2px; }
@@ -376,13 +376,30 @@ body {
   .kernbotschaft-above { font-size: 12px; padding: 10px 16px 8px; }
   .footer-nav a { margin: 0 9px; font-size: 0.82rem; }
 }
+/* Rechtlicher Hinweis in der Fussleiste, seit 11.09.2026 auf jeder Seite gleich. */
+.footer-hinweis {
+  font-size: 0.76rem;
+  opacity: 0.72;
+  margin: 12px auto 0;
+  line-height: 1.5;
+  max-width: 520px;
+  padding: 0 8px;
+}
 </style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://mommyfinance.de/start">
+<meta property="og:url" content="https://mommyfinance.de/start">
+<meta property="og:image" content="https://mommyfinance.de/og-bild.png">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
 <!-- ===== HEADER ===== -->
 <div class="top-bar">
-  <img src="/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin">
+  <a href="/"><img src="/cf-logo-elfenbein.png" alt="Cindy Friske Finanztrainerin"></a>
 </div>
 <div class="top-bar-gold"></div>
 
@@ -490,6 +507,7 @@ body {
       <a href="/datenschutz">Datenschutz</a>
       <a href="/impressum">Impressum</a>
     </div>
+    <p class="footer-hinweis">Alle Inhalte dienen der allgemeinen Information und Finanzbildung. Sie sind keine Anlageberatung und keine Empfehlung zum Kauf oder Verkauf von Wertpapieren.</p>
   </div>
 </div>
 

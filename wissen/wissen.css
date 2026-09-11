@@ -35,9 +35,9 @@ body {
   text-align: center;
   flex-shrink: 0;
 }
-/* 68 statt der 60 px der übrigen Seiten. Bewusst etwas größer, weil der Kopf hier gegen
-   das Profilfoto direkt darunter ankommen muss. Die Bewerbungsseite steht bei 80 px. */
-.top-bar img { height: 68px; margin-bottom: 12px; }
+/* 80 px wie auf allen übrigen Seiten. Vereinheitlicht am 11.09.2026 auf Cindys Wunsch,
+   vorher standen hier 68 px. Nur die Landingpage bleibt bewusst bei 60 px. */
+.top-bar img { height: 80px; margin-bottom: 12px; }
 .top-bar-gold {
   height: 4px;
   background: linear-gradient(90deg, var(--gold1), var(--gold2), var(--gold3));
@@ -98,6 +98,20 @@ h3 {
 
 p { margin-bottom: 14px; }
 strong { font-weight: 600; color: var(--weinrot); }
+
+/* ===== LEISER SPRUNG ZU DEN LEITFAeDEN =====
+   Wer schon weiss, dass sie die Leitfaeden will, soll nicht durch den ganzen Artikel
+   scrollen muessen. Bewusst klein und ohne Knopf, damit der Text oben ruhig bleibt und
+   der Sprung wie ein Angebot wirkt und nicht wie eine Aufforderung. */
+.sprung { margin: -6px 0 22px; font-size: 0.92rem; }
+.sprung a {
+  color: #7d5a68;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(139, 17, 48, 0.45);
+  padding-bottom: 1px;
+}
+.sprung a::after { content: ' ↓'; }
+.sprung a:hover { color: var(--weinrot); border-bottom-color: var(--weinrot); }
 
 /* ===== KENNZAHL ===== */
 .zahl-kasten {
@@ -452,7 +466,19 @@ strong { font-weight: 600; color: var(--weinrot); }
   letter-spacing: 0.03em;
 }
 
-/* ===== FUSSZEILE ===== */
+/* ===== FUSSZEILE =====
+   Der Kernsatz stand bisher auf jeder Seite der Website ueber der Fussleiste, nur
+   auf den Wissensseiten fehlte er. Ergaenzt am 11.09.2026. */
+.kernbotschaft {
+  font-family: 'Alice', serif;
+  font-size: 13px;
+  color: var(--weinrot);
+  opacity: 0.7;
+  font-style: italic;
+  text-align: center;
+  padding: 18px 20px 14px;
+  line-height: 1.6;
+}
 footer {
   background: var(--weinrot);
   color: var(--elfenbein);
@@ -479,8 +505,9 @@ footer a:hover { text-decoration: underline; }
   .content { padding: 0 18px 30px; }
   .downloads, .gespraech, .thema-karte { padding: 22px 18px; }
   /* Auf dem Handy schrumpft der Kopf, so wie auf /start auch. Das hatte hier gefehlt. */
-  .top-bar img { height: 54px; }
+  .top-bar img { height: 60px; }
   .top-bar { padding: 10px 0 0; }
+  .kernbotschaft { font-size: 12px; padding: 10px 16px 8px; }
 }
 
 /* ===== Rückmeldung des Anmeldeformulars =====

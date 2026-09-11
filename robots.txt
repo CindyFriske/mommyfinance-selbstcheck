@@ -1,0 +1,14 @@
+# MommyFinance
+# Alles ist offen fuer Suchmaschinen, bis auf die Seiten, die nur einer einzelnen
+# Besucherin gehoeren, alte Entwuerfe oder rein technische Dateien.
+
+User-agent: *
+Allow: /
+
+Disallow: /abmeldung
+Disallow: /vorschau/
+Disallow: /index-v4.html
+Disallow: /index-v5.html
+Disallow: /geldglauben-doi-template.html
+
+Sitemap: https://mommyfinance.de/sitemap.xml
