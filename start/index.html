@@ -563,7 +563,39 @@ body {
 (function () {
   var ZAEHLER = 'https://funnel.mommyfinance.de/start/klick';
 
+  // Cindys eigene Geräte zählen nicht mit. Einmal pro Gerät und Browser
+  // mommyfinance.de/start/?nicht-zaehlen öffnen, das merkt sich der Browser.
+  // Instagram hat einen eigenen Browser, dort also ebenfalls einmal öffnen.
+  // Rückgängig mit ?wieder-zaehlen.
+  var MERKER = 'mf-nicht-zaehlen';
+  var nichtZaehlen = false;
+  var hinweis = '';
+  try {
+    var suche = window.location.search;
+    if (/[?&]nicht-zaehlen\b/.test(suche)) {
+      window.localStorage.setItem(MERKER, '1');
+      hinweis = 'Dieses Gerät wird ab jetzt nicht mehr mitgezählt.';
+    } else if (/[?&]wieder-zaehlen\b/.test(suche)) {
+      window.localStorage.removeItem(MERKER);
+      hinweis = 'Dieses Gerät wird ab jetzt wieder mitgezählt.';
+    }
+    nichtZaehlen = window.localStorage.getItem(MERKER) === '1';
+    if (hinweis && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+    }
+  } catch (fehler) {
+    // Ohne Speicher im Browser wird ganz normal gezählt.
+  }
+  if (hinweis) {
+    var box = document.createElement('p');
+    box.textContent = hinweis;
+    box.style.cssText = 'margin:16px auto 0;max-width:520px;padding:10px 16px;border:1.5px solid #8b1130;border-radius:12px;color:#8b1130;font-weight:700;text-align:center;';
+    var inhalt = document.querySelector('.content');
+    if (inhalt) inhalt.insertBefore(box, inhalt.firstChild);
+  }
+
   function melde(ziel) {
+    if (nichtZaehlen) return;
     try {
       var daten = JSON.stringify({ ziel: ziel });
       if (navigator.sendBeacon) {
