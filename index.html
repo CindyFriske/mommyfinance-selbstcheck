@@ -534,6 +534,27 @@ body {
 
 .about-text p strong { font-weight: 600; color: var(--weinrot); }
 
+/* Instagram-Hinweis in der Vorstellung. Bewusst ein Textlink und kein Knopf,
+   weil Gold auf der Seite immer Knopf bedeutet und die Bewerbung Vorrang hat. */
+.about-instagram {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(139, 17, 48, 0.15);
+}
+.about-instagram p { margin-bottom: 10px; }
+.about-instagram a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--weinrot);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-word;
+}
+.about-instagram a:hover { color: var(--dunkelrot); }
+.about-instagram svg { width: 20px; height: 20px; flex-shrink: 0; }
+
 .about-name {
   font-family: 'Alice', serif;
   font-size: 1.15rem;
@@ -1051,6 +1072,16 @@ body {
         <p>
           Bei mir bekommst du keine reine Theorie, sondern <strong>ein fertiges System, das in deinem Alltag funktioniert</strong>.
         </p>
+
+        <div class="about-instagram">
+          <p>
+            Besuch mich gern auch auf Instagram. Dort zeige ich dir in kurzen Reels und Storys, wie du Kindergeld sinnvoll f&uuml;r dein Kind anlegst und welche Glaubenss&auml;tze uns Mamas beim Thema Geld ausbremsen.
+          </p>
+          <a href="https://www.instagram.com/cindy_friske_finanztrainerin/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+            @cindy_friske_finanztrainerin
+          </a>
+        </div>
       </div>
     </div>
   </section>
