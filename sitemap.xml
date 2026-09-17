@@ -7,7 +7,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mommyfinance.de/start</loc>
+    <loc>https://mommyfinance.de/start/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -61,31 +61,31 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mommyfinance.de/selbstcheck</loc>
+    <loc>https://mommyfinance.de/selbstcheck/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mommyfinance.de/geldglauben</loc>
+    <loc>https://mommyfinance.de/geldglauben/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mommyfinance.de/bewerbung</loc>
+    <loc>https://mommyfinance.de/bewerbung/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mommyfinance.de/impressum</loc>
+    <loc>https://mommyfinance.de/impressum/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://mommyfinance.de/datenschutz</loc>
+    <loc>https://mommyfinance.de/datenschutz/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
