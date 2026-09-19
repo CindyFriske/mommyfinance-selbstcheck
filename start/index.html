@@ -543,6 +543,13 @@ body {
     if (!id) return;
     var ziel = document.getElementById(id);
     if (ziel && ziel.tagName.toLowerCase() === 'details') {
+      // Alle anderen Kategorien zuklappen. Browser merken sich sonst, welche
+      // Kategorie beim letzten Besuch offen war, und die Besucherin landet
+      // über #wissen trotzdem bei einer aufgeklappten fremden Kategorie.
+      var alle = document.querySelectorAll('details.kategorie');
+      for (var i = 0; i < alle.length; i++) {
+        if (alle[i] !== ziel) alle[i].open = false;
+      }
       ziel.open = true;
       ziel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
