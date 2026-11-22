@@ -542,6 +542,27 @@ footer a:hover { text-decoration: underline; }
   color: var(--weinrot);
 }
 
+/* Nach der Anmeldung (22.11.2026): Das Formular ist ausgeblendet, der Kasten mit den
+   nächsten Schritten steht allein, größer und mit nummerierten Schritten. */
+.formular.formular-fertig .formular-meldung {
+  margin: 0;
+  padding: 24px 22px;
+  font-size: 1.05rem;
+}
+.formular-meldung .meldung-titel {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+.formular-meldung .meldung-schritte {
+  margin: 0 0 14px;
+  padding-left: 1.4em;
+}
+.formular-meldung .meldung-schritte li {
+  margin-bottom: 8px;
+}
+
 /* Die zweite Zeile im Fehlerkasten, leiser als die erste. Der Rat, es noch einmal zu
    versuchen, ist das Wichtige. Die Adresse ist nur der Notnagel dahinter. */
 .formular-meldung .meldung-leise {

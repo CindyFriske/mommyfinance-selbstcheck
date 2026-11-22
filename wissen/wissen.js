@@ -148,6 +148,14 @@
     return feld;
   }
 
+  // Blendet alles im Formular außer dem Meldungskasten aus (Felder, Häkchen, Knopf, Hinweis).
+  function schliesseFormular(formular, feld) {
+    Array.prototype.forEach.call(formular.children, function (kind) {
+      if (kind !== feld) kind.style.display = 'none';
+    });
+    formular.classList.add('formular-fertig');
+  }
+
   function zeige(feld, art, html) {
     feld.className = 'formular-meldung ' + art;
     feld.innerHTML = html;
@@ -206,19 +214,31 @@
             throw new Error(daten.fehler || 'unbekannt');
           }
 
+          // Geändert am 22.11.2026 (Cindy). Nach der Anmeldung verschwindet das Formular, damit
+          // nicht noch einmal Daten eingetragen werden. Übrig bleibt nur der Kasten mit den
+          // nächsten Schritten, groß und in der Mitte des Bildschirms.
           if (daten.bestaetigungNoetig === false && daten.zugang) {
             formular.reset();
+            schliesseFormular(formular, feld);
             zeige(feld, 'erfolg',
-              '<strong>Du bist schon dabei.</strong><br>' +
+              '<strong class="meldung-titel">Du bist schon dabei.</strong>' +
               'Deine Bibliothek steht bereits offen, du brauchst keine neue Bestätigung. ' +
-              '<a href="' + FUNNEL + daten.zugang + '">Hier geht es zu deinen Leitfäden.</a>');
+              '<a href="' + FUNNEL + daten.zugang + '">Hier geht es zu deinen Leitfäden.</a>' +
+              '<span class="meldung-leise">Leg dir die Seite danach als Lesezeichen an, dann findest du jederzeit zurück.</span>');
           } else {
             formular.reset();
+            schliesseFormular(formular, feld);
             zeige(feld, 'erfolg',
-              '<strong>Fast geschafft.</strong><br>' +
-              'Ich habe dir gerade eine E-Mail geschickt. Klick darin auf den Knopf, ' +
-              'dann ist dein Zugang offen. Schau bitte auch kurz im Spam-Ordner nach.');
+              '<strong class="meldung-titel">Fast geschafft. Jetzt ist dein Postfach dran.</strong>' +
+              '<ol class="meldung-schritte">' +
+              '<li>Öffne dein E-Mail-Postfach. Ich habe dir gerade eine E-Mail geschickt.</li>' +
+              '<li>Klick in der E-Mail auf den Knopf zur Bestätigung.</li>' +
+              '<li>Es öffnet sich eine Seite. Tippe dort auf „Zu deinen Leitfäden“ und leg dir diese Seite als Lesezeichen an.</li>' +
+              '</ol>' +
+              '<span class="meldung-leise">Nichts angekommen? Schau im Spam-Ordner nach und gib der E-Mail ein bis zwei Minuten. ' +
+              'Du musst hier nichts noch einmal ausfüllen.</span>');
           }
+          try { feld.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { /* älterer Browser, bleibt stehen */ }
           if (knopf) knopf.textContent = beschriftung;
         })
         .catch(function (fehler) {
